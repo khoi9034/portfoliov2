@@ -33,6 +33,14 @@ export function ProjectHero({ project }: ProjectHeroProps) {
             Contact
           </Link>
         </div>
+        {project.slug === "cabarrus-futurescape" ? (
+          <div className="local-prototype-callout">
+            <a className="button primary" href="http://localhost:3000/">
+              View Here
+            </a>
+            <span>Local prototype link. Public demo coming later.</span>
+          </div>
+        ) : null}
       </div>
       {project.slug === "cabarrus-futurescape" ? (
         <FutureScapeShowcase />

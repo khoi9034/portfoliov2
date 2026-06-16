@@ -7,7 +7,8 @@ export type VisualVariant =
 export type ProjectCategory =
   | "Flagship Systems"
   | "Enterprise GIS / Public Infrastructure"
-  | "Applied GIS Research";
+  | "Automation Systems"
+  | "Applied GIS / Research";
 
 export type ProjectDepth = "flagship" | "platform" | "professional" | "research";
 
@@ -205,7 +206,7 @@ export const projects: Project[] = [
     slug: "automap",
     title: "AutoMap",
     subtitle: "AI-assisted county map request and ArcGIS REST automation engine",
-    category: "Flagship Systems",
+    category: "Automation Systems",
     type: "AI-assisted County Map Request / REST Layer Automation Engine",
     status: "Active personal project.",
     role: "Full-stack workflow design, deterministic request intelligence, GIS automation architecture",
@@ -405,7 +406,7 @@ export const projects: Project[] = [
     slug: "anime-retail-site-selection",
     title: "Anime Retail Site Selection in Japan",
     subtitle: "Senior Thesis / Applied GIS Research Project",
-    category: "Applied GIS Research",
+    category: "Applied GIS / Research",
     type: "Senior Thesis / Applied GIS Research Project",
     status: "Academic research project.",
     role: "Spatial analyst, ArcPy workflow designer, suitability modeling",
@@ -468,7 +469,7 @@ export const projects: Project[] = [
     slug: "elderly-access-services",
     title: "Elderly Access to Services",
     subtitle: "GIS Accessibility / Planning Analysis",
-    category: "Applied GIS Research",
+    category: "Applied GIS / Research",
     type: "GIS Accessibility / Planning Analysis",
     status: "Academic planning analysis.",
     role: "GIS analyst, accessibility mapping, ArcPy automation",
@@ -529,7 +530,7 @@ export const projects: Project[] = [
     slug: "nc-working-age-lisa",
     title: "NC Working Age LISA Analysis in R",
     subtitle: "Spatial Statistics / Demographic Clustering",
-    category: "Applied GIS Research",
+    category: "Applied GIS / Research",
     type: "Spatial Statistics / Demographic Clustering",
     status: "Academic spatial statistics project.",
     role: "Spatial statistics analyst, R workflow author, map interpretation",
@@ -599,8 +600,13 @@ export const flagshipProject = projects.find(
 export const projectCategories: ProjectCategory[] = [
   "Flagship Systems",
   "Enterprise GIS / Public Infrastructure",
-  "Applied GIS Research"
+  "Automation Systems",
+  "Applied GIS / Research"
 ];
+
+export const researchProjects = projects.filter(
+  (project) => project.category === "Applied GIS / Research"
+);
 
 export function getProjectBySlug(slug: string) {
   return projects.find((project) => project.slug === slug);

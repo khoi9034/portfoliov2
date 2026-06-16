@@ -6,7 +6,7 @@ import { projectCategories, projects } from "@/data/projects";
 export const metadata: Metadata = {
   title: "Projects | Khoi Nguyen GIS Portfolio",
   description:
-    "Project index for Khoi Nguyen, organized around flagship GIS systems, enterprise GIS infrastructure, and applied GIS research.",
+    "Project index for Khoi Nguyen, organized around flagship GIS systems, enterprise GIS infrastructure, automation systems, and applied GIS research.",
   openGraph: {
     title: "Projects | Khoi Nguyen GIS Portfolio",
     description:
@@ -22,8 +22,8 @@ export default function ProjectsPage() {
         <h1>Enterprise GIS systems, public data infrastructure, and applied spatial analysis.</h1>
         <p>
           The work is organized by professional signal: flagship systems first,
-          public GIS infrastructure next, and academic analysis projects as
-          supporting evidence.
+          public GIS infrastructure and automation next, with academic research
+          separated into its own dedicated research page.
         </p>
       </section>
 
@@ -42,12 +42,23 @@ export default function ProjectsPage() {
                   ? "Systems-level projects that show product thinking, GIS architecture, automation, and planning intelligence."
                   : category === "Enterprise GIS / Public Infrastructure"
                     ? "Professional GIS infrastructure work focused on public data access, metadata, ArcGIS Hub, and user-centered navigation."
-                    : "Applied analysis projects that demonstrate GIS research methods, spatial statistics, accessibility, and suitability modeling."
+                    : category === "Automation Systems"
+                      ? "GIS automation work focused on request interpretation, REST metadata, safe layer selection, and reviewable outputs."
+                      : "Applied research projects are summarized here and expanded on the dedicated UNC Chapel Hill research page."
               }
             />
             <div className="project-grid">
               {categoryProjects.map((project) => (
-                <ProjectCard key={project.slug} project={project} />
+                <div
+                  id={
+                    project.slug === "cabarrus-futurescape"
+                      ? "cabarrus-futurescape"
+                      : undefined
+                  }
+                  key={project.slug}
+                >
+                  <ProjectCard project={project} />
+                </div>
               ))}
             </div>
           </section>

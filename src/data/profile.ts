@@ -87,7 +87,9 @@ export const pathway = {
 
 export const navigation = [
   { href: "/", label: "Home" },
+  { href: "/projects/cabarrus-futurescape", label: "CFS" },
   { href: "/projects", label: "Projects" },
+  { href: "/research", label: "Research" },
   { href: "/skills", label: "Skills" },
   { href: "/pathway", label: "Pathway" },
   { href: "/resume", label: "Resume" },

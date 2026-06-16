@@ -2,39 +2,85 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
-  Database,
-  Layers3,
+  Building2,
+  FileText,
   Mail,
   MapPinned,
-  ShieldCheck,
-  Workflow
+  Radar,
+  Satellite,
+  ShieldCheck
 } from "lucide-react";
-import { CapabilityCard } from "@/components/CapabilityCard";
 import { FutureScapeShowcase } from "@/components/DashboardVisuals";
-import { ProjectCard } from "@/components/ProjectCard";
-import { SectionHeader } from "@/components/SectionHeader";
-import { contact, credibilityStack, systemsBuilt } from "@/data/profile";
-import { featuredProjects, getProjectBySlug } from "@/data/projects";
+import { getProjectBySlug } from "@/data/projects";
 
 export const metadata: Metadata = {
-  title: "Khoi Nguyen | County-Scale GIS Intelligence Systems",
+  title: "Cabarrus FutureScape | Khoi Nguyen GIS Portfolio",
   description:
-    "Flagship GIS portfolio for Khoi Nguyen, focused on Cabarrus FutureScape, enterprise GIS, digital twin concepts, Web GIS, ArcPy automation, and planning intelligence.",
+    "Cabarrus FutureScape is Khoi Nguyen's flagship county digital twin and planning intelligence prototype for parcel intelligence, growth pressure, constraints, environmental signals, and executive planning support.",
   openGraph: {
-    title: "Khoi Nguyen | County-Scale GIS Intelligence Systems",
+    title: "Cabarrus FutureScape | Khoi Nguyen GIS Portfolio",
     description:
-      "A premium portfolio for enterprise GIS, planning intelligence, and county-scale digital twin prototype work."
+      "A premium GIS portfolio homepage focused on Cabarrus FutureScape, a personal county-scale digital twin and planning intelligence prototype."
   },
   twitter: {
-    title: "Khoi Nguyen | County-Scale GIS Intelligence Systems",
+    title: "Cabarrus FutureScape | Khoi Nguyen GIS Portfolio",
     description:
-      "Enterprise GIS, digital twin, Web GIS, ArcPy automation, and planning intelligence portfolio."
+      "County digital twin, parcel intelligence, constraints, growth pressure, and planning intelligence prototype."
   }
 };
 
-const systemIcons = [Layers3, Workflow, Database];
 const cfs = getProjectBySlug("cabarrus-futurescape");
-const homepageProjects = featuredProjects.slice(0, 4);
+
+const intelligencePanels = [
+  {
+    title: "Parcel intelligence",
+    description: "Parcel selection, land-use context, zoning intersections, and readiness signals.",
+    icon: MapPinned
+  },
+  {
+    title: "Constraints",
+    description: "Flood exposure, ETJ, zoning, school, boundary, and environmental planning context.",
+    icon: ShieldCheck
+  },
+  {
+    title: "Growth pressure",
+    description: "Development activity and spatial pressure indicators organized for county review.",
+    icon: Radar
+  },
+  {
+    title: "Environmental signals",
+    description: "NDVI, surface temperature, land cover, terrain, hydrology, rainfall, and flood signals.",
+    icon: Satellite
+  },
+  {
+    title: "Executive insight",
+    description: "Planning intelligence summaries and report concepts for decision support.",
+    icon: FileText
+  },
+  {
+    title: "Infrastructure awareness",
+    description: "Service context and readiness concepts for parcel-level planning review.",
+    icon: Building2
+  }
+];
+
+const additionalWork = [
+  {
+    title: "AutoMap",
+    description: "AI-assisted county map request and ArcGIS REST automation engine.",
+    href: "/projects/automap"
+  },
+  {
+    title: "Cabarrus County GIS Hub Redesign",
+    description: "Professional internship work in public GIS infrastructure and data discovery.",
+    href: "/projects/cabarrus-gis-hub"
+  },
+  {
+    title: "UNC GIS Research",
+    description: "Applied GIS research in suitability, accessibility, and spatial statistics.",
+    href: "/research"
+  }
+];
 
 export default function Home() {
   if (!cfs) {
@@ -42,113 +88,77 @@ export default function Home() {
   }
 
   return (
-    <main className="page-shell home-page">
-      <section className="home-hero">
+    <main className="page-shell home-page cfs-home">
+      <section className="home-hero cfs-hero">
         <div className="hero-copy">
-          <p className="eyebrow">Concord, NC / Enterprise GIS / Planning Intelligence</p>
-          <h1>Building county-scale GIS intelligence systems for planning, growth, and decision support.</h1>
-          <p className="hero-subtitle">
-            I combine Enterprise GIS, Web GIS, ArcPy automation, spatial
-            modeling, and digital twin concepts to turn fragmented county data
-            into decision-ready planning tools.
+          <p className="eyebrow">Flagship digital twin prototype</p>
+          <h1>Cabarrus FutureScape</h1>
+          <p className="project-subtitle">
+            County Digital Twin & Planning Intelligence Platform
           </p>
-          <div className="hero-actions" aria-label="Homepage actions">
-            <Link className="button primary" href="/projects/cabarrus-futurescape">
+          <div className="status-banner">{cfs.status}</div>
+          <p className="hero-subtitle">
+            A personal prototype and ongoing applied GIS platform focused on
+            parcel intelligence, growth pressure, constraints, infrastructure
+            awareness, environmental signals, and executive planning support.
+          </p>
+          <div className="hero-actions" aria-label="Cabarrus FutureScape actions">
+            <Link className="button primary" href="/projects#cabarrus-futurescape">
               <MapPinned size={18} />
-              <span>Explore Cabarrus FutureScape</span>
+              <span>Learn More About CFS</span>
             </Link>
-            <Link className="button secondary" href="/projects">
-              <Layers3 size={18} />
-              <span>View Projects</span>
+            <Link className="button secondary" href="/projects/cabarrus-futurescape">
+              <FileText size={18} />
+              <span>View CFS Case Study</span>
             </Link>
-            <Link className="button ghost" href="/skills">
-              <ShieldCheck size={18} />
-              <span>View Skills</span>
+            <Link className="button ghost" href="/contact">
+              <Mail size={18} />
+              <span>Contact Me</span>
             </Link>
           </div>
         </div>
         <FutureScapeShowcase />
       </section>
 
-      <section className="flagship-section" aria-labelledby="flagship-title">
-        <div className="flagship-copy">
-          <p className="eyebrow">Flagship system</p>
-          <h2 id="flagship-title">{cfs.title}</h2>
-          <p>{cfs.homepageSummary}</p>
-          <div className="status-banner">{cfs.status}</div>
-          <Link className="text-link" href="/projects/cabarrus-futurescape">
-            <span>Open flagship case study</span>
-            <ArrowRight size={16} />
-          </Link>
+      <section className="cfs-intelligence-section" aria-labelledby="cfs-intel-title">
+        <div className="section-header">
+          <p className="eyebrow">Planning intelligence surface</p>
+          <h2 id="cfs-intel-title">One system view for county-scale planning signals.</h2>
+          <p>
+            The homepage stays focused on FutureScape. Deeper project, skills,
+            resume, and research content lives on dedicated pages.
+          </p>
         </div>
-        <div className="flagship-module-grid">
-          {cfs.focus.map((item) => (
-            <article key={item}>
-              <span />
-              <strong>{item}</strong>
-            </article>
-          ))}
-        </div>
-      </section>
+        <div className="cfs-intel-grid">
+          {intelligencePanels.map((panel) => {
+            const Icon = panel.icon;
 
-      <section className="section-shell">
-        <SectionHeader
-          eyebrow="Systems I build"
-          title="From GIS operations to planning intelligence"
-          description="The portfolio is organized around systems, not disconnected school-project cards."
-        />
-        <div className="systems-grid">
-          {systemsBuilt.map((system, index) => {
-            const Icon = systemIcons[index] ?? Layers3;
             return (
-              <CapabilityCard
-                icon={Icon}
-                key={system.title}
-                signal={system.signal}
-                summary={system.summary}
-                title={system.title}
-              />
+              <article key={panel.title}>
+                <Icon size={20} />
+                <div>
+                  <h3>{panel.title}</h3>
+                  <p>{panel.description}</p>
+                </div>
+              </article>
             );
           })}
         </div>
       </section>
 
-      <section className="section-shell">
-        <SectionHeader
-          eyebrow="Project previews"
-          title="A focused route into the deeper work"
-          description="The homepage previews the biggest systems first. Full details live on dedicated project pages."
-        />
-        <div className="project-grid preview-grid">
-          {homepageProjects.map((project) => (
-            <ProjectCard compact key={project.slug} project={project} />
-          ))}
-        </div>
-      </section>
-
-      <section className="credibility-strip" aria-label="Technical credibility strip">
-        {credibilityStack.map((item) => (
-          <span key={item}>{item}</span>
-        ))}
-      </section>
-
-      <section className="contact-cta">
+      <section className="additional-work" aria-labelledby="additional-work-title">
         <div>
-          <p className="eyebrow">Next conversation</p>
-          <h2>GIS analyst work with a planning intelligence edge.</h2>
-          <p>
-            I am targeting GIS, planning analytics, Web GIS, automation, civic
-            technology, digital twin, and spatial data roles.
-          </p>
+          <p className="eyebrow">Additional work</p>
+          <h2 id="additional-work-title">A few supporting paths.</h2>
         </div>
-        <div className="contact-actions">
-          <a className="button primary" href={`mailto:${contact.email}`}>
-            <Mail size={18} />
-            <span>Contact Me</span>
-          </a>
-          <Link className="button secondary" href="/resume">
-            View Resume
-          </Link>
+        <div className="additional-work-links">
+          {additionalWork.map((item) => (
+            <Link href={item.href} key={item.title}>
+              <strong>{item.title}</strong>
+              <span>{item.description}</span>
+              <ArrowRight size={16} />
+            </Link>
+          ))}
         </div>
       </section>
     </main>
