@@ -124,70 +124,70 @@ export default function ResearchPage() {
 
           return (
             <article className="research-brief" key={project.slug}>
-              <div className="research-brief-copy">
-                <p className="eyebrow">{context.program}</p>
-                <h2>{project.title}</h2>
-                <p className="project-subtitle">{project.subtitle}</p>
-                <p>{project.summary}</p>
-
-                <div className="research-brief-body">
-                  <section className="research-question-panel">
-                    <BookOpen size={18} />
-                    <h3>Research question</h3>
-                    <p>{context.question}</p>
-                  </section>
-
-                  <div className="research-secondary-grid">
-                    <section className="research-info-panel">
-                      <GitBranch size={18} />
-                      <h3>Methods / workflow</h3>
-                      <ul className="detail-list">
-                        {context.workflow.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
-                    </section>
-
-                    <section className="research-info-panel">
-                      <ListChecks size={18} />
-                      <h3>Outputs</h3>
-                      <ul className="detail-list">
-                        {project.caseStudy.outputs.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
-                    </section>
-                  </div>
-
-                  <section className="research-relevance-panel">
-                    <MapPinned size={18} />
-                    <h3>Planning / analytical relevance</h3>
-                    <p>{context.relevance}</p>
-                  </section>
+              <div className="research-brief-top">
+                <div className="research-brief-copy">
+                  <p className="eyebrow">{project.subtitle}</p>
+                  <h2>{project.title}</h2>
+                  <p className="research-context">{context.program}</p>
+                  <p>{project.summary}</p>
                 </div>
 
-                <section className="research-methods-block">
-                  <h3>Methods and indicators</h3>
-                  <div className="method-grid" aria-label={`${project.title} methods`}>
-                    {context.methods.map((method) => (
-                      <span key={method}>{method}</span>
-                    ))}
+                <div className="research-visual-wrap">
+                  <ProjectVisual project={project} />
+                  <div className="research-note">
+                    <MapPinned size={16} />
+                    <span>UNC Chapel Hill applied GIS research / coursework</span>
                   </div>
+                </div>
+              </div>
+
+              <div className="research-brief-body">
+                <section className="research-question-panel">
+                  <BookOpen size={18} />
+                  <h3>Research question</h3>
+                  <p>{context.question}</p>
                 </section>
 
-                <Link className="text-link" href={`/projects/${project.slug}`}>
-                  <span>Open project detail</span>
-                  <ArrowRight size={16} />
-                </Link>
+                <section className="research-info-panel">
+                  <GitBranch size={18} />
+                  <h3>Methods / workflow</h3>
+                  <ul className="detail-list">
+                    {context.workflow.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </section>
+
+                <section className="research-info-panel">
+                  <ListChecks size={18} />
+                  <h3>Outputs</h3>
+                  <ul className="detail-list">
+                    {project.caseStudy.outputs.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </section>
+
+                <section className="research-relevance-panel">
+                  <MapPinned size={18} />
+                  <h3>Planning / analytical relevance</h3>
+                  <p>{context.relevance}</p>
+                </section>
               </div>
 
-              <div className="research-visual-wrap">
-                <ProjectVisual project={project} />
-                <div className="research-note">
-                  <MapPinned size={16} />
-                  <span>UNC Chapel Hill applied GIS research / coursework</span>
+              <section className="research-methods-block">
+                <h3>Methods and indicators</h3>
+                <div className="method-grid" aria-label={`${project.title} methods`}>
+                  {context.methods.map((method) => (
+                    <span key={method}>{method}</span>
+                  ))}
                 </div>
-              </div>
+              </section>
+
+              <Link className="text-link" href={`/projects/${project.slug}`}>
+                <span>Open project detail</span>
+                <ArrowRight size={16} />
+              </Link>
             </article>
           );
         })}
