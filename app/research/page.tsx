@@ -130,42 +130,50 @@ export default function ResearchPage() {
                 <p className="project-subtitle">{project.subtitle}</p>
                 <p>{project.summary}</p>
 
-                <div className="research-columns">
-                  <section>
+                <div className="research-brief-body">
+                  <section className="research-question-panel">
                     <BookOpen size={18} />
                     <h3>Research question</h3>
                     <p>{context.question}</p>
                   </section>
-                  <section>
-                    <GitBranch size={18} />
-                    <h3>Data / workflow</h3>
-                    <ul className="detail-list">
-                      {context.workflow.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </section>
-                  <section>
+
+                  <div className="research-secondary-grid">
+                    <section className="research-info-panel">
+                      <GitBranch size={18} />
+                      <h3>Methods / workflow</h3>
+                      <ul className="detail-list">
+                        {context.workflow.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </section>
+
+                    <section className="research-info-panel">
+                      <ListChecks size={18} />
+                      <h3>Outputs</h3>
+                      <ul className="detail-list">
+                        {project.caseStudy.outputs.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </section>
+                  </div>
+
+                  <section className="research-relevance-panel">
                     <MapPinned size={18} />
-                    <h3>Planning relevance</h3>
+                    <h3>Planning / analytical relevance</h3>
                     <p>{context.relevance}</p>
-                  </section>
-                  <section>
-                    <ListChecks size={18} />
-                    <h3>Outputs</h3>
-                    <ul className="detail-list">
-                      {project.caseStudy.outputs.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
                   </section>
                 </div>
 
-                <div className="method-grid" aria-label={`${project.title} methods`}>
-                  {context.methods.map((method) => (
-                    <span key={method}>{method}</span>
-                  ))}
-                </div>
+                <section className="research-methods-block">
+                  <h3>Methods and indicators</h3>
+                  <div className="method-grid" aria-label={`${project.title} methods`}>
+                    {context.methods.map((method) => (
+                      <span key={method}>{method}</span>
+                    ))}
+                  </div>
+                </section>
 
                 <Link className="text-link" href={`/projects/${project.slug}`}>
                   <span>Open project detail</span>

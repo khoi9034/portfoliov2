@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ExternalLink, FileText, MapPinned } from "lucide-react";
+import { ExternalLink, FileText, MapPinned } from "lucide-react";
 import { FutureScapeShowcase } from "@/components/DashboardVisuals";
 import { ProjectCard } from "@/components/ProjectCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { cfsPrototypeUrl } from "@/data/profile";
-import { getProjectBySlug, projects, researchProjects } from "@/data/projects";
+import { getProjectBySlug, projects } from "@/data/projects";
 
 export const metadata: Metadata = {
   title: "Projects | Khoi Nguyen GIS Portfolio",
   description:
-    "Project index for Khoi Nguyen, organized around Cabarrus FutureScape, enterprise GIS infrastructure, automation systems, and applied GIS research.",
+    "Project index for Khoi Nguyen, focused on Cabarrus FutureScape, enterprise GIS infrastructure, and automation systems, with UNC GIS research linked separately.",
   openGraph: {
     title: "Projects | Khoi Nguyen GIS Portfolio",
     description:
-      "Cabarrus FutureScape, AutoMap, Cabarrus GIS Hub, and applied GIS research projects.",
+      "Cabarrus FutureScape, AutoMap, and Cabarrus GIS Hub project work, with UNC GIS research separated onto its own page.",
     images: ["/og-gis-portfolio.svg"]
   },
   twitter: {
@@ -36,11 +36,12 @@ export default function ProjectsPage() {
     <main className="page-shell projects-page">
       <section className="page-hero projects-intro">
         <p className="eyebrow">Project system</p>
-        <h1>Enterprise GIS systems, public data infrastructure, and applied spatial analysis.</h1>
+        <h1>Enterprise GIS systems, public data infrastructure, and automation.</h1>
         <p>
           The portfolio is organized around real professional signals: one
           flagship planning intelligence system, enterprise GIS infrastructure,
-          automation systems, and a separate UNC Chapel Hill research lane.
+          and automation systems. UNC Chapel Hill research lives on a separate
+          research page.
         </p>
       </section>
 
@@ -129,28 +130,20 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      <section className="section-shell project-category research-preview-section">
-        <div className="research-preview-heading">
-          <SectionHeader
-            eyebrow="Applied GIS / Research"
-            title="UNC Chapel Hill applied GIS research"
-            description="Short previews of academic research work. The dedicated research page holds the full research brief layout."
-          />
-          <Link className="button secondary" href="/research">
-            <MapPinned size={18} />
-            <span>View UNC GIS Research</span>
-          </Link>
+      <section className="section-shell projects-research-cta">
+        <div>
+          <p className="eyebrow">Research archive</p>
+          <h2>UNC Chapel Hill GIS research lives on its own page.</h2>
+          <p>
+            Applied GIS research, spatial statistics, site suitability, and
+            accessibility analysis are separated from the professional project
+            index for a cleaner portfolio hierarchy.
+          </p>
         </div>
-        <div className="research-preview-grid">
-          {researchProjects.map((project) => (
-            <Link className="research-preview-card" href={`/projects/${project.slug}`} key={project.slug}>
-              <strong>{project.title}</strong>
-              <span>{project.type}</span>
-              <p>{project.summary}</p>
-              <ArrowRight size={16} />
-            </Link>
-          ))}
-        </div>
+        <Link className="button secondary" href="/research">
+          <MapPinned size={18} />
+          <span>View UNC Chapel Hill GIS Research</span>
+        </Link>
       </section>
     </main>
   );
