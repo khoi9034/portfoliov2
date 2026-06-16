@@ -1,14 +1,16 @@
+import Link from "next/link";
 import { ArrowRight, BadgeCheck } from "lucide-react";
-import type { Project } from "@/data/portfolio";
+import type { Project } from "@/data/projects";
 import { ProjectVisual } from "@/components/ProjectVisual";
 
 type ProjectCardProps = {
   project: Project;
+  compact?: boolean;
 };
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, compact = false }: ProjectCardProps) {
   return (
-    <article className="project-card">
+    <article className={`project-card ${compact ? "compact" : ""}`}>
       <ProjectVisual project={project} />
       <div className="project-card-content">
         <div className="project-meta">
@@ -22,14 +24,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
           <span>{project.role}</span>
         </div>
         <div className="tool-list" aria-label={`${project.title} tools`}>
-          {project.tools.slice(0, 7).map((tool) => (
+          {project.tools.slice(0, compact ? 5 : 7).map((tool) => (
             <span key={tool}>{tool}</span>
           ))}
         </div>
-        <a className="text-link" href={`#case-${project.id}`}>
+        <Link className="text-link" href={`/projects/${project.slug}`}>
           <span>View case study</span>
           <ArrowRight size={16} />
-        </a>
+        </Link>
       </div>
     </article>
   );

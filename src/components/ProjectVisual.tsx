@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { Project } from "@/data/portfolio";
+import type { Project } from "@/data/projects";
 
 type ProjectVisualProps = {
   project: Project;
