@@ -6,6 +6,8 @@ export const contact = {
   resumePath: "/resume/KhoiNguyenResume.pdf"
 };
 
+export const cfsPrototypeUrl = "http://localhost:3000/";
+
 export const education = {
   school: "University of North Carolina at Chapel Hill",
   degree: "B.A. Geography | Minor in GIS",
@@ -87,7 +89,6 @@ export const pathway = {
 
 export const navigation = [
   { href: "/", label: "Home" },
-  { href: "/projects/cabarrus-futurescape", label: "CFS" },
   { href: "/projects", label: "Projects" },
   { href: "/research", label: "Research" },
   { href: "/skills", label: "Skills" },

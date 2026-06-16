@@ -73,6 +73,49 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     <main className="page-shell detail-page">
       <ProjectHero project={project} />
 
+      {project.slug === "cabarrus-futurescape" ? (
+        <section className="cfs-detail-primer" aria-labelledby="cfs-primer-title">
+          <div className="cfs-primer-copy">
+            <p className="eyebrow">Prototype orientation</p>
+            <h2 id="cfs-primer-title">What FutureScape is meant to do</h2>
+            <p>
+              Cabarrus FutureScape is a personal county digital twin prototype
+              for turning fragmented parcel, zoning, infrastructure,
+              environmental, and constraint data into planning intelligence.
+            </p>
+            <p>
+              The interface is meant to help a reviewer select a parcel,
+              understand its planning context, see growth pressure and
+              constraints, and produce executive-level summaries without
+              jumping between disconnected layers.
+            </p>
+          </div>
+
+          <div className="cfs-primer-cards">
+            <article>
+              <h3>What it is</h3>
+              <p>{project.caseStudy.whatItIs}</p>
+            </article>
+            <article>
+              <h3>Problem it solves</h3>
+              <p>{project.caseStudy.problem}</p>
+            </article>
+            <article>
+              <h3>Interface role</h3>
+              <p>
+                A command-center style dashboard for parcel intelligence,
+                constraint review, infrastructure readiness, environmental
+                signals, and planning summaries.
+              </p>
+            </article>
+          </div>
+
+          {project.architecture ? (
+            <ArchitectureFlow items={project.architecture} />
+          ) : null}
+        </section>
+      ) : null}
+
       <section className="detail-meta-grid" aria-label="Project details">
         <article>
           <span>Role</span>

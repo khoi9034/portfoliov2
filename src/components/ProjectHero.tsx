@@ -3,6 +3,7 @@ import { ArrowLeft, FileText } from "lucide-react";
 import type { Project } from "@/data/projects";
 import { FutureScapeShowcase } from "@/components/DashboardVisuals";
 import { ProjectVisual } from "@/components/ProjectVisual";
+import { cfsPrototypeUrl } from "@/data/profile";
 
 type ProjectHeroProps = {
   project: Project;
@@ -35,10 +36,10 @@ export function ProjectHero({ project }: ProjectHeroProps) {
         </div>
         {project.slug === "cabarrus-futurescape" ? (
           <div className="local-prototype-callout">
-            <a className="button primary" href="http://localhost:3000/">
-              View Here
+            <a className="button primary large-action" href={cfsPrototypeUrl}>
+              View CFS
             </a>
-            <span>Local prototype link. Public demo coming later.</span>
+            <span>Local prototype link for now. Public live link coming later.</span>
           </div>
         ) : null}
       </div>
