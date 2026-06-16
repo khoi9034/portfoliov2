@@ -10,7 +10,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Contact | Khoi Nguyen GIS Portfolio",
     description:
-      "Professional contact page for Khoi Nguyen, GIS analyst in Concord, NC."
+      "Professional contact page for Khoi Nguyen, GIS analyst in Concord, NC.",
+    images: ["/og-gis-portfolio.svg"]
+  },
+  twitter: {
+    title: "Contact | Khoi Nguyen GIS Portfolio",
+    description:
+      "Contact Khoi Nguyen for GIS analyst, planning intelligence, Web GIS, automation, and spatial data roles.",
+    images: ["/og-gis-portfolio.svg"]
   }
 };
 

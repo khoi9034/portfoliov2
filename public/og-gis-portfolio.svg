@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Khoi Nguyen GIS Portfolio</title>
+  <desc id="desc">Dark enterprise GIS command-center preview with parcel grid, dashboard panels, and planning intelligence labels.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#071013"/>
+      <stop offset="0.55" stop-color="#0b1d22"/>
+      <stop offset="1" stop-color="#091418"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" x2="1">
+      <stop offset="0" stop-color="#61d3e5"/>
+      <stop offset="1" stop-color="#42c7b8"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#61d3e5" stroke-opacity=".08" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <g opacity=".2" fill="none" stroke="#8bcfa8">
+    <path d="M775 105l150-28 80 90-64 132-172-18z"/>
+    <path d="M887 248l146-18 68 72-41 119-170 12z"/>
+    <path d="M702 315l160-40 44 118-95 98-142-32z"/>
+  </g>
+  <rect x="84" y="88" width="520" height="454" rx="18" fill="#0c1d23" fill-opacity=".78" stroke="#8fd6e0" stroke-opacity=".25"/>
+  <text x="124" y="158" fill="#61d3e5" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">Khoi Nguyen GIS Portfolio</text>
+  <text x="124" y="228" fill="#edf8fa" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="800">Cabarrus</text>
+  <text x="124" y="294" fill="#edf8fa" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="800">FutureScape</text>
+  <text x="124" y="348" fill="#c7dbe0" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">County Digital Twin &amp;</text>
+  <text x="124" y="386" fill="#c7dbe0" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Planning Intelligence</text>
+  <rect x="124" y="430" width="338" height="44" rx="10" fill="url(#accent)" fill-opacity=".22" stroke="#61d3e5" stroke-opacity=".5"/>
+  <text x="148" y="459" fill="#edf8fa" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">Enterprise GIS / Web GIS / ArcPy</text>
+  <rect x="682" y="116" width="410" height="376" rx="18" fill="#081419" fill-opacity=".82" stroke="#8fd6e0" stroke-opacity=".3"/>
+  <rect x="722" y="158" width="198" height="178" rx="12" fill="#102930" stroke="#8fd6e0" stroke-opacity=".25"/>
+  <path d="M746 214l114-20 34 82-92 36-70-48z" fill="#61d3e5" fill-opacity=".1" stroke="#61d3e5" stroke-opacity=".55"/>
+  <path d="M777 350h236" stroke="#61d3e5" stroke-width="3" stroke-opacity=".75"/>
+  <circle cx="872" cy="350" r="62" fill="none" stroke="#d6bc75" stroke-opacity=".45"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700">
+    <rect x="944" y="158" width="112" height="44" rx="10" fill="#0e2329" stroke="#8fd6e0" stroke-opacity=".22"/>
+    <text x="960" y="186" fill="#edf8fa">Parcels</text>
+    <rect x="944" y="218" width="112" height="44" rx="10" fill="#0e2329" stroke="#8fd6e0" stroke-opacity=".22"/>
+    <text x="960" y="246" fill="#edf8fa">Growth</text>
+    <rect x="944" y="278" width="112" height="44" rx="10" fill="#0e2329" stroke="#8fd6e0" stroke-opacity=".22"/>
+    <text x="960" y="306" fill="#edf8fa">Constraints</text>
+  </g>
+</svg>

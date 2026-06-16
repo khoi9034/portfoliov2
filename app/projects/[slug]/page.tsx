@@ -5,10 +5,14 @@ import { ArrowRight, FileText, Layers3, ListChecks } from "lucide-react";
 import { CaseStudySection } from "@/components/CaseStudySection";
 import {
   ArchitectureFlow,
+  AutoMapInterfaceVisual,
   AutoMapWorkflowVisual,
+  CFSDataPipeline,
+  CFSIntelligencePanels,
+  CFSWhatItDoesGrid,
+  HubBeforeAfterVisual,
   HubNavigationVisual,
   InterfaceConceptGrid,
-  PromptToMapMockup
 } from "@/components/DashboardVisuals";
 import { ProjectHero } from "@/components/ProjectHero";
 import { getProjectBySlug, projects } from "@/data/projects";
@@ -37,16 +41,29 @@ export async function generateMetadata({
     };
   }
 
+  const descriptions: Record<string, string> = {
+    "cabarrus-futurescape":
+      "Cabarrus FutureScape case study: a personal county digital twin and planning intelligence prototype for parcel context, growth pressure, constraints, infrastructure signals, and executive planning summaries.",
+    automap:
+      "AutoMap case study: an active personal project for AI-assisted county map requests, ArcGIS REST metadata, source validation, map recipes, refinements, and analysis reports.",
+    "cabarrus-gis-hub":
+      "Cabarrus County GIS Hub case study: professional internship work in ArcGIS Hub, ArcGIS Online, Enterprise/Portal, hosted layers, metadata, sharing settings, and public GIS workflows."
+  };
+
+  const description = descriptions[project.slug] ?? project.summary;
+
   return {
     title: `${project.title} | Khoi Nguyen GIS Portfolio`,
-    description: project.summary,
+    description,
     openGraph: {
       title: `${project.title} | Khoi Nguyen GIS Portfolio`,
-      description: project.summary
+      description,
+      images: ["/og-gis-portfolio.svg"]
     },
     twitter: {
       title: `${project.title} | Khoi Nguyen GIS Portfolio`,
-      description: project.summary
+      description,
+      images: ["/og-gis-portfolio.svg"]
     }
   };
 }
@@ -91,27 +108,12 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             </p>
           </div>
 
-          <div className="cfs-primer-cards">
-            <article>
-              <h3>What it is</h3>
-              <p>{project.caseStudy.whatItIs}</p>
-            </article>
-            <article>
-              <h3>Problem it solves</h3>
-              <p>{project.caseStudy.problem}</p>
-            </article>
-            <article>
-              <h3>Interface role</h3>
-              <p>
-                A command-center style dashboard for parcel intelligence,
-                constraint review, infrastructure readiness, environmental
-                signals, and planning summaries.
-              </p>
-            </article>
-          </div>
+          <CFSWhatItDoesGrid />
+
+          <CFSIntelligencePanels />
 
           {project.architecture ? (
-            <ArchitectureFlow items={project.architecture} />
+            <CFSDataPipeline items={project.architecture} />
           ) : null}
         </section>
       ) : null}
@@ -149,12 +151,13 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         {project.workflow ? (
           <CaseStudySection title="Workflow">
             <AutoMapWorkflowVisual workflow={project.workflow} />
-            <PromptToMapMockup />
+            <AutoMapInterfaceVisual />
           </CaseStudySection>
         ) : null}
 
         {project.informationArchitecture ? (
           <CaseStudySection title="Information architecture">
+            <HubBeforeAfterVisual items={project.informationArchitecture} />
             <HubNavigationVisual items={project.informationArchitecture} />
           </CaseStudySection>
         ) : null}

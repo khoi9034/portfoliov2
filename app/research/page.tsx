@@ -11,12 +11,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "UNC Chapel Hill GIS Research & Applied Spatial Analysis",
     description:
-      "Research brief page for UNC Chapel Hill geography and GIS coursework, spatial analysis, accessibility, LISA, and ArcPy workflows."
+      "Research brief page for UNC Chapel Hill geography and GIS coursework, spatial analysis, accessibility, LISA, and ArcPy workflows.",
+    images: ["/og-gis-portfolio.svg"]
   },
   twitter: {
     title: "UNC Chapel Hill GIS Research & Applied Spatial Analysis",
     description:
-      "Applied GIS research briefs focused on site suitability, accessibility, spatial statistics, and reproducible methods."
+      "Applied GIS research briefs focused on site suitability, accessibility, spatial statistics, and reproducible methods.",
+    images: ["/og-gis-portfolio.svg"]
   }
 };
 
@@ -27,6 +29,7 @@ const researchContext: Record<
     question: string;
     workflow: string[];
     methods: string[];
+    relevance: string;
   }
 > = {
   "anime-retail-site-selection": {
@@ -54,7 +57,9 @@ const researchContext: Record<
       "Projection checks",
       "Schema validation",
       "Repeatable ArcPy processing"
-    ]
+    ],
+    relevance:
+      "Shows how a retail site-selection problem can be translated into a reproducible GIS decision framework for comparing accessibility, demand, competition, and cultural fit."
   },
   "elderly-access-services": {
     program: "UNC Chapel Hill GIS coursework / applied planning analysis",
@@ -73,7 +78,9 @@ const researchContext: Record<
       "Service equity",
       "Accessibility interpretation",
       "ArcPy automation"
-    ]
+    ],
+    relevance:
+      "Connects demographic vulnerability, service locations, and accessibility interpretation to long-term care and public service equity planning."
   },
   "nc-working-age-lisa": {
     program: "UNC Chapel Hill spatial statistics / R analysis",
@@ -91,7 +98,9 @@ const researchContext: Record<
       "High-high / low-low clusters",
       "Demographic planning interpretation",
       "R workflow"
-    ]
+    ],
+    relevance:
+      "Demonstrates how local spatial autocorrelation can support regional demographic interpretation beyond a basic statewide choropleth."
   }
 };
 
@@ -129,12 +138,17 @@ export default function ResearchPage() {
                   </section>
                   <section>
                     <GitBranch size={18} />
-                    <h3>Workflow</h3>
+                    <h3>Data / workflow</h3>
                     <ul className="detail-list">
                       {context.workflow.map((item) => (
                         <li key={item}>{item}</li>
                       ))}
                     </ul>
+                  </section>
+                  <section>
+                    <MapPinned size={18} />
+                    <h3>Planning relevance</h3>
+                    <p>{context.relevance}</p>
                   </section>
                   <section>
                     <ListChecks size={18} />

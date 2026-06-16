@@ -14,7 +14,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Projects | Khoi Nguyen GIS Portfolio",
     description:
-      "Cabarrus FutureScape, AutoMap, Cabarrus GIS Hub, and applied GIS research projects."
+      "Cabarrus FutureScape, AutoMap, Cabarrus GIS Hub, and applied GIS research projects.",
+    images: ["/og-gis-portfolio.svg"]
+  },
+  twitter: {
+    title: "Projects | Khoi Nguyen GIS Portfolio",
+    description:
+      "Project index for enterprise GIS, planning intelligence, automation, and applied spatial analysis.",
+    images: ["/og-gis-portfolio.svg"]
   }
 };
 

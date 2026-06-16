@@ -2,15 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
-  Building2,
   FileText,
   Mail,
-  MapPinned,
-  Radar,
-  Satellite,
-  ShieldCheck
+  MapPinned
 } from "lucide-react";
-import { FutureScapeShowcase } from "@/components/DashboardVisuals";
+import {
+  CFSIntelligencePanels,
+  FutureScapeShowcase
+} from "@/components/DashboardVisuals";
 import { getProjectBySlug } from "@/data/projects";
 
 export const metadata: Metadata = {
@@ -20,49 +19,18 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Cabarrus FutureScape | Khoi Nguyen GIS Portfolio",
     description:
-      "A premium GIS portfolio homepage focused on Cabarrus FutureScape, a personal county-scale digital twin and planning intelligence prototype."
+      "A premium GIS portfolio homepage focused on Cabarrus FutureScape, a personal county-scale digital twin and planning intelligence prototype.",
+    images: ["/og-gis-portfolio.svg"]
   },
   twitter: {
     title: "Cabarrus FutureScape | Khoi Nguyen GIS Portfolio",
     description:
-      "County digital twin, parcel intelligence, constraints, growth pressure, and planning intelligence prototype."
+      "County digital twin, parcel intelligence, constraints, growth pressure, and planning intelligence prototype.",
+    images: ["/og-gis-portfolio.svg"]
   }
 };
 
 const cfs = getProjectBySlug("cabarrus-futurescape");
-
-const intelligencePanels = [
-  {
-    title: "Parcel intelligence",
-    description: "Parcel selection, land-use context, zoning intersections, and readiness signals.",
-    icon: MapPinned
-  },
-  {
-    title: "Constraints",
-    description: "Flood exposure, ETJ, zoning, school, boundary, and environmental planning context.",
-    icon: ShieldCheck
-  },
-  {
-    title: "Growth pressure",
-    description: "Development activity and spatial pressure indicators organized for county review.",
-    icon: Radar
-  },
-  {
-    title: "Environmental signals",
-    description: "NDVI, surface temperature, land cover, terrain, hydrology, rainfall, and flood signals.",
-    icon: Satellite
-  },
-  {
-    title: "Executive insight",
-    description: "Planning intelligence summaries and report concepts for decision support.",
-    icon: FileText
-  },
-  {
-    title: "Infrastructure awareness",
-    description: "Service context and readiness concepts for parcel-level planning review.",
-    icon: Building2
-  }
-];
 
 const additionalWork = [
   {
@@ -129,21 +97,7 @@ export default function Home() {
             resume, and research content lives on dedicated pages.
           </p>
         </div>
-        <div className="cfs-intel-grid">
-          {intelligencePanels.map((panel) => {
-            const Icon = panel.icon;
-
-            return (
-              <article key={panel.title}>
-                <Icon size={20} />
-                <div>
-                  <h3>{panel.title}</h3>
-                  <p>{panel.description}</p>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+        <CFSIntelligencePanels />
       </section>
 
       <section className="additional-work" aria-labelledby="additional-work-title">

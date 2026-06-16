@@ -11,7 +11,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Resume | Khoi Nguyen GIS Portfolio",
     description:
-      "Education, experience, projects, technical profile, and resume download for Khoi Nguyen."
+      "Education, experience, projects, technical profile, and resume download for Khoi Nguyen.",
+    images: ["/og-gis-portfolio.svg"]
+  },
+  twitter: {
+    title: "Resume | Khoi Nguyen GIS Portfolio",
+    description:
+      "Resume for Khoi Nguyen, focused on enterprise GIS, Web GIS, automation, and planning intelligence.",
+    images: ["/og-gis-portfolio.svg"]
   }
 };
 
