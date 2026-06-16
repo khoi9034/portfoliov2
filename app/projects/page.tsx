@@ -30,6 +30,7 @@ const hub = getProjectBySlug("cabarrus-gis-hub");
 const automationProjects = projects.filter(
   (project) => project.category === "Automation Systems"
 );
+const professionalProjects = [hub, ...automationProjects].filter(Boolean);
 
 export default function ProjectsPage() {
   return (
@@ -97,35 +98,19 @@ export default function ProjectsPage() {
         </section>
       ) : null}
 
-      {hub ? (
-        <section className="section-shell project-category">
-          <SectionHeader
-            eyebrow="Enterprise GIS / Public Infrastructure"
-            title="Cabarrus County GIS Hub Redesign"
-            description="Professional internship work focused on public GIS data access, metadata, hosted layers, ArcGIS Hub, and user-centered discovery."
-          />
-          <div className="project-grid balanced-grid single-item-grid">
-            <div>
-              <ProjectCard project={hub} />
-            </div>
-          </div>
-        </section>
-      ) : null}
-
       <section className="section-shell project-category">
         <SectionHeader
-          eyebrow="Automation Systems"
-          title="GIS request automation and REST layer intelligence"
-          description="Automation work focused on request interpretation, REST metadata, safe layer selection, map recipes, and reviewable outputs."
+          eyebrow="Enterprise GIS / Automation"
+          title="Public GIS infrastructure and automation systems"
+          description="Professional and technical project work focused on ArcGIS Hub, hosted data access, REST metadata, safe layer selection, map recipes, and reviewable outputs."
         />
         <div className="project-grid balanced-grid">
-          {automationProjects.map((project) => (
-            <div
-              className={automationProjects.length === 1 ? "span-wide" : undefined}
-              key={project.slug}
-            >
-              <ProjectCard project={project} />
-            </div>
+          {professionalProjects.map((project) => (
+            project ? (
+              <div key={project.slug}>
+                <ProjectCard project={project} />
+              </div>
+            ) : null
           ))}
         </div>
       </section>
