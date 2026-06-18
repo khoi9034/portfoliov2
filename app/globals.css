@@ -1000,6 +1000,35 @@ p {
   margin-bottom: 18px;
 }
 
+.compact-strip-section {
+  padding: 24px;
+}
+
+.compact-strip-section .section-header {
+  max-width: 760px;
+}
+
+.cfs-action-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.cfs-action-strip span {
+  display: grid;
+  min-height: 72px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  color: var(--soft);
+  background: rgba(7, 18, 23, 0.66);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.35;
+  text-align: center;
+}
+
 .cfs-intel-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2438,6 +2467,7 @@ p {
   }
 
   .preview-grid,
+  .cfs-action-strip,
   .module-grid,
   .mockup-grid,
   .cfs-what-grid,
@@ -2609,6 +2639,7 @@ p {
   .dashboard-side,
   .flagship-module-grid,
   .preview-grid,
+  .cfs-action-strip,
   .cfs-intel-grid,
   .cfs-what-grid,
   .cfs-primer-cards,

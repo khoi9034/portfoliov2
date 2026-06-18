@@ -86,7 +86,7 @@ export default function ProjectsPage() {
                 </a>
                 <Link className="button secondary" href="/projects/cabarrus-futurescape">
                   <FileText size={18} />
-                  <span>Case Study</span>
+                  <span>Read Case Study</span>
                 </Link>
               </div>
               <p className="local-link-note">

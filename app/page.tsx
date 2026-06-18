@@ -2,14 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
+  ExternalLink,
   FileText,
-  Mail,
-  MapPinned
+  Mail
 } from "lucide-react";
-import {
-  CFSIntelligencePanels,
-  FutureScapeShowcase
-} from "@/components/DashboardVisuals";
+import { FutureScapeShowcase } from "@/components/DashboardVisuals";
+import { cfsPrototypeUrl } from "@/data/profile";
 import { getProjectBySlug } from "@/data/projects";
 
 export const metadata: Metadata = {
@@ -31,6 +29,13 @@ export const metadata: Metadata = {
 };
 
 const cfs = getProjectBySlug("cabarrus-futurescape");
+
+const cfsActions = [
+  "Reviews parcel context",
+  "Surfaces planning constraints",
+  "Tracks growth pressure",
+  "Supports executive planning summaries"
+];
 
 const additionalWork = [
   {
@@ -66,38 +71,46 @@ export default function Home() {
           </p>
           <div className="status-banner">{cfs.status}</div>
           <p className="hero-subtitle">
-            A personal prototype and ongoing applied GIS platform focused on
-            parcel intelligence, growth pressure, constraints, infrastructure
-            awareness, environmental signals, and executive planning support.
+            Cabarrus FutureScape is a county-scale GIS intelligence prototype
+            that connects parcel context, growth pressure, planning
+            constraints, infrastructure readiness, environmental signals, and
+            executive reporting into one decision-support interface.
           </p>
           <div className="hero-actions" aria-label="Cabarrus FutureScape actions">
-            <Link className="button primary" href="/projects#cabarrus-futurescape">
-              <MapPinned size={18} />
-              <span>Learn More About CFS</span>
-            </Link>
+            <a className="button primary large-action" href={cfsPrototypeUrl}>
+              <ExternalLink size={18} />
+              <span>View CFS</span>
+            </a>
             <Link className="button secondary" href="/projects/cabarrus-futurescape">
               <FileText size={18} />
-              <span>View CFS Case Study</span>
+              <span>Read Case Study</span>
             </Link>
             <Link className="button ghost" href="/contact">
               <Mail size={18} />
               <span>Contact Me</span>
             </Link>
           </div>
+          <p className="local-link-note">
+            Local prototype link for now. Public live link coming later.
+          </p>
         </div>
         <FutureScapeShowcase />
       </section>
 
-      <section className="cfs-intelligence-section" aria-labelledby="cfs-intel-title">
+      <section className="cfs-intelligence-section compact-strip-section" aria-labelledby="cfs-intel-title">
         <div className="section-header">
           <p className="eyebrow">Planning intelligence surface</p>
-          <h2 id="cfs-intel-title">One system view for county-scale planning signals.</h2>
+          <h2 id="cfs-intel-title">What FutureScape does.</h2>
           <p>
-            The homepage stays focused on FutureScape. Deeper project, skills,
-            resume, and research content lives on dedicated pages.
+            A concise signal layer for the flagship prototype. Deeper details
+            live in the case study.
           </p>
         </div>
-        <CFSIntelligencePanels />
+        <div className="cfs-action-strip" aria-label="Cabarrus FutureScape capabilities">
+          {cfsActions.map((action) => (
+            <span key={action}>{action}</span>
+          ))}
+        </div>
       </section>
 
       <section className="additional-work" aria-labelledby="additional-work-title">
