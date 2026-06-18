@@ -175,9 +175,10 @@ export const researchBriefs: ResearchBrief[] = [
       external: true
     },
     visual: {
-      kind: "thermal",
-      alt: "Prototype visual panel showing NDVI, land surface temperature, and urban canopy cooling signals",
-      label: "Remote sensing output concept"
+      kind: "image",
+      src: "/research/thumbnails/thermal-mitigating-effects-urban-canopy.png",
+      alt: "Thermal mitigation map preview showing Chapel Hill heat and canopy cooling patterns",
+      label: "Thermal surface and canopy cooling preview"
     }
   }
 ];
