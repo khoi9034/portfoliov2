@@ -62,6 +62,18 @@ export default function Home() {
 
   return (
     <main className="page-shell home-page cfs-home">
+      <section className="homepage-intro" aria-label="Professional introduction">
+        <p className="eyebrow">Khoi Nguyen</p>
+        <strong>GIS Analyst / Enterprise GIS / Planning Intelligence</strong>
+        <p>
+          Hi, I&apos;m Khoi Nguyen, a GIS analyst focused on Enterprise GIS,
+          Web GIS, ArcPy automation, and planning intelligence systems. I build
+          spatial workflows and digital twin prototypes that turn county-scale
+          data into decision-ready tools for planning, growth, and public-sector
+          decision support.
+        </p>
+      </section>
+
       <section className="home-hero cfs-hero">
         <div className="hero-copy">
           <p className="eyebrow">Flagship digital twin prototype</p>

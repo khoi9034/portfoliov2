@@ -154,6 +154,39 @@ main {
   padding-top: 34px;
 }
 
+.homepage-intro {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  width: min(100%, 980px);
+  margin: 0 auto 18px;
+  border: 1px solid rgba(143, 214, 224, 0.16);
+  border-radius: 8px;
+  padding: 22px 26px;
+  background:
+    linear-gradient(180deg, rgba(12, 29, 35, 0.68), rgba(7, 18, 23, 0.56)),
+    linear-gradient(90deg, rgba(97, 211, 229, 0.04), transparent);
+  text-align: center;
+}
+
+.homepage-intro .eyebrow {
+  margin-bottom: 2px;
+}
+
+.homepage-intro strong {
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.homepage-intro p:last-child {
+  max-width: 820px;
+  margin-bottom: 0;
+  color: var(--soft);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
 .home-hero,
 .project-hero,
 .page-hero,
