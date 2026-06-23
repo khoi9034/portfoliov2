@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ExternalLink, FileText, MapPinned } from "lucide-react";
-import { LiveProductFrame } from "@/components/LiveProductFrame";
+import { MapPinned } from "lucide-react";
 import { ProjectCard } from "@/components/ProjectCard";
 import { SectionHeader } from "@/components/SectionHeader";
-import { projectLinks } from "@/data/links";
-import { getProjectBySlug, projects } from "@/data/projects";
+import { getProjectBySlug, type Project } from "@/data/projects";
 
 export const metadata: Metadata = {
   title: "Projects | Khoi Nguyen GIS Portfolio",
@@ -25,12 +23,15 @@ export const metadata: Metadata = {
   }
 };
 
-const cfs = getProjectBySlug("cabarrus-futurescape");
-const hub = getProjectBySlug("cabarrus-gis-hub");
-const automationProjects = projects.filter(
-  (project) => project.category === "Automation Systems"
-);
-const professionalProjects = [...automationProjects, hub].filter(Boolean);
+const mainProjectSlugs = [
+  "cabarrus-futurescape",
+  "automap",
+  "cabarrus-gis-hub"
+];
+
+const mainProjects = mainProjectSlugs
+  .map((slug) => getProjectBySlug(slug))
+  .filter((project): project is Project => Boolean(project));
 
 const proofItems = [
   "Cabarrus FutureScape live prototype",
@@ -65,86 +66,17 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {cfs ? (
-        <section className="section-shell project-category" id="cabarrus-futurescape">
-          <SectionHeader
-            eyebrow="Flagship Systems"
-            title="Cabarrus FutureScape"
-            description="The primary system in the portfolio: a county-scale digital twin and planning intelligence prototype."
-          />
-          <article className="projects-cfs-spotlight">
-            <div className="projects-cfs-copy">
-              <p className="eyebrow">{cfs.subtitle}</p>
-              <h2>County-scale parcel intelligence for planning review.</h2>
-              <div className="status-banner">{cfs.status}</div>
-              <p>
-                Cabarrus FutureScape is a county-scale digital twin prototype
-                that turns parcel, zoning, development, school-capacity,
-                infrastructure, environmental, and constraint data into
-                planning intelligence.
-                The system is designed to help review parcel context, identify
-                development hotspots, surface constraints, organize
-                infrastructure readiness signals, and support executive-level
-                planning summaries.
-              </p>
-              <div className="method-grid" aria-label="Cabarrus FutureScape modules">
-                {[
-                  "Parcel intelligence",
-                  "Permit hotspots",
-                  "Development hotspots",
-                  "School capacity context",
-                  "Constraint review",
-                  "Infrastructure awareness",
-                  "Environmental signals",
-                  "Development pressure ranking",
-                  "Executive reporting"
-                ].map((module) => (
-                  <span key={module}>{module}</span>
-                ))}
-              </div>
-              <div className="projects-cfs-actions">
-                <a
-                  className="button primary large-action launch-button"
-                  href={projectLinks.cfs}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <ExternalLink size={18} />
-                  <span>Launch CFS</span>
-                </a>
-                <Link className="button secondary" href="/projects/cabarrus-futurescape">
-                  <FileText size={18} />
-                  <span>Read Case Study</span>
-                </Link>
-              </div>
-              <p className="live-product-note">
-                Live personal prototype. Not an official county system.
-              </p>
-            </div>
-            <LiveProductFrame
-              src="/projects/cfs-live-preview.png"
-              alt="Live Cabarrus FutureScape deployed prototype interface"
-              caption="Live CFS prototype interface"
-              href={projectLinks.cfs}
-              label="Live Prototype"
-            />
-          </article>
-        </section>
-      ) : null}
-
       <section className="section-shell project-category">
         <SectionHeader
-          eyebrow="Enterprise GIS / Automation"
-          title="Public GIS infrastructure and automation systems"
-          description="Professional and technical project work focused on ArcGIS Hub, hosted data access, REST metadata, safe layer selection, map recipes, and reviewable outputs."
+          eyebrow="Portfolio systems"
+          title="Live products and enterprise GIS work"
+          description="Three core portfolio signals shown with similar weight: a county digital twin prototype, a GIS automation engine, and public GIS infrastructure experience."
         />
-        <div className="project-grid balanced-grid">
-          {professionalProjects.map((project) => (
-            project ? (
-              <div key={project.slug}>
-                <ProjectCard project={project} />
-              </div>
-            ) : null
+        <div className="project-grid balanced-grid projects-main-grid">
+          {mainProjects.map((project) => (
+            <div key={project.slug}>
+              <ProjectCard project={project} />
+            </div>
           ))}
         </div>
       </section>

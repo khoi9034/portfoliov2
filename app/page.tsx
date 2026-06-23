@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
-  ExternalLink,
   FileText,
   Layers3
 } from "lucide-react";
@@ -31,10 +30,10 @@ export const metadata: Metadata = {
 const cfs = getProjectBySlug("cabarrus-futurescape");
 
 const cfsActions = [
-  "Reviews parcel context",
-  "Surfaces planning constraints",
-  "Tracks development pressure",
-  "Supports executive planning summaries"
+  "Parcel context",
+  "Growth pressure",
+  "Constraints",
+  "Executive planning summaries"
 ];
 
 const additionalWork = [
@@ -90,39 +89,32 @@ export default function Home() {
           </p>
           <div className="status-banner">{cfs.status}</div>
           <p className="hero-subtitle">
-            Cabarrus FutureScape is a county-scale GIS intelligence prototype
-            that connects parcel context, development activity, school
-            capacity, planning constraints, infrastructure readiness,
-            environmental signals, and executive reporting into one
-            decision-support interface.
+            Cabarrus FutureScape connects parcel context, development
+            activity, school capacity, planning constraints, infrastructure
+            readiness, environmental signals, and executive reporting into a
+            county-scale decision-support interface.
           </p>
-          <div className="hero-actions" aria-label="Cabarrus FutureScape actions">
-            <a
-              className="button primary large-action launch-button"
-              href={projectLinks.cfs}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <ExternalLink size={18} />
-              <span>Launch CFS</span>
-            </a>
+        </div>
+        <div className="cfs-preview-stack">
+          <LiveProductFrame
+            src="/projects/cfs-live-preview.png"
+            alt="Live Cabarrus FutureScape deployed prototype interface"
+            caption="Live CFS prototype interface"
+            href={projectLinks.cfs}
+            label="Live Prototype"
+            ctaLabel="View CFS"
+          />
+          <div className="cfs-preview-actions" aria-label="Cabarrus FutureScape supporting links">
             <Link className="button secondary" href="/projects/cabarrus-futurescape">
               <FileText size={18} />
-              <span>Read Case Study</span>
+              <span>Read CFS Case Study</span>
             </Link>
             <Link className="button ghost" href="/projects">
               <Layers3 size={18} />
-              <span>View Projects</span>
+              <span>View All Projects</span>
             </Link>
           </div>
         </div>
-        <LiveProductFrame
-          src="/projects/cfs-live-preview.png"
-          alt="Live Cabarrus FutureScape deployed prototype interface"
-          caption="Live CFS prototype interface"
-          href={projectLinks.cfs}
-          label="Live Prototype"
-        />
       </section>
 
       <section className="cfs-intelligence-section compact-strip-section" aria-labelledby="cfs-intel-title">

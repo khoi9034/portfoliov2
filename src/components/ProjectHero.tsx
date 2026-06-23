@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowLeft, ExternalLink, FileText } from "lucide-react";
 import type { Project } from "@/data/projects";
 import { ProjectVisual } from "@/components/ProjectVisual";
-import { getProjectLaunch } from "@/data/links";
+import { getProjectLaunch, projectLinks } from "@/data/links";
 
 type ProjectHeroProps = {
   project: Project;
@@ -10,6 +10,18 @@ type ProjectHeroProps = {
 
 export function ProjectHero({ project }: ProjectHeroProps) {
   const launch = getProjectLaunch(project.slug);
+  const isCabarrusHub = project.slug === "cabarrus-gis-hub";
+  const openDataHref = isCabarrusHub ? projectLinks.cabarrusOpenData : "";
+  const hasExternalPrimary = Boolean(launch || openDataHref);
+  const externalPrimary = launch
+    ? { href: launch.href, label: launch.label, status: launch.status }
+    : openDataHref
+      ? {
+          href: openDataHref,
+          label: "View Open Data Site",
+          status: "Public Open Data / GIS Hub link."
+        }
+      : null;
 
   return (
     <section className="project-hero">
@@ -26,31 +38,44 @@ export function ProjectHero({ project }: ProjectHeroProps) {
         {project.implementationNote ? (
           <p className="implementation-note">{project.implementationNote}</p>
         ) : null}
-        {launch ? (
+        {externalPrimary ? (
           <div className="live-prototype-callout">
             <a
               className="button primary large-action launch-button"
-              href={launch.href}
+              href={externalPrimary.href}
               target="_blank"
               rel="noopener noreferrer"
             >
               <ExternalLink size={18} />
-              <span>{launch.label}</span>
+              <span>{externalPrimary.label}</span>
             </a>
-            <span>{launch.status}</span>
+            <span>{externalPrimary.status}</span>
           </div>
         ) : null}
         <div className="project-hero-actions">
-          <a
-            className={`button ${launch ? "secondary" : "primary"}`}
-            href="#case-study"
-          >
-            <FileText size={17} />
-            <span>Technical Case Study</span>
-          </a>
-          <Link className={`button ${launch ? "ghost" : "secondary"}`} href="/projects">
-            Back to Projects
-          </Link>
+          {isCabarrusHub && !openDataHref ? (
+            <>
+              <Link className="button primary" href="/projects">
+                Back to Projects
+              </Link>
+              <Link className="button secondary" href="/contact">
+                Contact for Details
+              </Link>
+            </>
+          ) : (
+            <>
+              <a
+                className={`button ${hasExternalPrimary ? "secondary" : "primary"}`}
+                href="#case-study"
+              >
+                <FileText size={17} />
+                <span>Technical Case Study</span>
+              </a>
+              <Link className={`button ${hasExternalPrimary ? "ghost" : "secondary"}`} href="/projects">
+                Back to Projects
+              </Link>
+            </>
+          )}
         </div>
       </div>
       <ProjectVisual project={project} />

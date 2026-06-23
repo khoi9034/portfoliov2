@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, ExternalLink } from "lucide-react";
 import type { Project } from "@/data/projects";
-import { getProjectLaunch } from "@/data/links";
+import { getProjectLaunch, projectLinks } from "@/data/links";
 import { ProjectVisual } from "@/components/ProjectVisual";
 
 type ProjectCardProps = {
@@ -11,6 +11,16 @@ type ProjectCardProps = {
 
 export function ProjectCard({ project, compact = false }: ProjectCardProps) {
   const launch = getProjectLaunch(project.slug);
+  const isCabarrusHub = project.slug === "cabarrus-gis-hub";
+  const openDataHref = isCabarrusHub ? projectLinks.cabarrusOpenData : "";
+  const detailLabel =
+    project.slug === "cabarrus-futurescape"
+      ? "Read CFS Details"
+      : project.slug === "automap"
+        ? "Read AutoMap Details"
+        : isCabarrusHub
+          ? "Read GIS Hub Details"
+          : "Read Details";
 
   return (
     <article className={`project-card ${compact ? "compact" : ""}`}>
@@ -43,8 +53,22 @@ export function ProjectCard({ project, compact = false }: ProjectCardProps) {
               <span>{launch.label}</span>
             </a>
           ) : null}
-          <Link className={launch ? "button secondary" : "text-link"} href={`/projects/${project.slug}`}>
-            <span>{launch ? "Read Case Study" : "View Case Study"}</span>
+          {openDataHref ? (
+            <a
+              className="button primary launch-button"
+              href={openDataHref}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ExternalLink size={16} />
+              <span>View Open Data Site</span>
+            </a>
+          ) : null}
+          <Link
+            className={launch || isCabarrusHub ? "button secondary" : "text-link"}
+            href={`/projects/${project.slug}`}
+          >
+            <span>{detailLabel}</span>
             <ArrowRight size={16} />
           </Link>
         </div>

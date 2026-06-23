@@ -1,6 +1,7 @@
 export const projectLinks = {
   cfs: "https://cabarrus-future-scape.vercel.app/",
-  automap: "https://auto-map-cyan.vercel.app/"
+  automap: "https://auto-map-cyan.vercel.app/",
+  cabarrusOpenData: ""
 };
 
 export const projectLaunches: Record<

@@ -7,6 +7,7 @@ type LiveProductFrameProps = {
   caption: string;
   href?: string;
   label?: string;
+  ctaLabel?: string;
 };
 
 export function LiveProductFrame({
@@ -14,7 +15,8 @@ export function LiveProductFrame({
   alt,
   caption,
   href,
-  label = "Live Prototype"
+  label = "Live Prototype",
+  ctaLabel = "View Prototype"
 }: LiveProductFrameProps) {
   return (
     <figure className="live-product-frame">
@@ -33,6 +35,16 @@ export function LiveProductFrame({
       </div>
       <div className="live-frame-image">
         <Image src={src} alt={alt} fill sizes="(max-width: 860px) 100vw, 980px" />
+        {href ? (
+          <a
+            className="live-frame-overlay"
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>{ctaLabel}</span>
+          </a>
+        ) : null}
       </div>
       <figcaption>{caption}</figcaption>
     </figure>
