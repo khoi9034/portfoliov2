@@ -33,13 +33,6 @@ const mainProjects = mainProjectSlugs
   .map((slug) => getProjectBySlug(slug))
   .filter((project): project is Project => Boolean(project));
 
-const proofItems = [
-  "Cabarrus FutureScape live prototype",
-  "AutoMap live prototype",
-  "Cabarrus County GIS Hub internship work",
-  "UNC GIS research archive"
-];
-
 export default function ProjectsPage() {
   return (
     <main className="page-shell projects-page">
@@ -52,18 +45,6 @@ export default function ProjectsPage() {
           and automation systems. UNC Chapel Hill research lives on a separate
           research page.
         </p>
-      </section>
-
-      <section className="live-proof-bar projects-proof" aria-labelledby="projects-proof-title">
-        <div>
-          <p className="eyebrow">Built and deployed</p>
-          <h2 id="projects-proof-title">Live GIS products, enterprise GIS work, and research evidence.</h2>
-        </div>
-        <div className="proof-grid">
-          {proofItems.map((item) => (
-            <span key={item}>{item}</span>
-          ))}
-        </div>
       </section>
 
       <section className="section-shell project-category">
@@ -93,7 +74,7 @@ export default function ProjectsPage() {
         </div>
         <Link className="button secondary" href="/research">
           <MapPinned size={18} />
-          <span>View UNC Chapel Hill GIS Research</span>
+          <span>View UNC GIS Research</span>
         </Link>
       </section>
     </main>

@@ -54,13 +54,6 @@ const additionalWork = [
   }
 ];
 
-const proofItems = [
-  "Cabarrus FutureScape live prototype",
-  "AutoMap live prototype",
-  "Cabarrus County Open Data / GIS Hub experience",
-  "UNC Chapel Hill applied GIS research"
-];
-
 export default function Home() {
   if (!cfs) {
     return null;
@@ -129,18 +122,6 @@ export default function Home() {
         <div className="cfs-action-strip" aria-label="Cabarrus FutureScape capabilities">
           {cfsActions.map((action) => (
             <span key={action}>{action}</span>
-          ))}
-        </div>
-      </section>
-
-      <section className="live-proof-bar" aria-labelledby="proof-title">
-        <div>
-          <p className="eyebrow">Built and deployed</p>
-          <h2 id="proof-title">Evidence of live GIS systems and applied spatial work.</h2>
-        </div>
-        <div className="proof-grid">
-          {proofItems.map((item) => (
-            <span key={item}>{item}</span>
           ))}
         </div>
       </section>

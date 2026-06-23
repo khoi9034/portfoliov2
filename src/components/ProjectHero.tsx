@@ -13,6 +13,14 @@ export function ProjectHero({ project }: ProjectHeroProps) {
   const isCabarrusHub = project.slug === "cabarrus-gis-hub";
   const openDataHref = isCabarrusHub ? projectLinks.cabarrusOpenData : "";
   const hasExternalPrimary = Boolean(launch || openDataHref);
+  const detailActionLabel =
+    project.slug === "cabarrus-futurescape"
+      ? "Read CFS Details"
+      : project.slug === "automap"
+        ? "Read AutoMap Details"
+        : isCabarrusHub
+          ? "Read Hub Details"
+          : "Read Project Details";
   const externalPrimary = launch
     ? { href: launch.href, label: launch.label, status: launch.status }
     : openDataHref
@@ -64,12 +72,9 @@ export function ProjectHero({ project }: ProjectHeroProps) {
             </>
           ) : (
             <>
-              <a
-                className={`button ${hasExternalPrimary ? "secondary" : "primary"}`}
-                href="#case-study"
-              >
+              <a className={`button ${hasExternalPrimary ? "secondary" : "primary"}`} href="#case-study">
                 <FileText size={17} />
-                <span>Technical Case Study</span>
+                <span>{detailActionLabel}</span>
               </a>
               <Link className={`button ${hasExternalPrimary ? "ghost" : "secondary"}`} href="/projects">
                 Back to Projects

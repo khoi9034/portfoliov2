@@ -1,7 +1,7 @@
 export const projectLinks = {
   cfs: "https://cabarrus-future-scape.vercel.app/",
   automap: "https://auto-map-cyan.vercel.app/",
-  cabarrusOpenData: ""
+  cabarrusOpenData: "https://gis-cabarrus.opendata.arcgis.com/"
 };
 
 export const projectLaunches: Record<
@@ -14,12 +14,12 @@ export const projectLaunches: Record<
 > = {
   "cabarrus-futurescape": {
     href: projectLinks.cfs,
-    label: "Launch CFS",
+    label: "View CFS",
     status: "Live personal prototype. Not an official county system."
   },
   automap: {
     href: projectLinks.automap,
-    label: "Launch AutoMap",
+    label: "View AutoMap",
     status: "Live personal prototype. Active personal project."
   }
 };
