@@ -398,7 +398,9 @@ export const projects: Project[] = [
     ],
     visual: {
       variant: "cabarrus-hub",
-      alt: "Prototype ArcGIS Hub information architecture concept for public GIS data"
+      image: "/projects/cabarrus-open-data-preview.png",
+      alt: "Cabarrus County Open Data GIS Hub website preview",
+      caption: "Cabarrus County Open Data website preview"
     },
     featured: true,
     depth: "professional",
