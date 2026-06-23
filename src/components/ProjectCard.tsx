@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ArrowRight, BadgeCheck } from "lucide-react";
+import { ArrowRight, BadgeCheck, ExternalLink } from "lucide-react";
 import type { Project } from "@/data/projects";
+import { getProjectLaunch } from "@/data/links";
 import { ProjectVisual } from "@/components/ProjectVisual";
 
 type ProjectCardProps = {
@@ -9,6 +10,8 @@ type ProjectCardProps = {
 };
 
 export function ProjectCard({ project, compact = false }: ProjectCardProps) {
+  const launch = getProjectLaunch(project.slug);
+
   return (
     <article className={`project-card ${compact ? "compact" : ""}`}>
       <ProjectVisual project={project} />
@@ -28,10 +31,23 @@ export function ProjectCard({ project, compact = false }: ProjectCardProps) {
             <span key={tool}>{tool}</span>
           ))}
         </div>
-        <Link className="text-link" href={`/projects/${project.slug}`}>
-          <span>View case study</span>
-          <ArrowRight size={16} />
-        </Link>
+        <div className="project-card-actions">
+          {launch ? (
+            <a
+              className="button primary launch-button"
+              href={launch.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ExternalLink size={16} />
+              <span>{launch.label}</span>
+            </a>
+          ) : null}
+          <Link className={launch ? "button secondary" : "text-link"} href={`/projects/${project.slug}`}>
+            <span>{launch ? "Read Case Study" : "View Case Study"}</span>
+            <ArrowRight size={16} />
+          </Link>
+        </div>
       </div>
     </article>
   );

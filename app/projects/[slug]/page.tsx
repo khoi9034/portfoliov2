@@ -43,9 +43,9 @@ export async function generateMetadata({
 
   const descriptions: Record<string, string> = {
     "cabarrus-futurescape":
-      "Cabarrus FutureScape case study: a personal county digital twin and planning intelligence prototype for parcel context, growth pressure, constraints, infrastructure signals, and executive planning summaries.",
+      "Cabarrus FutureScape is a county-scale planning intelligence and digital twin prototype focused on parcels, constraints, development activity, infrastructure signals, and executive planning support.",
     automap:
-      "AutoMap case study: an active personal project for AI-assisted county map requests, ArcGIS REST metadata, source validation, map recipes, refinements, and analysis reports.",
+      "AutoMap is a GIS automation engine for turning plain-language map requests into verified ArcGIS REST workflows, map recipes, and analysis reports.",
     "cabarrus-gis-hub":
       "Cabarrus County GIS Hub case study: professional internship work in ArcGIS Hub, ArcGIS Online, Enterprise/Portal, hosted layers, metadata, sharing settings, and public GIS workflows."
   };
@@ -78,6 +78,49 @@ function BulletedList({ items }: { items: string[] }) {
   );
 }
 
+const cfsValueCards = [
+  {
+    title: "What is it?",
+    text: "A live personal prototype for county-scale planning intelligence and parcel-centered decision support."
+  },
+  {
+    title: "Who is it for?",
+    text: "GIS managers, planners, analysts, and public-sector teams reviewing growth pressure and development context."
+  },
+  {
+    title: "What decisions does it support?",
+    text: "Parcel review, hotspot identification, constraint review, infrastructure readiness triage, and executive planning summaries."
+  },
+  {
+    title: "What data does it connect?",
+    text: "Parcels, permits, zoning, school-capacity context, flood/environmental constraints, infrastructure signals, and remote-sensing indicators."
+  }
+];
+
+const cfsRankingExplanation = [
+  "The first model uses permit history, zoning-change signals, flood constraints, utility/infrastructure context, and other parcel-level factors to rank areas by relative development likelihood.",
+  "The purpose is decision support and prioritization, not final approval or deterministic prediction."
+];
+
+const automapValueCards = [
+  {
+    title: "What AutoMap Does",
+    text: "Turns plain-language GIS requests into structured, reviewable map workflows."
+  },
+  {
+    title: "Prompt-to-Map Workflow",
+    text: "Connects user wording to a REST layer registry, approved source matching, recipe generation, and refinement."
+  },
+  {
+    title: "Report Generation",
+    text: "Produces analysis summaries, grouped statistics, warnings, and report history for review."
+  },
+  {
+    title: "Customization Layer",
+    text: "Supports safer customization of map outputs while keeping sources, limits, and assumptions visible."
+  }
+];
+
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
@@ -93,19 +136,27 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
       {project.slug === "cabarrus-futurescape" ? (
         <section className="cfs-detail-primer" aria-labelledby="cfs-primer-title">
           <div className="cfs-primer-copy">
-            <p className="eyebrow">Prototype orientation</p>
-            <h2 id="cfs-primer-title">What FutureScape is meant to do</h2>
+            <p className="eyebrow">Live prototype orientation</p>
+            <h2 id="cfs-primer-title">What CFS Does</h2>
             <p>
-              Cabarrus FutureScape is a personal county digital twin prototype
-              for turning fragmented parcel, zoning, infrastructure,
-              environmental, and constraint data into planning intelligence.
+              CFS is designed to help users review parcel context, identify
+              development hotspots, surface planning constraints, track
+              infrastructure and school-capacity signals, and organize growth
+              intelligence before development pressure becomes harder to
+              manage.
             </p>
             <p>
-              The interface is meant to help a reviewer select a parcel,
-              understand its planning context, see growth pressure and
-              constraints, and produce executive-level summaries without
-              jumping between disconnected layers.
+              Live personal prototype. Not an official county system.
             </p>
+          </div>
+
+          <div className="cfs-value-grid" aria-label="Cabarrus FutureScape product value">
+            {cfsValueCards.map((card) => (
+              <article key={card.title}>
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+              </article>
+            ))}
           </div>
 
           <CFSWhatItDoesGrid />
@@ -115,6 +166,30 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           {project.architecture ? (
             <CFSDataPipeline items={project.architecture} />
           ) : null}
+        </section>
+      ) : null}
+
+      {project.slug === "automap" ? (
+        <section className="automap-detail-primer" aria-labelledby="automap-primer-title">
+          <div className="cfs-primer-copy">
+            <p className="eyebrow">GIS automation engine</p>
+            <h2 id="automap-primer-title">What AutoMap Does</h2>
+            <p>
+              AutoMap turns plain-language GIS requests into reviewable map
+              workflows by connecting user intent, ArcGIS REST layer metadata,
+              source validation, map recipes, customization options, and
+              analysis report generation.
+            </p>
+          </div>
+
+          <div className="cfs-value-grid" aria-label="AutoMap workflow value">
+            {automapValueCards.map((card) => (
+              <article key={card.title}>
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+              </article>
+            ))}
+          </div>
         </section>
       ) : null}
 
@@ -143,13 +218,21 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         </CaseStudySection>
 
         {project.architecture ? (
-          <CaseStudySection title="System concept">
+          <CaseStudySection
+            title={
+              project.slug === "cabarrus-futurescape"
+                ? "Planning Intelligence Workflow"
+                : "System concept"
+            }
+          >
             <ArchitectureFlow items={project.architecture} />
           </CaseStudySection>
         ) : null}
 
         {project.workflow ? (
-          <CaseStudySection title="Workflow">
+          <CaseStudySection
+            title={project.slug === "automap" ? "Prompt-to-Map Workflow" : "Workflow"}
+          >
             <AutoMapWorkflowVisual workflow={project.workflow} />
             <AutoMapInterfaceVisual />
           </CaseStudySection>
@@ -163,7 +246,9 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         ) : null}
 
         {project.coreModules ? (
-          <CaseStudySection title="Core modules">
+          <CaseStudySection
+            title={project.slug === "cabarrus-futurescape" ? "Key Modules" : "Core modules"}
+          >
             <div className="module-grid">
               {project.coreModules.map((module) => (
                 <article key={module.title}>
@@ -176,6 +261,32 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           </CaseStudySection>
         ) : null}
 
+        {project.slug === "cabarrus-futurescape" ? (
+          <CaseStudySection title="First-Pass Development Pressure Ranking">
+            <BulletedList items={cfsRankingExplanation} />
+          </CaseStudySection>
+        ) : null}
+
+        {project.slug === "automap" ? (
+          <>
+            <CaseStudySection title="Report Generation">
+              <p>
+                AutoMap reports are designed to make GIS automation reviewable:
+                they summarize selected layers, grouped statistics, warnings,
+                limitations, refinement context, and report history before a
+                workflow is treated as reusable.
+              </p>
+            </CaseStudySection>
+            <CaseStudySection title="Customization Layer">
+              <p>
+                The customization layer gives users a controlled way to adjust
+                map outputs while keeping approved source matching, REST
+                metadata validation, and recipe assumptions visible.
+              </p>
+            </CaseStudySection>
+          </>
+        ) : null}
+
         <CaseStudySection title="Approach">
           <BulletedList items={project.caseStudy.approach} />
         </CaseStudySection>
@@ -185,7 +296,9 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         </CaseStudySection>
 
         {project.methods ? (
-          <CaseStudySection title="Data / methods">
+          <CaseStudySection
+            title={project.slug === "cabarrus-futurescape" ? "Data Signals" : "Data / methods"}
+          >
             <div className="method-grid">
               {project.methods.map((method) => (
                 <span key={method}>{method}</span>
@@ -238,12 +351,16 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           </article>
           <article>
             <ArrowRight size={20} />
-            <h2>Why it matters</h2>
+            <h2>{project.slug === "cabarrus-futurescape" ? "Product Value" : "Why it matters"}</h2>
             <p>{project.caseStudy.whyItMatters}</p>
           </article>
           <article>
             <ListChecks size={20} />
-            <h2>Next steps</h2>
+            <h2>
+              {project.slug === "cabarrus-futurescape"
+                ? "Current Limitations / Next Steps"
+                : "Next steps"}
+            </h2>
             <BulletedList items={project.caseStudy.nextSteps} />
           </article>
         </section>

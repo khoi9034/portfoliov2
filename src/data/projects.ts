@@ -28,6 +28,7 @@ export type Project = {
     variant: VisualVariant;
     image?: string;
     alt: string;
+    caption?: string;
   };
   featured: boolean;
   depth: ProjectDepth;
@@ -63,9 +64,9 @@ export const projects: Project[] = [
       "Personal prototype / ongoing applied GIS platform. Not an official county system.",
     role: "Product strategy, spatial data architecture, dashboard concept, Web GIS prototype",
     summary:
-      "A county-scale digital twin prototype for Cabarrus County focused on parcel intelligence, development activity, infrastructure awareness, growth pressure, environmental constraints, and planning decision support.",
+      "A county-scale GIS intelligence prototype that connects parcel context, development activity, school capacity, planning constraints, infrastructure readiness, environmental signals, and executive reporting into one decision-support interface.",
     homepageSummary:
-      "The flagship portfolio system: a command-center concept for parcel intelligence, growth pressure, constraints, infrastructure readiness, environmental signals, and executive planning reports.",
+      "The flagship live prototype: a command-center interface for parcel intelligence, development hotspots, constraints, infrastructure readiness, school-capacity signals, and executive planning reports.",
     tools: [
       "Next.js",
       "TypeScript",
@@ -81,49 +82,59 @@ export const projects: Project[] = [
     ],
     focus: [
       "Parcel intelligence",
+      "Permit hotspots",
+      "Development hotspots",
+      "School capacity context",
       "Development activity",
       "Growth pressure",
       "Infrastructure readiness",
       "Constraint intelligence",
       "Environmental signals",
+      "Development pressure ranking",
       "Executive reporting"
     ],
     visual: {
       variant: "cabarrus-futurescape",
-      alt: "Prototype command-center interface concept for Cabarrus FutureScape"
+      image: "/projects/cfs-live-preview.png",
+      alt: "Live Cabarrus FutureScape deployed prototype interface",
+      caption: "Live CFS prototype interface"
     },
     featured: true,
     depth: "flagship",
     caseStudy: {
       whatItIs:
-        "A county-scale digital twin prototype for Cabarrus County focused on parcel intelligence, development activity, infrastructure awareness, growth pressure, environmental constraints, and planning decision support.",
+        "A live county-scale digital twin and planning intelligence prototype for Cabarrus County, focused on parcels, development activity, school capacity, infrastructure awareness, growth pressure, environmental constraints, and executive planning support.",
       problem:
-        "County planning data is spread across parcels, zoning, permits, flood layers, school zones, utility context, environmental rasters, and public REST services. Planning staff need clearer ways to understand what is happening, where growth pressure is forming, and what constraints affect each parcel.",
+        "County planning data is spread across parcels, zoning, permits, school-capacity context, flood layers, utility and infrastructure signals, environmental rasters, and public REST services. Planning teams need clearer ways to understand what is happening, where development pressure is forming, and what constraints affect each parcel.",
       approach: [
-        "Designed a prototype information architecture around parcels, zoning, ETJ, municipal boundaries, flood exposure, schools, infrastructure context, environmental constraints, and development activity.",
+        "Designed a product-oriented information architecture around parcels, permits, zoning, future land-use context, ETJ, municipal boundaries, flood exposure, schools, infrastructure context, environmental constraints, and development activity.",
         "Separated raw, derived, metadata, and QA outputs so future PostGIS ingestion and dashboard analytics can be handled cleanly.",
-        "Framed the interface as an executive planning dashboard rather than a one-off map viewer."
+        "Framed the interface as a live planning intelligence platform rather than a one-off map viewer.",
+        "Added first-pass relative development likelihood ranking language as decision support and prioritization, not deterministic prediction or final approval."
       ],
       system: [
-        "SceneView and Web GIS dashboard concept for county-scale spatial review.",
-        "Parcel intelligence summaries tied to development, infrastructure, zoning, environmental context, and growth signals.",
+        "Web GIS dashboard concept for county-scale parcel, permit, constraint, school-capacity, and infrastructure review.",
+        "Parcel intelligence summaries tied to development activity, infrastructure readiness, zoning, future land-use context, environmental constraints, and growth signals.",
+        "Early development pressure ranking concept based on permit history, zoning-change signals, flood constraints, utility/infrastructure context, and other parcel-level factors.",
         "Environmental workflow concepts using Landsat surface temperature, NDVI, Dynamic World land cover, terrain, hydrology, rainfall, and flooding data."
       ],
       outputs: [
-        "Interactive Web GIS dashboard concept",
+        "Live interactive Web GIS planning intelligence prototype",
         "Parcel intelligence summary pattern",
-        "Constraint and readiness layer model",
+        "Permit and development hotspot review workflow",
+        "Constraint, school-capacity, and readiness layer model",
         "Executive-level insight and report concepts",
+        "First-pass relative development likelihood ranking model",
         "PostGIS-ready raw, derived, metadata, and QA output organization"
       ],
       whyItMatters:
-        "Cabarrus FutureScape shows the ability to move beyond static maps into planning intelligence systems that combine data engineering, Web GIS, analysis, and decision support.",
+        "Cabarrus FutureScape shows the ability to move beyond static maps into deployed planning intelligence systems that combine data engineering, Web GIS, analysis, and decision support.",
       nextSteps: [
         "Connect stable data sources.",
         "Add parcel-level constraint scores.",
         "Build executive PDF report generation.",
-        "Add a parcel-level prediction model later, after constraint data is stable.",
-        "Add ML growth prediction only after source data, assumptions, and QA rules are documented."
+        "Improve the early development pressure ranking only after source data, assumptions, and QA rules are documented.",
+        "Treat ranking outputs as planning prioritization signals, not final approvals or deterministic predictions."
       ]
     },
     architecture: [
@@ -141,9 +152,19 @@ export const projects: Project[] = [
           "Parcel selection, ownership/context summaries, land-use context, zoning intersections, and development-readiness signals."
       },
       {
-        title: "Development Activity",
+        title: "Permit Hotspots",
         description:
-          "A planning layer concept for reviewing where activity is concentrated and how it relates to infrastructure and constraints."
+          "Permit and activity signals organized to show where review pressure is emerging."
+      },
+      {
+        title: "Development Hotspots",
+        description:
+          "Planning intelligence panels for seeing where recent activity, zoning context, and readiness signals overlap."
+      },
+      {
+        title: "School Capacity Context",
+        description:
+          "Preliminary school-capacity and service context used as a planning signal, not a final capacity determination."
       },
       {
         title: "Constraint Intelligence",
@@ -164,14 +185,24 @@ export const projects: Project[] = [
         title: "Executive Reporting",
         description:
           "Report concepts that translate spatial overlays into concise planning intelligence for decision review."
+      },
+      {
+        title: "Development Pressure Ranking",
+        description:
+          "First-pass relative development likelihood ranking for prioritization, using parcel-level signals without claiming deterministic prediction."
       }
     ],
     methods: [
       "ArcGIS REST services",
       "Parcel overlays",
+      "Permit history",
+      "Development activity signals",
       "Zoning / ETJ / municipal boundaries",
+      "Future land-use context",
       "Flood exposure",
       "School zones",
+      "School capacity context",
+      "Utility / infrastructure readiness",
       "Google Earth Engine",
       "Landsat surface temperature",
       "NDVI",
@@ -179,6 +210,7 @@ export const projects: Project[] = [
       "Terrain / hydrology",
       "Rainfall / flooding data",
       "PostGIS-ready data organization",
+      "First-pass relative development likelihood ranking",
       "QA folders: raw, derived, metadata, qa notes"
     ],
     interfaceConcepts: [
@@ -208,14 +240,14 @@ export const projects: Project[] = [
     subtitle: "AI-assisted county map request and ArcGIS REST automation engine",
     category: "Automation Systems",
     type: "AI-assisted County Map Request / REST Layer Automation Engine",
-    status: "Active personal project.",
+    status: "Active personal project. Live deployed prototype.",
     role: "Full-stack workflow design, deterministic request intelligence, GIS automation architecture",
     summary:
-      "AutoMap ingests ArcGIS REST service metadata and lets a user describe the map they want in plain language. The system selects needed layers, validates them, creates map recipes, supports refinement, and generates reviewable analysis reports.",
+      "AutoMap turns plain-language GIS requests into reviewable map workflows by connecting user intent, ArcGIS REST layer metadata, source validation, map recipes, customization options, and analysis report generation.",
     homepageSummary:
-      "A professional prompt-to-map automation engine for county GIS requests, approved REST layer selection, refinement, and analysis report generation.",
+      "A live GIS automation engine for county map requests, approved REST layer selection, customizable map recipes, refinement, and analysis report generation.",
     implementationNote:
-      "AutoMap is separate from Cabarrus FutureScape. Cabarrus FutureScape reserves ports 3000/8000; AutoMap uses frontend 3010 and backend/API 8010.",
+      "AutoMap is separate from Cabarrus FutureScape. The deployed prototype is designed for reviewable workflows and does not perform real county publishing actions.",
     tools: [
       "Next.js",
       "TypeScript",
@@ -229,44 +261,52 @@ export const projects: Project[] = [
     focus: [
       "REST layer registry",
       "Prompt interpretation",
+      "Approved source matching",
+      "REST metadata validation",
       "Layer selection",
       "Map recipes",
+      "Customization layer",
       "Refinement workflows",
-      "Analysis reports"
+      "Analysis reports",
+      "Report history"
     ],
     visual: {
       variant: "automap",
-      alt: "Prototype AutoMap prompt-to-map automation interface concept"
+      image: "/projects/automap-live-preview.png",
+      alt: "Live AutoMap deployed prototype interface",
+      caption: "AutoMap deployed interface"
     },
     featured: true,
     depth: "platform",
     caseStudy: {
       whatItIs:
-        "An ambitious county planning tool that ingests ArcGIS REST service URLs and layer metadata, stores them, and lets a user describe a desired map in plain language.",
+        "A live GIS automation prototype that ingests ArcGIS REST service URLs and layer metadata, stores them in a registry, and turns plain-language map requests into reviewable map workflows.",
       problem:
         "County GIS requests often arrive as plain language, but building the correct map requires knowing which REST layers, fields, filters, geometries, and limitations apply.",
       approach: [
-        "Built a deterministic request intelligence flow that interprets map requests without inventing layers, fields, URLs, or data sources.",
+        "Built a deterministic request intelligence flow that translates user wording into structured map intent without inventing layers, fields, URLs, or data sources.",
         "Stored and validated layer metadata so recipes can be built from known ArcGIS REST services.",
-        "Added local report generation for analysis runs and refinements so reviewers can understand counts, warnings, and data limitations."
+        "Added customization options, refinement workflows, and report generation so reviewers can understand counts, warnings, and data limitations."
       ],
       system: [
         "FastAPI backend with recipe, refinement, approval, analysis, and report endpoints.",
-        "Next.js frontend with dashboard, map request, analysis, analysis reports, catalog, history, and system status pages.",
-        "Guarded port model that keeps Cabarrus FutureScape and AutoMap development environments separate."
+        "Next.js frontend with dashboard, map request, analysis, analysis reports, catalog, history, methodology, and system status pages.",
+        "Safer workflow pattern where approved source matching, REST metadata validation, recipe generation, and report history are reviewable before any operational use."
       ],
       outputs: [
+        "Live deployed AutoMap prototype",
         "AutoMap v2.3 analysis summary reports",
         "Local HTML, Markdown, JSON, CSV report packages",
         "Grouped statistics support using returnGeometry=false",
-        "Frontend /analysis-reports workflow"
+        "Frontend report history and /analysis-reports workflow",
+        "Customizable map recipe and refinement workflow"
       ],
       whyItMatters:
-        "AutoMap shows how planning and GIS teams could turn repeated map requests into reviewable, auditable, and safer automation workflows.",
+        "AutoMap shows how GIS teams could turn repeated plain-language map requests into reviewable, auditable, safer, and more repeatable automation workflows.",
       nextSteps: [
         "Keep real publishing behind explicit local CLI safeguards.",
         "Expand supported analysis operations only when feature limits and review rules are clear.",
-        "Add public demo screenshots when a sanitized demo dataset is available."
+        "Connect more sanitized demo sources and continue improving report history, customization, and source validation."
       ]
     },
     workflow: [
@@ -275,6 +315,7 @@ export const projects: Project[] = [
       "Candidate source evaluation",
       "Map recipe",
       "Map preview",
+      "Customization",
       "Refinement",
       "Analysis report"
     ],
@@ -282,11 +323,16 @@ export const projects: Project[] = [
       "REST layer registry",
       "Map request interpretation",
       "Layer selection",
+      "Approved source matching",
+      "REST metadata validation",
       "Approved source workflow",
       "Analysis summary reports",
       "Grouped statistics",
       "returnGeometry=false optimization",
       "Frontend pages for reports/catalog/history/status",
+      "Customization options",
+      "Refinement workflow",
+      "Report history",
       "CLI/API support"
     ],
     technicalDetails: [
@@ -303,20 +349,20 @@ export const projects: Project[] = [
       {
         title: "Plain-language Request",
         description:
-          "User describes the needed county map while the system resolves intent into known GIS sources.",
-        label: "Prototype interface concept"
+          "User wording becomes structured map intent that can be checked against known GIS sources.",
+        label: "Live prototype workflow"
       },
       {
-        title: "Layer Selection",
+        title: "Source Validation",
         description:
-          "Candidate sources are checked against approved metadata instead of relying on guessed layers.",
-        label: "Prototype interface concept"
+          "Candidate sources are checked against approved REST metadata instead of relying on guessed layers.",
+        label: "Live prototype workflow"
       },
       {
         title: "Analysis Report",
         description:
-          "Reports summarize counts, warnings, fields, layers, and refinement context for review.",
-        label: "Prototype interface concept"
+          "Reports summarize counts, warnings, fields, layers, customization choices, and refinement context for review.",
+        label: "Live prototype workflow"
       }
     ]
   },

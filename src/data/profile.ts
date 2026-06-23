@@ -6,8 +6,6 @@ export const contact = {
   resumePath: "/resume/KhoiNguyenResume.pdf"
 };
 
-export const cfsPrototypeUrl = "http://localhost:3000/";
-
 export const education = {
   school: "University of North Carolina at Chapel Hill",
   degree: "B.A. Geography | Minor in GIS",

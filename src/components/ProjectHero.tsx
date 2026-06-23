@@ -1,16 +1,15 @@
 import Link from "next/link";
-import { ArrowLeft, FileText } from "lucide-react";
+import { ArrowLeft, ExternalLink, FileText } from "lucide-react";
 import type { Project } from "@/data/projects";
-import { FutureScapeShowcase } from "@/components/DashboardVisuals";
 import { ProjectVisual } from "@/components/ProjectVisual";
-import { cfsPrototypeUrl } from "@/data/profile";
+import { getProjectLaunch } from "@/data/links";
 
 type ProjectHeroProps = {
   project: Project;
 };
 
 export function ProjectHero({ project }: ProjectHeroProps) {
-  const isCabarrusFutureScape = project.slug === "cabarrus-futurescape";
+  const launch = getProjectLaunch(project.slug);
 
   return (
     <section className="project-hero">
@@ -27,35 +26,34 @@ export function ProjectHero({ project }: ProjectHeroProps) {
         {project.implementationNote ? (
           <p className="implementation-note">{project.implementationNote}</p>
         ) : null}
-        {isCabarrusFutureScape ? (
-          <div className="local-prototype-callout">
-            <a className="button primary large-action" href={cfsPrototypeUrl}>
-              View CFS
+        {launch ? (
+          <div className="live-prototype-callout">
+            <a
+              className="button primary large-action launch-button"
+              href={launch.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ExternalLink size={18} />
+              <span>{launch.label}</span>
             </a>
-            <span>Local prototype link for now. Public live link coming later.</span>
+            <span>{launch.status}</span>
           </div>
         ) : null}
         <div className="project-hero-actions">
           <a
-            className={`button ${isCabarrusFutureScape ? "secondary" : "primary"}`}
+            className={`button ${launch ? "secondary" : "primary"}`}
             href="#case-study"
           >
             <FileText size={17} />
-            <span>Read Case Study</span>
+            <span>Technical Case Study</span>
           </a>
-          <Link
-            className={`button ${isCabarrusFutureScape ? "ghost" : "secondary"}`}
-            href="/contact"
-          >
-            Contact
+          <Link className={`button ${launch ? "ghost" : "secondary"}`} href="/projects">
+            Back to Projects
           </Link>
         </div>
       </div>
-      {isCabarrusFutureScape ? (
-        <FutureScapeShowcase />
-      ) : (
-        <ProjectVisual project={project} />
-      )}
+      <ProjectVisual project={project} />
     </section>
   );
 }

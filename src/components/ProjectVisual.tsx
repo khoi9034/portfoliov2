@@ -15,6 +15,9 @@ export function ProjectVisual({ project }: ProjectVisualProps) {
           fill
           sizes="(max-width: 768px) 100vw, 520px"
         />
+        {project.visual.caption ? (
+          <span className="live-preview-caption">{project.visual.caption}</span>
+        ) : null}
       </div>
     );
   }

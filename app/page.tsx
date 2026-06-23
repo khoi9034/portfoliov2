@@ -4,26 +4,26 @@ import {
   ArrowRight,
   ExternalLink,
   FileText,
-  Mail
+  Layers3
 } from "lucide-react";
-import { FutureScapeShowcase } from "@/components/DashboardVisuals";
-import { cfsPrototypeUrl } from "@/data/profile";
+import { LiveProductFrame } from "@/components/LiveProductFrame";
+import { projectLinks } from "@/data/links";
 import { getProjectBySlug } from "@/data/projects";
 
 export const metadata: Metadata = {
   title: "Cabarrus FutureScape | Khoi Nguyen GIS Portfolio",
   description:
-    "Cabarrus FutureScape is Khoi Nguyen's flagship county digital twin and planning intelligence prototype for parcel intelligence, growth pressure, constraints, environmental signals, and executive planning support.",
+    "Khoi Nguyen is a GIS analyst focused on Enterprise GIS, Web GIS, planning intelligence, digital twin prototypes, ArcPy automation, and spatial decision-support systems.",
   openGraph: {
     title: "Cabarrus FutureScape | Khoi Nguyen GIS Portfolio",
     description:
-      "A premium GIS portfolio homepage focused on Cabarrus FutureScape, a personal county-scale digital twin and planning intelligence prototype.",
+      "Launch Cabarrus FutureScape, Khoi Nguyen's live county-scale digital twin and planning intelligence prototype.",
     images: ["/og-gis-portfolio.svg"]
   },
   twitter: {
     title: "Cabarrus FutureScape | Khoi Nguyen GIS Portfolio",
     description:
-      "County digital twin, parcel intelligence, constraints, growth pressure, and planning intelligence prototype.",
+      "Live county digital twin, parcel intelligence, constraints, growth pressure, and planning intelligence prototype.",
     images: ["/og-gis-portfolio.svg"]
   }
 };
@@ -33,26 +33,33 @@ const cfs = getProjectBySlug("cabarrus-futurescape");
 const cfsActions = [
   "Reviews parcel context",
   "Surfaces planning constraints",
-  "Tracks growth pressure",
+  "Tracks development pressure",
   "Supports executive planning summaries"
 ];
 
 const additionalWork = [
   {
     title: "AutoMap",
-    description: "AI-assisted county map request and ArcGIS REST automation engine.",
+    description: "Launch or review the live GIS automation engine.",
     href: "/projects/automap"
   },
   {
-    title: "Cabarrus County GIS Hub Redesign",
-    description: "Professional internship work in public GIS infrastructure and data discovery.",
-    href: "/projects/cabarrus-gis-hub"
+    title: "Projects",
+    description: "See deployed systems and professional GIS infrastructure work.",
+    href: "/projects"
   },
   {
-    title: "UNC GIS Research",
-    description: "Applied GIS research in suitability, accessibility, and spatial statistics.",
-    href: "/research"
+    title: "Contact",
+    description: "Reach out about GIS, planning intelligence, or automation roles.",
+    href: "/contact"
   }
+];
+
+const proofItems = [
+  "Cabarrus FutureScape live prototype",
+  "AutoMap live prototype",
+  "Cabarrus County Open Data / GIS Hub experience",
+  "UNC Chapel Hill applied GIS research"
 ];
 
 export default function Home() {
@@ -84,29 +91,38 @@ export default function Home() {
           <div className="status-banner">{cfs.status}</div>
           <p className="hero-subtitle">
             Cabarrus FutureScape is a county-scale GIS intelligence prototype
-            that connects parcel context, growth pressure, planning
-            constraints, infrastructure readiness, environmental signals, and
-            executive reporting into one decision-support interface.
+            that connects parcel context, development activity, school
+            capacity, planning constraints, infrastructure readiness,
+            environmental signals, and executive reporting into one
+            decision-support interface.
           </p>
           <div className="hero-actions" aria-label="Cabarrus FutureScape actions">
-            <a className="button primary large-action" href={cfsPrototypeUrl}>
+            <a
+              className="button primary large-action launch-button"
+              href={projectLinks.cfs}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <ExternalLink size={18} />
-              <span>View CFS</span>
+              <span>Launch CFS</span>
             </a>
             <Link className="button secondary" href="/projects/cabarrus-futurescape">
               <FileText size={18} />
               <span>Read Case Study</span>
             </Link>
-            <Link className="button ghost" href="/contact">
-              <Mail size={18} />
-              <span>Contact Me</span>
+            <Link className="button ghost" href="/projects">
+              <Layers3 size={18} />
+              <span>View Projects</span>
             </Link>
           </div>
-          <p className="local-link-note">
-            Local prototype link for now. Public live link coming later.
-          </p>
         </div>
-        <FutureScapeShowcase />
+        <LiveProductFrame
+          src="/projects/cfs-live-preview.png"
+          alt="Live Cabarrus FutureScape deployed prototype interface"
+          caption="Live CFS prototype interface"
+          href={projectLinks.cfs}
+          label="Live Prototype"
+        />
       </section>
 
       <section className="cfs-intelligence-section compact-strip-section" aria-labelledby="cfs-intel-title">
@@ -121,6 +137,18 @@ export default function Home() {
         <div className="cfs-action-strip" aria-label="Cabarrus FutureScape capabilities">
           {cfsActions.map((action) => (
             <span key={action}>{action}</span>
+          ))}
+        </div>
+      </section>
+
+      <section className="live-proof-bar" aria-labelledby="proof-title">
+        <div>
+          <p className="eyebrow">Built and deployed</p>
+          <h2 id="proof-title">Evidence of live GIS systems and applied spatial work.</h2>
+        </div>
+        <div className="proof-grid">
+          {proofItems.map((item) => (
+            <span key={item}>{item}</span>
           ))}
         </div>
       </section>
