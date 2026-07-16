@@ -3147,6 +3147,113 @@ p {
   line-height: 1.35;
 }
 
+.experience-section {
+  display: grid;
+  gap: 22px;
+}
+
+.experience-feature,
+.experience-capability-card,
+.experience-education-card,
+.experience-applied-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(140deg, rgba(23, 58, 66, 0.7), rgba(8, 21, 27, 0.86)),
+    rgba(8, 21, 27, 0.86);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+}
+
+.experience-feature {
+  display: grid;
+  gap: 20px;
+  padding: 26px;
+}
+
+.experience-feature-header,
+.experience-education-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.experience-feature-header svg,
+.experience-education-card svg,
+.experience-capability-card svg,
+.experience-applied-card svg {
+  color: var(--cyan);
+  flex: 0 0 auto;
+}
+
+.experience-feature h2,
+.experience-capability-card h2,
+.experience-education-card h2,
+.experience-applied-card h2 {
+  margin-bottom: 8px;
+  font-size: 24px;
+  line-height: 1.18;
+}
+
+.experience-feature p,
+.experience-capability-card p,
+.experience-education-card p,
+.experience-applied-card p {
+  color: var(--soft);
+  line-height: 1.65;
+}
+
+.experience-capability-grid,
+.experience-applied-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.experience-capability-card,
+.experience-applied-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  padding: 22px;
+}
+
+.experience-capability-card .method-grid {
+  margin-top: auto;
+}
+
+.experience-education-card {
+  padding: 24px;
+}
+
+.experience-applied-card {
+  min-height: 260px;
+  color: var(--text);
+}
+
+.experience-applied-card:hover,
+.experience-applied-card:focus-visible {
+  border-color: var(--line-strong);
+  outline: none;
+  box-shadow: 0 22px 56px rgba(0, 0, 0, 0.28);
+}
+
+.experience-applied-card > span {
+  color: var(--cyan);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.experience-applied-card strong {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  margin-top: auto;
+  color: var(--green);
+}
+
 @media (max-width: 1120px) {
   .home-hero,
   .project-hero,
@@ -3167,6 +3274,8 @@ p {
   .mockup-grid,
   .cfs-what-grid,
   .cfs-value-grid,
+  .experience-capability-grid,
+  .experience-applied-grid,
   .projects-main-grid,
   .cfs-data-pipeline,
   .outcome-grid {
@@ -3225,6 +3334,8 @@ p {
   .cfs-value-grid,
   .cfs-panel-stack,
   .capability-outcome-grid,
+  .experience-capability-grid,
+  .experience-applied-grid,
   .capability-map,
   .detail-meta-grid,
   .consulting-summary-grid,

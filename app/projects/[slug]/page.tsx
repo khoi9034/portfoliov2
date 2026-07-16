@@ -375,8 +375,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           <Link className="button primary" href="/projects">
             All Projects
           </Link>
-          <Link className="button secondary" href="/skills">
-            Skills
+          <Link className="button secondary" href="/experience">
+            Experience
           </Link>
         </div>
       </section>

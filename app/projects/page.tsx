@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { MapPinned } from "lucide-react";
+import { BriefcaseBusiness } from "lucide-react";
 import { ProjectCard } from "@/components/ProjectCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { getProjectBySlug, type Project } from "@/data/projects";
@@ -42,8 +42,8 @@ export default function ProjectsPage() {
         <p>
           The portfolio is organized around real professional signals: one
           flagship planning intelligence system, enterprise GIS infrastructure,
-          and automation systems. UNC Chapel Hill research lives on a separate
-          research page.
+          and automation systems. Consulting and research-oriented analysis now
+          lives in the case studies section.
         </p>
       </section>
 
@@ -64,17 +64,17 @@ export default function ProjectsPage() {
 
       <section className="section-shell projects-research-cta">
         <div>
-          <p className="eyebrow">Research archive</p>
-          <h2>UNC Chapel Hill GIS research lives on its own page.</h2>
+          <p className="eyebrow">Analysis archive</p>
+          <h2>Consulting and applied research belong in Case Studies.</h2>
           <p>
-            Applied GIS research, spatial statistics, site suitability, and
-            accessibility analysis are separated from the professional project
-            index for a cleaner portfolio hierarchy.
+            Applied GIS research, spatial analytics, strategy framing, and
+            evidence-based recommendations are organized separately from the
+            technical product index.
           </p>
         </div>
-        <Link className="button secondary" href="/research">
-          <MapPinned size={18} />
-          <span>View UNC GIS Research</span>
+        <Link className="button secondary" href="/case-studies">
+          <BriefcaseBusiness size={18} />
+          <span>View Consulting Case Studies</span>
         </Link>
       </section>
     </main>

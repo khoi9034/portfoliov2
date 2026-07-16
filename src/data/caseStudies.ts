@@ -1,3 +1,5 @@
+import { researchBriefs } from "./research";
+
 export type CaseStudy = {
   slug: string;
   title: string;
@@ -12,6 +14,11 @@ export type CaseStudy = {
     src: string;
     alt: string;
   };
+  actions?: {
+    label: string;
+    href: string;
+    external?: boolean;
+  }[];
   href: string;
   featured: boolean;
   published: boolean;
@@ -28,7 +35,24 @@ export type CaseStudy = {
   };
 };
 
-export const caseStudies: CaseStudy[] = [
+const researchCategoryBySlug: Record<string, string> = {
+  "anime-retail-site-selection-tokyo": "Location Intelligence / Market Analysis",
+  "ltc-facilities-aging-population-japan":
+    "Public Sector Analytics / Accessibility Planning",
+  "thermal-mitigating-effects-urban-canopy":
+    "Remote Sensing / Urban Heat Analysis"
+};
+
+const researchDeliverableBySlug: Record<string, string> = {
+  "anime-retail-site-selection-tokyo":
+    "Research paper, hotspot maps, overlay analysis, and reusable ArcPy workflow.",
+  "ltc-facilities-aging-population-japan":
+    "Research paper, elderly density maps, LTC facility overlays, and accessibility interpretation.",
+  "thermal-mitigating-effects-urban-canopy":
+    "Research paper, NDVI/LST maps, regression analysis, and green-infrastructure recommendations."
+};
+
+const coreCaseStudies: CaseStudy[] = [
   {
     slug: "cabarrus-futurescape",
     title: "Cabarrus FutureScape: Growth and Infrastructure Intelligence",
@@ -36,7 +60,7 @@ export const caseStudies: CaseStudy[] = [
       "How parcel-level GIS and public data can be organized into a planning intelligence platform for reviewing growth, development pressure, infrastructure context, and service constraints.",
     problem:
       "County growth information is distributed across parcels, permits, flood constraints, schools, transportation, utilities, and planning datasets, making coordinated review difficult.",
-    category: "Public Sector Strategy · Spatial Analytics",
+    category: "Public Sector Strategy / Spatial Analytics",
     context: "Independent portfolio case study for a county-scale planning intelligence prototype.",
     methods: [
       "GIS analysis",
@@ -113,7 +137,7 @@ export const caseStudies: CaseStudy[] = [
       "A structured screening framework that combines spatial constraints, development activity, parcel characteristics, infrastructure context, and follow-up due diligence.",
     problem:
       "A parcel may appear attractive based on price or location while still carrying zoning, flood, infrastructure, entitlement, market, or service-delivery risks.",
-    category: "Real Estate Strategy · Location Intelligence",
+    category: "Real Estate Strategy / Location Intelligence",
     context: "Portfolio framework for real estate and location intelligence screening.",
     methods: [
       "Parcel screening",
@@ -173,7 +197,7 @@ export const caseStudies: CaseStudy[] = [
       "Combining attendance-area utilization context with observed permit activity as a preliminary planning review signal.",
     problem:
       "Planners need an early review signal for areas where existing school utilization context overlaps with observed residential permit activity.",
-    category: "Public Sector Analytics · Growth Planning",
+    category: "Public Sector Analytics / Growth Planning",
     context: "Cabarrus FutureScape analysis concept.",
     methods: [
       "Attendance-area review",
@@ -235,7 +259,7 @@ export const caseStudies: CaseStudy[] = [
       "Reorganizing public GIS content into clearer categories and improving discoverability of county datasets, maps, applications, planning resources, and property information.",
     problem:
       "Public GIS resources can be difficult to navigate when datasets, applications, maps, categories, metadata, and download options are inconsistently organized.",
-    category: "Digital Government · Data Strategy",
+    category: "Digital Government / Data Strategy",
     context: "Professional experience through Cabarrus County GIS Analyst Internship.",
     methods: [
       "ArcGIS Hub",
@@ -295,6 +319,63 @@ export const caseStudies: CaseStudy[] = [
       ]
     }
   }
+];
+
+const researchCaseStudies: CaseStudy[] = researchBriefs.map((brief) => ({
+  slug: brief.slug,
+  title: brief.title,
+  summary: brief.summary,
+  problem: brief.questions[0] ?? brief.summary,
+  category:
+    researchCategoryBySlug[brief.slug] ?? "Applied GIS Research / Spatial Analysis",
+  context: brief.context,
+  methods: brief.methods,
+  deliverable:
+    researchDeliverableBySlug[brief.slug] ?? brief.outputs.slice(0, 3).join(" / "),
+  status: "UNC Chapel Hill GIS Research",
+  image:
+    brief.visual.kind === "image"
+      ? {
+          src: brief.visual.src,
+          alt: brief.visual.alt
+        }
+      : undefined,
+  href: `/case-studies/${brief.slug}`,
+  actions: brief.code ? [brief.pdf, brief.code] : [brief.pdf],
+  featured: false,
+  published: true,
+  detail: {
+    executiveSummary: brief.summary,
+    contextAndConstraints: [
+      brief.subtitle,
+      brief.context,
+      "Academic research output; no client, adoption, or production impact is claimed."
+    ],
+    approach: brief.methods,
+    dataAndTools: brief.methods,
+    keyFindings: brief.findings,
+    recommendation: [
+      "Use the findings as analytical review signals and starting points for follow-up data collection, field validation, or stakeholder review.",
+      "Treat map outputs as evidence for interpretation, not as standalone decisions."
+    ],
+    risksAndLimitations: [
+      "Findings depend on source data coverage, assumptions, and available public or course datasets.",
+      "The work is presented as UNC Chapel Hill applied GIS research, not a production planning system."
+    ],
+    potentialImpact: [
+      "Demonstrates reproducible GIS methods for location intelligence, accessibility, remote sensing, and planning analysis.",
+      "Shows how spatial evidence can support clearer questions and practical next-step recommendations."
+    ],
+    nextAnalysis: [
+      "Validate source data currency and completeness.",
+      "Compare outputs with additional local knowledge or official planning inputs where appropriate."
+    ]
+  }
+}));
+
+export const caseStudies: CaseStudy[] = [
+  ...coreCaseStudies,
+  ...researchCaseStudies
 ];
 
 export function getCaseStudyBySlug(slug: string) {

@@ -92,8 +92,23 @@ export default async function CaseStudyDetailPage({
         <h1>{study.title}</h1>
         <p>{study.summary}</p>
         <div className="status-banner">
-          {study.published ? study.status : `${study.status} · Overview`}
+          {study.published ? study.status : `${study.status} / Overview`}
         </div>
+        {study.actions?.length ? (
+          <div className="hero-actions">
+            {study.actions.map((action) => (
+              <a
+                className="button secondary"
+                href={action.href}
+                key={action.href}
+                rel={action.external ? "noopener noreferrer" : undefined}
+                target={action.external ? "_blank" : undefined}
+              >
+                {action.label}
+              </a>
+            ))}
+          </div>
+        ) : null}
       </section>
 
       {study.image ? (

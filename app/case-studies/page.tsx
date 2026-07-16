@@ -64,7 +64,7 @@ export default function CaseStudiesPage() {
                 </div>
                 <div>
                   <dt>Methods</dt>
-                  <dd>{study.methods.slice(0, 4).join(" · ")}</dd>
+                  <dd>{study.methods.slice(0, 4).join(" / ")}</dd>
                 </div>
                 <div>
                   <dt>Deliverable</dt>

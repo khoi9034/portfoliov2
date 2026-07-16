@@ -86,12 +86,9 @@ export const pathway = {
 };
 
 export const navigation = [
-  { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
   { href: "/case-studies", label: "Case Studies" },
-  { href: "/research", label: "Research" },
-  { href: "/skills", label: "Skills" },
-  { href: "/pathway", label: "Pathway" },
+  { href: "/experience", label: "Experience" },
   { href: "/resume", label: "Resume" },
   { href: "/contact", label: "Contact" }
 ];
