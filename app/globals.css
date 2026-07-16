@@ -1078,6 +1078,202 @@ p {
   font-weight: 800;
 }
 
+.case-studies-page {
+  padding-top: 38px;
+}
+
+.case-studies-hero {
+  padding-block: 34px;
+}
+
+.case-studies-hero p {
+  max-width: 820px;
+}
+
+.case-study-index {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.case-study-card {
+  display: grid;
+  grid-template-rows: 220px 1fr;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(12, 29, 35, 0.76);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+
+.case-study-card:hover,
+.case-study-card:focus-visible {
+  border-color: var(--line-strong);
+  outline: none;
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.22);
+}
+
+.case-study-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  color: var(--cyan);
+  background:
+    linear-gradient(rgba(97, 211, 229, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(97, 211, 229, 0.06) 1px, transparent 1px),
+    rgba(5, 15, 19, 0.76);
+  background-size: 28px 28px;
+  overflow: hidden;
+}
+
+.case-study-visual img,
+.consulting-visual img {
+  object-fit: cover;
+}
+
+.case-study-visual::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(180deg, transparent 45%, rgba(7, 16, 19, 0.82));
+}
+
+.case-study-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+}
+
+.case-study-card-topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.case-study-card-topline span,
+.case-study-facts dt {
+  color: var(--cyan);
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.case-study-card-topline span:last-child {
+  color: var(--green);
+}
+
+.case-study-card h2 {
+  margin-bottom: 0;
+  font-size: 24px;
+  line-height: 1.18;
+}
+
+.case-study-card p,
+.case-study-facts dd {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.case-study-facts {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.case-study-facts div {
+  border-top: 1px solid rgba(143, 214, 224, 0.14);
+  padding-top: 10px;
+}
+
+.case-study-facts dd {
+  margin: 3px 0 0;
+}
+
+.case-study-link {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  width: fit-content;
+  margin-top: auto;
+  color: var(--soft);
+  font-size: 14px;
+  font-weight: 830;
+}
+
+.case-study-detail-page {
+  padding-top: 38px;
+}
+
+.consulting-detail-hero {
+  padding-block: 34px;
+}
+
+.consulting-visual {
+  position: relative;
+  min-height: 420px;
+  margin: 24px 0 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: rgba(5, 15, 19, 0.76);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.consulting-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.consulting-summary-grid article,
+.consulting-detail-block {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(12, 29, 35, 0.76);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.18);
+}
+
+.consulting-summary-grid article {
+  padding: 18px;
+}
+
+.consulting-summary-grid span {
+  color: var(--cyan);
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.consulting-summary-grid p {
+  margin-top: 8px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.consulting-detail-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.consulting-detail-block {
+  padding: 24px;
+}
+
+.consulting-detail-block h2 {
+  margin-bottom: 12px;
+  font-size: 24px;
+}
+
+.consulting-detail-block p {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
 .live-product-frame {
   position: relative;
   z-index: 1;
@@ -3021,6 +3217,7 @@ p {
 
   .systems-grid,
   .project-grid,
+  .case-study-index,
   .preview-grid,
   .cfs-intel-grid,
   .cfs-what-grid,
@@ -3030,6 +3227,7 @@ p {
   .capability-outcome-grid,
   .capability-map,
   .detail-meta-grid,
+  .consulting-summary-grid,
   .resume-layout,
   .pathway-grid {
     grid-template-columns: 1fr;
@@ -3099,6 +3297,10 @@ p {
 
   .research-page .page-hero h1 {
     font-size: 42px;
+  }
+
+  .consulting-visual {
+    min-height: 260px;
   }
 }
 

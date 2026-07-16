@@ -1,0 +1,302 @@
+export type CaseStudy = {
+  slug: string;
+  title: string;
+  summary: string;
+  problem: string;
+  category: string;
+  context: string;
+  methods: string[];
+  deliverable: string;
+  status: string;
+  image?: {
+    src: string;
+    alt: string;
+  };
+  href: string;
+  featured: boolean;
+  published: boolean;
+  detail: {
+    executiveSummary: string;
+    contextAndConstraints: string[];
+    approach: string[];
+    dataAndTools: string[];
+    keyFindings: string[];
+    recommendation: string[];
+    risksAndLimitations: string[];
+    potentialImpact: string[];
+    nextAnalysis: string[];
+  };
+};
+
+export const caseStudies: CaseStudy[] = [
+  {
+    slug: "cabarrus-futurescape",
+    title: "Cabarrus FutureScape: Growth and Infrastructure Intelligence",
+    summary:
+      "How parcel-level GIS and public data can be organized into a planning intelligence platform for reviewing growth, development pressure, infrastructure context, and service constraints.",
+    problem:
+      "County growth information is distributed across parcels, permits, flood constraints, schools, transportation, utilities, and planning datasets, making coordinated review difficult.",
+    category: "Public Sector Strategy · Spatial Analytics",
+    context: "Independent portfolio case study for a county-scale planning intelligence prototype.",
+    methods: [
+      "GIS analysis",
+      "Parcel intelligence",
+      "Permit analysis",
+      "PostGIS",
+      "FastAPI",
+      "Next.js",
+      "ArcGIS Maps SDK",
+      "Dashboard design",
+      "Scenario planning"
+    ],
+    deliverable: "Planning intelligence platform concept and live prototype.",
+    status: "Independent Portfolio Case Study",
+    image: {
+      src: "/projects/cfs-live-preview.png",
+      alt: "Cabarrus FutureScape planning intelligence interface preview"
+    },
+    href: "/case-studies/cabarrus-futurescape",
+    featured: true,
+    published: true,
+    detail: {
+      executiveSummary:
+        "Cabarrus FutureScape frames county-scale GIS data as a decision-support system for reviewing parcel context, observed development activity, infrastructure signals, and planning constraints before decisions become harder to coordinate.",
+      contextAndConstraints: [
+        "The work is an independent portfolio prototype, not an official county system.",
+        "The analysis depends on available public and portfolio-safe datasets.",
+        "Outputs are intended as planning intelligence, not approval decisions."
+      ],
+      approach: [
+        "Organize parcel, permit, infrastructure, environmental, and service context into reviewable planning signals.",
+        "Show where observed activity and constraints overlap.",
+        "Present assumptions and caveats in the interface rather than hiding them behind a single score."
+      ],
+      dataAndTools: [
+        "Next.js",
+        "FastAPI",
+        "PostGIS",
+        "ArcGIS Maps SDK",
+        "Parcel and permit context",
+        "Flood, school, infrastructure, and planning layers"
+      ],
+      keyFindings: [
+        "Parcel review is easier when activity, constraints, and service context are shown together.",
+        "Observed permit activity is useful as a planning review signal when paired with clear caveats.",
+        "A dashboard-style interface can make cross-layer review easier than static map outputs."
+      ],
+      recommendation: [
+        "Use the prototype as a planning intelligence framework, not a deterministic model.",
+        "Prioritize stable data pipelines, metadata, and review workflows before adding stronger ranking logic.",
+        "Keep public-facing language focused on observed activity, constraints, and recommended follow-up."
+      ],
+      risksAndLimitations: [
+        "Public data coverage may be incomplete or delayed.",
+        "The prototype does not include private review notes or student-level demographic data.",
+        "Any ranking output should be treated as a preliminary review signal."
+      ],
+      potentialImpact: [
+        "Faster first-pass parcel and growth review.",
+        "Clearer conversations between GIS, planning, infrastructure, and leadership users.",
+        "More transparent follow-up questions for development pressure and service constraints."
+      ],
+      nextAnalysis: [
+        "Validate source data coverage and update cadence.",
+        "Document assumptions for each planning signal.",
+        "Add report-ready summaries that separate evidence, caveats, and recommended follow-up."
+      ]
+    }
+  },
+  {
+    slug: "real-estate-screening",
+    title: "Turning County Data into a Real Estate Screening Framework",
+    summary:
+      "A structured screening framework that combines spatial constraints, development activity, parcel characteristics, infrastructure context, and follow-up due diligence.",
+    problem:
+      "A parcel may appear attractive based on price or location while still carrying zoning, flood, infrastructure, entitlement, market, or service-delivery risks.",
+    category: "Real Estate Strategy · Location Intelligence",
+    context: "Portfolio framework for real estate and location intelligence screening.",
+    methods: [
+      "Parcel screening",
+      "Constraint review",
+      "Infrastructure context",
+      "Development activity review",
+      "Due diligence framing"
+    ],
+    deliverable: "Screening checklist and location-intelligence analysis structure.",
+    status: "Case Study in Development",
+    href: "/case-studies/real-estate-screening",
+    featured: false,
+    published: false,
+    detail: {
+      executiveSummary:
+        "This overview frames a defensible parcel screening workflow for identifying constraints, follow-up questions, and early location risks before deeper due diligence.",
+      contextAndConstraints: [
+        "No client, financial return, or acquisition outcome is claimed.",
+        "The framework is intended for preliminary screening, not legal, appraisal, or entitlement advice."
+      ],
+      approach: [
+        "Start with parcel and location basics.",
+        "Layer zoning, flood, infrastructure, and service context.",
+        "Convert findings into follow-up questions rather than unsupported go/no-go claims."
+      ],
+      dataAndTools: [
+        "County parcel data",
+        "Zoning and flood constraints",
+        "Infrastructure proximity",
+        "Observed development activity",
+        "GIS screening maps"
+      ],
+      keyFindings: [
+        "A low-friction screening structure can surface risks that are easy to miss in a price-and-location-only review."
+      ],
+      recommendation: [
+        "Use the framework to triage parcels and identify due-diligence priorities."
+      ],
+      risksAndLimitations: [
+        "Market, entitlement, and utility details require follow-up outside GIS.",
+        "Screening outputs should not be treated as investment advice."
+      ],
+      potentialImpact: [
+        "Clearer early-stage parcel comparisons.",
+        "Better follow-up questions for real estate, planning, and infrastructure review."
+      ],
+      nextAnalysis: [
+        "Test the framework on a small set of public example parcels.",
+        "Separate hard constraints from softer location-intelligence signals."
+      ]
+    }
+  },
+  {
+    slug: "school-pressure",
+    title: "School Utilization and Development Pressure Review",
+    summary:
+      "Combining attendance-area utilization context with observed permit activity as a preliminary planning review signal.",
+    problem:
+      "Planners need an early review signal for areas where existing school utilization context overlaps with observed residential permit activity.",
+    category: "Public Sector Analytics · Growth Planning",
+    context: "Cabarrus FutureScape analysis concept.",
+    methods: [
+      "Attendance-area review",
+      "Utilization context",
+      "Observed permit activity",
+      "Planning caveats",
+      "GIS overlay analysis"
+    ],
+    deliverable: "Preliminary school capacity watch and planning review signal.",
+    status: "Cabarrus FutureScape Analysis",
+    href: "/case-studies/school-pressure",
+    featured: false,
+    published: false,
+    detail: {
+      executiveSummary:
+        "This overview explains how school utilization context and observed residential permit activity can support early planning review without claiming to forecast enrollment.",
+      contextAndConstraints: [
+        "Not an official enrollment forecast.",
+        "Not an overcrowding prediction.",
+        "Not a student-level demographic model."
+      ],
+      approach: [
+        "Pair utilization context with observed permit activity.",
+        "Flag attendance-area development pressure as a review signal.",
+        "Keep caveats visible so the signal is not confused with an official capacity determination."
+      ],
+      dataAndTools: [
+        "Attendance-area context",
+        "Observed residential permit activity",
+        "GIS overlays",
+        "Dashboard summary language"
+      ],
+      keyFindings: [
+        "Utilization context becomes more useful when reviewed alongside observed permit activity.",
+        "The signal is best used to guide follow-up, not to make official forecast claims."
+      ],
+      recommendation: [
+        "Use safe language such as preliminary school capacity watch, observed permit activity, and planning review signal."
+      ],
+      risksAndLimitations: [
+        "Student-level demographic data is not included.",
+        "Permit activity does not equal actual student generation.",
+        "Boundary, capacity, and timing assumptions require official review."
+      ],
+      potentialImpact: [
+        "Earlier identification of areas that may need school-capacity follow-up.",
+        "Clearer communication between planning, GIS, and service-capacity review."
+      ],
+      nextAnalysis: [
+        "Document data coverage and update timing.",
+        "Compare observed activity with official school planning inputs where appropriate."
+      ]
+    }
+  },
+  {
+    slug: "gis-hub",
+    title: "Improving Public Access to County GIS Data",
+    summary:
+      "Reorganizing public GIS content into clearer categories and improving discoverability of county datasets, maps, applications, planning resources, and property information.",
+    problem:
+      "Public GIS resources can be difficult to navigate when datasets, applications, maps, categories, metadata, and download options are inconsistently organized.",
+    category: "Digital Government · Data Strategy",
+    context: "Professional experience through Cabarrus County GIS Analyst Internship.",
+    methods: [
+      "ArcGIS Hub",
+      "ArcGIS Online",
+      "Metadata review",
+      "Hosted item organization",
+      "User-centered navigation"
+    ],
+    deliverable: "Public GIS Hub information architecture and data-discovery improvements.",
+    status: "Professional Experience",
+    image: {
+      src: "/projects/cabarrus-open-data-preview.png",
+      alt: "Cabarrus County Open Data GIS Hub website preview"
+    },
+    href: "/case-studies/gis-hub",
+    featured: false,
+    published: false,
+    detail: {
+      executiveSummary:
+        "This overview describes public GIS data-discovery work completed through internship experience, focusing on navigation, metadata, public access, and clearer paths to county GIS resources.",
+      contextAndConstraints: [
+        "This reflects professional experience through the internship.",
+        "No private county information, internal contacts, or non-public data are disclosed.",
+        "The wording avoids implying county approval or sole responsibility beyond stated resume experience."
+      ],
+      approach: [
+        "Organize GIS resources around user intent.",
+        "Improve discoverability of public datasets, maps, applications, planning resources, and property information.",
+        "Review metadata, sharing settings, hosted layers, and access paths."
+      ],
+      dataAndTools: [
+        "ArcGIS Hub",
+        "ArcGIS Online",
+        "ArcGIS Enterprise / Portal",
+        "Hosted layers",
+        "Web maps",
+        "Metadata"
+      ],
+      keyFindings: [
+        "Public data access improves when users can navigate by task rather than internal structure.",
+        "Metadata and sharing settings are part of the user experience, not just back-office administration."
+      ],
+      recommendation: [
+        "Keep public GIS categories clear, task-oriented, and metadata-supported."
+      ],
+      risksAndLimitations: [
+        "Public-facing descriptions should avoid exposing internal workflows.",
+        "Hub content must remain aligned with official county publishing practices."
+      ],
+      potentialImpact: [
+        "Improved public access to GIS resources.",
+        "Clearer discovery paths for residents, planners, staff, and external data users."
+      ],
+      nextAnalysis: [
+        "Review search terms and user tasks that lead people to GIS resources.",
+        "Continue metadata consistency checks for public items."
+      ]
+    }
+  }
+];
+
+export function getCaseStudyBySlug(slug: string) {
+  return caseStudies.find((study) => study.slug === slug);
+}
