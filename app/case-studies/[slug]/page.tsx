@@ -145,11 +145,15 @@ export default async function CaseStudyDetailPage({
       </section>
 
       <div className="consulting-detail-grid">
-        <DetailBlock title="Executive Decision">
+        <DetailBlock title="Decision at Hand">
+          <p>{study.decisionQuestion}</p>
+        </DetailBlock>
+
+        <DetailBlock title="Executive Recommendation">
           <p>{study.detail.executiveSummary}</p>
         </DetailBlock>
 
-        <DetailBlock title="Problem and Context">
+        <DetailBlock title="Context and Constraints">
           <p>{study.problem}</p>
           <DetailList items={study.detail.contextAndConstraints} />
         </DetailBlock>
@@ -172,10 +176,6 @@ export default async function CaseStudyDetailPage({
 
         <DetailBlock title="Risks and Limitations">
           <DetailList items={study.detail.risksAndLimitations} />
-        </DetailBlock>
-
-        <DetailBlock title="Potential Impact">
-          <DetailList items={study.detail.potentialImpact} />
         </DetailBlock>
 
         <DetailBlock title="Recommended Follow-Up">

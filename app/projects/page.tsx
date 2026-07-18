@@ -36,11 +36,11 @@ export default function ProjectsPage() {
   return (
     <main className="page-shell projects-page">
       <section className="page-hero projects-intro">
-        <p className="eyebrow">PROJECT PORTFOLIO</p>
-        <h1>Selected Projects</h1>
+        <p className="eyebrow">PROJECT TRACK EXPLORER</p>
+        <h1>Choose Your Track</h1>
         <p>
-          GIS systems and analytical tools built for public planning,
-          infrastructure, and operational decision-making.
+          Follow the systems, applications, and analytical tools I have built
+          across government technology and infrastructure intelligence.
         </p>
       </section>
 

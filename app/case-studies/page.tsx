@@ -25,11 +25,10 @@ export default function CaseStudiesPage() {
     <main className="page-shell case-studies-page">
       <section className="page-hero case-studies-hero">
         <p className="eyebrow">DECISION INTELLIGENCE</p>
-        <h1>Consulting Case Studies</h1>
+        <h1>Follow a Decision Path</h1>
         <p>
-          Analyses showing how spatial evidence, operational context, and
-          economic reasoning can support government, infrastructure, and
-          location decisions.
+          Explore how spatial evidence, infrastructure context, and analytical
+          reasoning were used to examine planning and operational decisions.
         </p>
       </section>
 

@@ -17,6 +17,7 @@ export type ProjectIndustryCategory =
   | "gis-systems-automation";
 
 export type ProjectFilterValue = "all" | ProjectIndustryCategory;
+export type ProfessionalTrack = "government" | "utilities";
 
 export type AdditionalTechnicalBuild = {
   title: string;
@@ -32,6 +33,8 @@ export type Project = {
   subtitle: string;
   category: ProjectCategory;
   categories: ProjectIndustryCategory[];
+  primaryTrack: ProfessionalTrack;
+  tracks: ProfessionalTrack[];
   primaryIndustry?: string;
   capabilityCategory?: string;
   type: string;
@@ -54,6 +57,8 @@ export type Project = {
   depth: ProjectDepth;
   implementationNote?: string;
   relatedCaseStudies?: { title: string; href: string }[];
+  routeOrder: number;
+  junction?: boolean;
   caseStudy: {
     whatItIs: string;
     problem: string;
@@ -86,6 +91,8 @@ export const projects: Project[] = [
       "utilities-infrastructure",
       "gis-systems-automation"
     ],
+    primaryTrack: "government",
+    tracks: ["government", "utilities"],
     primaryIndustry: "Public Systems & Planning Intelligence",
     capabilityCategory: "Planning intelligence / infrastructure context",
     type: "County Digital Twin & Growth Intelligence Platform",
@@ -153,6 +160,8 @@ export const projects: Project[] = [
         href: "/case-studies/real-estate-screening"
       }
     ],
+    routeOrder: 1,
+    junction: true,
     caseStudy: {
       whatItIs:
         "A live county-scale digital twin and planning intelligence prototype for Cabarrus County, focused on parcels, development activity, school capacity, infrastructure awareness, growth pressure, environmental constraints, and executive planning support.",
@@ -293,6 +302,8 @@ export const projects: Project[] = [
     subtitle: "AI-assisted county map request and ArcGIS REST automation engine",
     category: "Automation Systems",
     categories: ["public-systems", "gis-systems-automation"],
+    primaryTrack: "government",
+    tracks: ["government"],
     primaryIndustry: "Public Systems & Planning Intelligence",
     capabilityCategory: "GIS systems & automation",
     type: "AI-assisted County Map Request / REST Layer Automation Engine",
@@ -349,6 +360,7 @@ export const projects: Project[] = [
         href: "/case-studies/automap"
       }
     ],
+    routeOrder: 2,
     caseStudy: {
       whatItIs:
         "A live GIS automation prototype that ingests ArcGIS REST service URLs and layer metadata, stores them in a registry, and turns plain-language map requests into reviewable map workflows.",
@@ -444,6 +456,8 @@ export const projects: Project[] = [
     subtitle: "Public GIS infrastructure, metadata, and user-centered data discovery",
     category: "Enterprise GIS / Public Infrastructure",
     categories: ["public-systems", "gis-systems-automation"],
+    primaryTrack: "government",
+    tracks: ["government"],
     primaryIndustry: "Public Systems & Planning Intelligence",
     capabilityCategory: "GIS modernization / public data",
     type: "Internship / Public GIS Infrastructure Work",
@@ -495,6 +509,7 @@ export const projects: Project[] = [
         href: "/case-studies/gis-hub"
       }
     ],
+    routeOrder: 3,
     caseStudy: {
       whatItIs:
         "A public GIS infrastructure and data discovery redesign completed through the Cabarrus County GIS Analyst Internship.",
@@ -547,6 +562,8 @@ export const projects: Project[] = [
     subtitle: "Senior Thesis / Applied GIS Research Project",
     category: "Applied GIS / Research",
     categories: ["gis-systems-automation"],
+    primaryTrack: "government",
+    tracks: ["government"],
     type: "Senior Thesis / Applied GIS Research Project",
     status: "Academic research project.",
     role: "Spatial analyst, ArcPy workflow designer, suitability modeling",
@@ -589,6 +606,7 @@ export const projects: Project[] = [
         href: "/case-studies/anime-retail-site-selection-tokyo"
       }
     ],
+    routeOrder: 99,
     caseStudy: {
       whatItIs:
         "An applied GIS research project for evaluating candidate anime retail locations in Japan through repeatable suitability modeling.",
@@ -624,6 +642,8 @@ export const projects: Project[] = [
     subtitle: "GIS Accessibility / Planning Analysis",
     category: "Applied GIS / Research",
     categories: ["public-systems"],
+    primaryTrack: "government",
+    tracks: ["government"],
     type: "GIS Accessibility / Planning Analysis",
     status: "Academic planning analysis.",
     role: "GIS analyst, accessibility mapping, ArcPy automation",
@@ -664,6 +684,7 @@ export const projects: Project[] = [
         href: "/case-studies/ltc-facilities-aging-population-japan"
       }
     ],
+    routeOrder: 99,
     caseStudy: {
       whatItIs:
         "A GIS accessibility and planning analysis focused on long-term care service equity for Tokyo's elderly population.",
@@ -699,6 +720,8 @@ export const projects: Project[] = [
     subtitle: "Spatial Statistics / Demographic Clustering",
     category: "Applied GIS / Research",
     categories: ["public-systems"],
+    primaryTrack: "government",
+    tracks: ["government"],
     type: "Spatial Statistics / Demographic Clustering",
     status: "Academic spatial statistics project.",
     role: "Spatial statistics analyst, R workflow author, map interpretation",
@@ -735,6 +758,7 @@ export const projects: Project[] = [
     featured: false,
     published: false,
     depth: "research",
+    routeOrder: 99,
     caseStudy: {
       whatItIs:
         "A spatial statistics project using R to evaluate working-age demographic clustering patterns in North Carolina.",
@@ -789,7 +813,7 @@ export const projectFilterOptions: { value: ProjectFilterValue; label: string }[
 ];
 
 export const projectTrackPanels: {
-  value: ProjectIndustryCategory;
+  value: ProfessionalTrack;
   title: string;
   description: string;
   labels: string[];
@@ -797,16 +821,16 @@ export const projectTrackPanels: {
   action: string;
 }[] = [
   {
-    value: "public-systems",
-    title: "Public Systems & Planning Intelligence",
+    value: "government",
+    title: "Government Technology",
     description:
-      "County GIS, planning, parcels, permitting, public data, growth management, economic development, and government decision-support systems.",
-    labels: ["County GIS", "Planning Intelligence", "Public Data"],
+      "County GIS, planning intelligence, public data, permitting, automation, growth management, and digital government systems.",
+    labels: ["County GIS", "Planning Systems", "Public Data", "GIS Automation"],
     featuredProject: "Cabarrus FutureScape",
-    action: "Explore Public Systems"
+    action: "Explore Government Technology"
   },
   {
-    value: "utilities-infrastructure",
+    value: "utilities",
     title: "Utilities & Network Infrastructure",
     description:
       "Telecom, broadband, water and sewer systems, electric infrastructure, service territories, utility assets, capacity, and network expansion.",

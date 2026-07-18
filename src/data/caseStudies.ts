@@ -13,7 +13,10 @@ export type CaseStudyDecisionType =
   | "Data Modernization"
   | "Operational Efficiency"
   | "Site and Investment Screening"
-  | "Public Service Delivery";
+  | "Public Service Delivery"
+  | "Infrastructure Readiness";
+
+export type CaseStudyTrack = "government" | "utilities";
 
 export type CaseStudy = {
   slug: string;
@@ -24,6 +27,7 @@ export type CaseStudy = {
   category: string;
   categorySlug: CaseStudyCategory;
   secondaryCategories?: CaseStudyCategory[];
+  tracks: CaseStudyTrack[];
   decisionType: CaseStudyDecisionType;
   evidence: string[];
   cardRecommendation: string;
@@ -42,6 +46,8 @@ export type CaseStudy = {
   }[];
   href: string;
   relatedProject?: { title: string; href: string };
+  routeOrder: number;
+  junction?: boolean;
   featured: boolean;
   published: boolean;
   detail: {
@@ -103,6 +109,7 @@ const coreCaseStudies: CaseStudy[] = [
     category: "Public Sector Strategy / Spatial Analytics",
     categorySlug: "government-planning",
     secondaryCategories: ["utilities-infrastructure"],
+    tracks: ["government", "utilities"],
     decisionType: "Growth and Capacity",
     evidence: [
       "Parcel context",
@@ -135,6 +142,8 @@ const coreCaseStudies: CaseStudy[] = [
       title: "Cabarrus FutureScape",
       href: "/projects/cabarrus-futurescape"
     },
+    routeOrder: 1,
+    junction: true,
     featured: true,
     published: true,
     detail: {
@@ -197,7 +206,8 @@ const coreCaseStudies: CaseStudy[] = [
     category: "Utilities & Infrastructure",
     categorySlug: "utilities-infrastructure",
     secondaryCategories: ["government-planning"],
-    decisionType: "Growth and Capacity",
+    tracks: ["utilities"],
+    decisionType: "Infrastructure Readiness",
     evidence: [
       "Parcel and permit context",
       "Utility service context",
@@ -222,6 +232,7 @@ const coreCaseStudies: CaseStudy[] = [
       title: "Cabarrus FutureScape",
       href: "/projects/cabarrus-futurescape"
     },
+    routeOrder: 2,
     featured: false,
     published: true,
     detail: {
@@ -280,6 +291,7 @@ const coreCaseStudies: CaseStudy[] = [
     category: "GIS Modernization & Data Strategy",
     categorySlug: "gis-modernization",
     secondaryCategories: ["government-planning"],
+    tracks: ["government"],
     decisionType: "Operational Efficiency",
     evidence: [
       "Plain-language requests",
@@ -308,6 +320,7 @@ const coreCaseStudies: CaseStudy[] = [
       title: "AutoMap",
       href: "/projects/automap"
     },
+    routeOrder: 4,
     featured: false,
     published: true,
     detail: {
@@ -369,6 +382,7 @@ const coreCaseStudies: CaseStudy[] = [
     category: "Real Estate Strategy / Location Intelligence",
     categorySlug: "real-estate-location",
     secondaryCategories: ["utilities-infrastructure"],
+    tracks: [],
     decisionType: "Site and Investment Screening",
     evidence: [
       "Parcel characteristics",
@@ -393,6 +407,7 @@ const coreCaseStudies: CaseStudy[] = [
       title: "Cabarrus FutureScape",
       href: "/projects/cabarrus-futurescape"
     },
+    routeOrder: 6,
     featured: false,
     published: true,
     detail: {
@@ -445,6 +460,7 @@ const coreCaseStudies: CaseStudy[] = [
       "Planners need an early review signal for areas where existing school utilization context overlaps with observed residential permit activity.",
     category: "Public Sector Analytics / Growth Planning",
     categorySlug: "government-planning",
+    tracks: ["government"],
     decisionType: "Public Service Delivery",
     evidence: [
       "Utilization context",
@@ -469,6 +485,7 @@ const coreCaseStudies: CaseStudy[] = [
       title: "Cabarrus FutureScape",
       href: "/projects/cabarrus-futurescape"
     },
+    routeOrder: 2,
     featured: false,
     published: true,
     detail: {
@@ -524,6 +541,7 @@ const coreCaseStudies: CaseStudy[] = [
     category: "GIS Modernization & Data Strategy",
     categorySlug: "gis-modernization",
     secondaryCategories: ["government-planning"],
+    tracks: ["government"],
     decisionType: "Data Modernization",
     evidence: [
       "ArcGIS Hub structure",
@@ -552,6 +570,7 @@ const coreCaseStudies: CaseStudy[] = [
       title: "Cabarrus County Open Data / GIS Hub Redesign",
       href: "/projects/cabarrus-gis-hub"
     },
+    routeOrder: 3,
     featured: false,
     published: true,
     detail: {
@@ -608,6 +627,7 @@ const researchCaseStudies: CaseStudy[] = researchBriefs.map((brief) => ({
     researchCategoryBySlug[brief.slug] ?? "Applied GIS Research / Spatial Analysis",
   categorySlug: researchCategorySlugBySlug[brief.slug] ?? "government-planning",
   secondaryCategories: researchSecondaryCategoriesBySlug[brief.slug],
+  tracks: [],
   decisionType:
     researchDecisionTypeBySlug[brief.slug] ?? "Public Service Delivery",
   evidence: brief.outputs.slice(0, 4),
@@ -628,6 +648,7 @@ const researchCaseStudies: CaseStudy[] = researchBriefs.map((brief) => ({
       : undefined,
   href: `/case-studies/${brief.slug}`,
   actions: brief.code ? [brief.pdf, brief.code] : [brief.pdf],
+  routeOrder: 20,
   featured: false,
   published: true,
   detail: {
