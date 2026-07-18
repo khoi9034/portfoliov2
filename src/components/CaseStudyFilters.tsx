@@ -1,204 +1,211 @@
-"use client";
-
-import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, FileText } from "lucide-react";
-import type { CaseStudy, CaseStudyTrack } from "@/data/caseStudies";
+import type { CaseStudy, CaseStudyCategory } from "@/data/caseStudies";
 
 type CaseStudyFiltersProps = {
   studies: CaseStudy[];
 };
 
-type DecisionRoute = CaseStudyTrack | "all";
-
-const routeLabels: Record<DecisionRoute, string> = {
-  government: "Government Technology",
-  utilities: "Utilities & Network Infrastructure",
-  all: "View All Decisions"
+type CategoryMeta = {
+  slug: CaseStudyCategory;
+  label: string;
+  descriptor: string;
 };
 
-function isTrack(value: string | null): value is CaseStudyTrack {
-  return value === "government" || value === "utilities";
+const categoryMeta: CategoryMeta[] = [
+  {
+    slug: "government-planning",
+    label: "Government & Planning",
+    descriptor: "Growth, public service, and planning review decisions."
+  },
+  {
+    slug: "utilities-infrastructure",
+    label: "Utilities & Infrastructure",
+    descriptor: "Infrastructure readiness, service context, and capacity follow-up."
+  },
+  {
+    slug: "real-estate-location",
+    label: "Real Estate & Location Intelligence",
+    descriptor: "Site screening, market context, and location-risk framing."
+  },
+  {
+    slug: "gis-modernization",
+    label: "GIS Modernization & Data Strategy",
+    descriptor: "Public data, workflow modernization, and GIS operating models."
+  }
+];
+
+const categoryLabels = new Map(
+  categoryMeta.map((category) => [category.slug, category.label])
+);
+
+function getCategoryLabel(slug: CaseStudyCategory) {
+  return categoryLabels.get(slug) ?? slug;
 }
 
-function getInitialRoute(): DecisionRoute {
-  if (typeof window === "undefined") {
-    return "all";
-  }
-
-  const queryTrack = new URLSearchParams(window.location.search).get("track");
-  if (isTrack(queryTrack)) {
-    return queryTrack;
-  }
-
-  const storedTrack = window.sessionStorage.getItem("portfolioTrack");
-  return isTrack(storedTrack) ? storedTrack : "all";
-}
-
-function matchesRoute(study: CaseStudy, route: DecisionRoute) {
-  return route === "all" || study.tracks.includes(route);
+function getCategoryClass(slug: CaseStudyCategory) {
+  return `case-category-${slug}`;
 }
 
 export function CaseStudyFilters({ studies }: CaseStudyFiltersProps) {
-  const [selectedRoute, setSelectedRoute] = useState<DecisionRoute>(() =>
-    getInitialRoute()
-  );
-  const [activeSlug, setActiveSlug] = useState<string | null>(null);
-  const checkpointRefs = useRef(new Map<string, HTMLElement>());
-
-  const publishedStudies = useMemo(
-    () =>
-      studies
-        .filter((study) => study.published !== false)
-        .sort((a, b) => a.routeOrder - b.routeOrder),
-    [studies]
-  );
-  const visibleStudies = useMemo(
-    () => publishedStudies.filter((study) => matchesRoute(study, selectedRoute)),
-    [publishedStudies, selectedRoute]
-  );
-  const currentSlug = activeSlug ?? visibleStudies[0]?.slug ?? null;
-  const activeIndex = Math.max(
-    0,
-    visibleStudies.findIndex((study) => study.slug === currentSlug)
-  );
-  const progress = visibleStudies.length
-    ? ((activeIndex + 1) / visibleStudies.length) * 100
-    : 0;
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntry = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-        if (visibleEntry?.target instanceof HTMLElement) {
-          setActiveSlug(visibleEntry.target.dataset.slug ?? null);
-        }
-      },
-      { rootMargin: "-28% 0px -46% 0px", threshold: [0.2, 0.55] }
-    );
-
-    const nodes = [...checkpointRefs.current.values()];
-    nodes.forEach((node) => observer.observe(node));
-    return () => observer.disconnect();
-  }, [visibleStudies]);
-
-  function selectRoute(route: DecisionRoute) {
-    const url = new URL(window.location.href);
-
-    if (route === "all") {
-      url.searchParams.delete("track");
-    } else {
-      url.searchParams.set("track", route);
-      window.sessionStorage.setItem("portfolioTrack", route);
-    }
-
-    window.history.replaceState(null, "", url);
-    setSelectedRoute(route);
-  }
-
-  function setCheckpointRef(slug: string, node: HTMLElement | null) {
-    if (node) {
-      checkpointRefs.current.set(slug, node);
-    } else {
-      checkpointRefs.current.delete(slug);
-    }
-  }
+  const publishedStudies = studies
+    .filter((study) => study.published !== false)
+    .sort((a, b) => a.routeOrder - b.routeOrder);
+  const featuredStudy =
+    publishedStudies.find((study) => study.featured) ?? publishedStudies[0];
+  const groupedStudies = categoryMeta
+    .map((category) => ({
+      ...category,
+      studies: publishedStudies.filter(
+        (study) => study.categorySlug === category.slug
+      )
+    }))
+    .filter((category) => category.studies.length);
 
   return (
-    <section className="decision-path-explorer" aria-label="Case study decision path">
-      <div className="decision-route-selector" aria-label="Decision path selector">
-        {(["government", "utilities", "all"] as DecisionRoute[]).map((route) => (
-          <button
-            aria-pressed={selectedRoute === route}
-            key={route}
-            onClick={() => selectRoute(route)}
-            type="button"
-          >
-            {routeLabels[route]}
-          </button>
-        ))}
+    <section className="case-intelligence-catalog" aria-label="Case study catalog">
+      <div className="case-domain-overview" aria-label="Case study domains">
+        {groupedStudies.map((category) => {
+          const featured = category.studies.find((study) => study.featured);
+
+          return (
+            <a
+              className={`case-domain-card ${getCategoryClass(category.slug)}`}
+              href={`#case-${category.slug}`}
+              key={category.slug}
+            >
+              <span className="case-domain-count">
+                {category.studies.length} case
+                {category.studies.length === 1 ? "" : "s"}
+              </span>
+              <strong>{category.label}</strong>
+              <p>{category.descriptor}</p>
+              <small>
+                {featured ? `Featured: ${featured.title}` : "Domain catalog"}
+              </small>
+            </a>
+          );
+        })}
       </div>
 
-      <div className="route-explorer decision-route">
-        <aside className="route-status" aria-live="polite">
-          <span>{routeLabels[selectedRoute]}</span>
-          <strong>
-            {visibleStudies.length ? activeIndex + 1 : 0} / {visibleStudies.length}
-          </strong>
-          <p>{visibleStudies[activeIndex]?.title ?? "Choose a decision path"}</p>
-        </aside>
-
-        <div className="route-path-shell">
-          <div className="route-rail" aria-hidden="true">
-            <span className="route-rail-fill" style={{ height: `${progress}%` }} />
-            <span className="route-signal" style={{ top: `${progress}%` }} />
+      {featuredStudy ? (
+        <article
+          className={`case-featured-panel ${getCategoryClass(
+            featuredStudy.categorySlug
+          )}`}
+        >
+          <div className="case-featured-copy">
+            <p className="case-panel-label">Featured Decision Brief</p>
+            <span>{featuredStudy.decisionType}</span>
+            <h2>{featuredStudy.title}</h2>
+            <p>{featuredStudy.decisionQuestion}</p>
+            <dl className="case-featured-facts">
+              <div>
+                <dt>Evidence</dt>
+                <dd>{featuredStudy.evidence.slice(0, 4).join(" / ")}</dd>
+              </div>
+              <div>
+                <dt>Deliverable</dt>
+                <dd>{featuredStudy.deliverable}</dd>
+              </div>
+            </dl>
+            <div className="case-featured-actions">
+              <Link href={featuredStudy.href}>
+                Open Featured Brief
+                <ArrowRight size={16} />
+              </Link>
+              {featuredStudy.relatedProject ? (
+                <Link href={featuredStudy.relatedProject.href}>
+                  Related Project
+                  <ArrowRight size={16} />
+                </Link>
+              ) : null}
+            </div>
           </div>
+          <CaseVisual study={featuredStudy} priority />
+        </article>
+      ) : null}
 
-          <div className="route-checkpoint-list">
-            {visibleStudies.map((study, index) => (
-              <article
-                className={`route-checkpoint ${
-                  index % 2 === 0 ? "is-left" : "is-right"
-                    } ${study.slug === currentSlug ? "is-active" : ""} ${
-                  study.junction ? "is-junction" : ""
-                }`}
-                data-slug={study.slug}
-                key={study.slug}
-                ref={(node) => setCheckpointRef(study.slug, node)}
-              >
-                <span className="route-node" aria-hidden="true" />
-                <Link className="decision-card" href={study.href}>
-                  <div className="case-study-card-topline">
-                    <span>{study.category}</span>
+      <div className="case-domain-sections">
+        {groupedStudies.map((category) => (
+          <section
+            className={`case-domain-section ${getCategoryClass(category.slug)}`}
+            id={`case-${category.slug}`}
+            key={category.slug}
+          >
+            <div className="case-domain-heading">
+              <p className="case-panel-label">{category.label}</p>
+              <h2>{category.descriptor}</h2>
+            </div>
+            <div className="case-analysis-grid">
+              {category.studies.map((study) => (
+                <Link
+                  aria-label={`Open case study: ${study.title}`}
+                  className="case-analysis-card"
+                  href={study.href}
+                  key={study.slug}
+                >
+                  <span className="case-card-bar" aria-hidden="true" />
+                  <div className="case-card-topline">
+                    <span>{getCategoryLabel(study.categorySlug)}</span>
                     <span>{study.decisionType}</span>
                   </div>
-                  <p className="decision-question">{study.decisionQuestion}</p>
-                  <h2>{study.title}</h2>
-                  <dl className="case-study-facts case-study-decision-facts">
+                  <h3>{study.title}</h3>
+                  <p>{study.decisionQuestion}</p>
+                  <dl>
                     <div>
                       <dt>Evidence reviewed</dt>
-                      <dd>{study.evidence.slice(0, 4).join(" / ")}</dd>
+                      <dd>{study.evidence.slice(0, 3).join(" / ")}</dd>
                     </div>
                     <div>
                       <dt>Recommendation</dt>
                       <dd>{study.cardRecommendation}</dd>
                     </div>
-                    <div>
-                      <dt>Limitations</dt>
-                      <dd>{study.detail.risksAndLimitations[0]}</dd>
-                    </div>
                   </dl>
-                  {study.relatedProject ? (
-                    <span className="case-study-related">
-                      Related project: {study.relatedProject.title}
+                  <div className="case-card-footer">
+                    <span>{study.status}</span>
+                    {study.relatedProject ? (
+                      <small>Related: {study.relatedProject.title}</small>
+                    ) : null}
+                    <ArrowRight size={17} />
+                  </div>
+                  {study.secondaryCategories?.length ? (
+                    <span className="case-secondary-relevance">
+                      Also relevant:{" "}
+                      {study.secondaryCategories.map(getCategoryLabel).join(" / ")}
                     </span>
                   ) : null}
-                  <span className="case-study-link">
-                    <span>{study.status}</span>
-                    <ArrowRight size={16} />
-                  </span>
-                  <div className="decision-card-visual" aria-hidden={!study.image}>
-                    {study.image ? (
-                      <Image
-                        alt={study.image.alt}
-                        fill
-                        sizes="(max-width: 860px) 100vw, 220px"
-                        src={study.image.src}
-                      />
-                    ) : (
-                      <FileText size={28} />
-                    )}
-                  </div>
                 </Link>
-              </article>
-            ))}
-          </div>
-        </div>
+              ))}
+            </div>
+          </section>
+        ))}
       </div>
     </section>
+  );
+}
+
+function CaseVisual({
+  study,
+  priority = false
+}: {
+  study: CaseStudy;
+  priority?: boolean;
+}) {
+  return (
+    <figure className="case-featured-visual">
+      {study.image ? (
+        <Image
+          alt={study.image.alt}
+          fill
+          priority={priority}
+          sizes="(max-width: 860px) 100vw, 420px"
+          src={study.image.src}
+        />
+      ) : (
+        <FileText size={34} />
+      )}
+    </figure>
   );
 }

@@ -23,9 +23,9 @@ function isTrack(value: string | null): value is ProfessionalTrack {
   return value === "government" || value === "utilities";
 }
 
-function getInitialTrack() {
+function getInitialTrack(): ProfessionalTrack {
   if (typeof window === "undefined") {
-    return null;
+    return "government";
   }
 
   const queryTrack = new URLSearchParams(window.location.search).get("track");
@@ -33,11 +33,11 @@ function getInitialTrack() {
     return queryTrack;
   }
 
-  return null;
+  return "government";
 }
 
 export function ProjectFilters({ projects }: ProjectFiltersProps) {
-  const [selectedTrack, setSelectedTrack] = useState<ProfessionalTrack | null>(
+  const [selectedTrack, setSelectedTrack] = useState<ProfessionalTrack>(
     () => getInitialTrack()
   );
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
@@ -54,11 +54,7 @@ export function ProjectFilters({ projects }: ProjectFiltersProps) {
 
   const visibleProjects = useMemo(
     () =>
-      selectedTrack
-        ? publishedProjects.filter((project) =>
-            project.tracks.includes(selectedTrack)
-          )
-        : [],
+      publishedProjects.filter((project) => project.tracks.includes(selectedTrack)),
     [publishedProjects, selectedTrack]
   );
 
@@ -68,7 +64,7 @@ export function ProjectFilters({ projects }: ProjectFiltersProps) {
     visibleProjects.findIndex((project) => project.slug === currentSlug)
   );
   const progress =
-    selectedTrack && visibleProjects.length
+    visibleProjects.length
       ? ((activeIndex + 1) / visibleProjects.length) * 100
       : 0;
 
@@ -150,93 +146,83 @@ export function ProjectFilters({ projects }: ProjectFiltersProps) {
       </section>
 
       <section
-        className={`route-explorer ${selectedTrack ? "is-selected" : "is-neutral"} ${
-          selectedTrack ? `is-${selectedTrack}` : ""
-        }`}
+        className={`route-explorer is-selected is-${selectedTrack}`}
         aria-label="Project route explorer"
         ref={routeRef}
       >
-        {selectedTrack ? (
-          <>
-            <aside className="route-status" aria-live="polite">
-              <span>{trackLabels[selectedTrack]}</span>
-              <strong>
-                {visibleProjects.length ? activeIndex + 1 : 0} / {visibleProjects.length}
-              </strong>
-              <p>
-                {visibleProjects[activeIndex]?.shortTitle ??
-                  visibleProjects[activeIndex]?.title ??
-                  "Select a route"}
-              </p>
-              <div>
-                {projectTrackPanels.map((track) => (
-                  <button
-                    aria-pressed={selectedTrack === track.value}
-                    key={track.value}
-                    onClick={() => selectTrack(track.value)}
-                    type="button"
-                  >
-                    {track.value === "government" ? "Government" : "Utilities"}
-                  </button>
-                ))}
-              </div>
-            </aside>
-
-            <div className="route-path-shell">
-              <div className="route-rail" aria-hidden="true">
-                <span className="route-rail-fill" style={{ height: `${progress}%` }} />
-                <span className="route-signal" style={{ top: `${progress}%` }} />
-              </div>
-
-              <div className="route-checkpoint-list">
-                {visibleProjects.map((project, index) => (
-                  <article
-                    className={`route-checkpoint ${
-                      index % 2 === 0 ? "is-left" : "is-right"
-                    } ${project.slug === currentSlug ? "is-active" : ""} ${
-                      project.junction ? "is-junction" : ""
-                    }`}
-                    data-slug={project.slug}
-                    key={project.slug}
-                    ref={(node) => setCheckpointRef(project.slug, node)}
-                  >
-                    <span className="route-node" aria-hidden="true" />
-                    <ProjectCard activeTrack={selectedTrack} project={project} />
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            {selectedTrack === "utilities" ? (
-              <div className="developing-track-note">
-                <p className="eyebrow">Expanding Infrastructure Track</p>
-                <h2>Prototype-backed infrastructure intelligence is developing.</h2>
-                <p>
-                  Applying the CFS planning-intelligence foundation to utility
-                  service context, infrastructure readiness, and development
-                  review. No utility partnership or verified capacity finding is
-                  claimed.
-                </p>
-              </div>
-            ) : null}
-
-            <div className="route-complete-node">
-              <Route size={18} />
-              <div>
-                <span>Project route complete</span>
-                <p>Looking for the analysis behind the work?</p>
-              </div>
-              <Link href="/case-studies">
-                Explore Case Studies
-                <ArrowRight size={16} />
-              </Link>
-            </div>
-          </>
-        ) : (
-          <div className="route-empty-state">
-            Select a track to draw the project route.
+        <aside className="route-status" aria-live="polite">
+          <span>{trackLabels[selectedTrack]}</span>
+          <strong>
+            {visibleProjects.length ? activeIndex + 1 : 0} / {visibleProjects.length}
+          </strong>
+          <p>
+            {visibleProjects[activeIndex]?.shortTitle ??
+              visibleProjects[activeIndex]?.title ??
+              "Select a route"}
+          </p>
+          <div>
+            {projectTrackPanels.map((track) => (
+              <button
+                aria-pressed={selectedTrack === track.value}
+                key={track.value}
+                onClick={() => selectTrack(track.value)}
+                type="button"
+              >
+                {track.value === "government" ? "Government" : "Utilities"}
+              </button>
+            ))}
           </div>
-        )}
+        </aside>
+
+        <div className="route-path-shell">
+          <div className="route-rail" aria-hidden="true">
+            <span className="route-rail-fill" style={{ height: `${progress}%` }} />
+            <span className="route-signal" style={{ top: `${progress}%` }} />
+          </div>
+
+          <div className="route-checkpoint-list">
+            {visibleProjects.map((project, index) => (
+              <article
+                className={`route-checkpoint ${
+                  index % 2 === 0 ? "is-left" : "is-right"
+                } ${project.slug === currentSlug ? "is-active" : ""} ${
+                  project.junction ? "is-junction" : ""
+                }`}
+                data-slug={project.slug}
+                key={project.slug}
+                ref={(node) => setCheckpointRef(project.slug, node)}
+              >
+                <span className="route-node" aria-hidden="true" />
+                <ProjectCard activeTrack={selectedTrack} project={project} />
+              </article>
+            ))}
+          </div>
+        </div>
+
+        {selectedTrack === "utilities" ? (
+          <div className="developing-track-note">
+            <p className="eyebrow">Expanding Infrastructure Track</p>
+            <h2>Prototype-backed infrastructure intelligence is developing.</h2>
+            <p>
+              Applying the CFS planning-intelligence foundation to utility
+              service context, infrastructure readiness, and development
+              review. No utility partnership or verified capacity finding is
+              claimed.
+            </p>
+          </div>
+        ) : null}
+
+        <div className="route-complete-node">
+          <Route size={18} />
+          <div>
+            <span>Project route complete</span>
+            <p>Looking for the analysis behind the work?</p>
+          </div>
+          <Link href="/case-studies">
+            Explore Case Studies
+            <ArrowRight size={16} />
+          </Link>
+        </div>
       </section>
     </>
   );

@@ -25,10 +25,10 @@ export default function CaseStudiesPage() {
     <main className="page-shell case-studies-page">
       <section className="page-hero case-studies-hero">
         <p className="eyebrow">DECISION INTELLIGENCE</p>
-        <h1>Follow a Decision Path</h1>
+        <h1>Consulting Case Studies</h1>
         <p>
-          Explore how spatial evidence, infrastructure context, and analytical
-          reasoning were used to examine planning and operational decisions.
+          Spatial analysis, planning intelligence, infrastructure review, and
+          decision-support work organized by strategic domain.
         </p>
       </section>
 

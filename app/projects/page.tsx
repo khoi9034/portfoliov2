@@ -33,11 +33,9 @@ const mainProjects = mainProjectSlugs
 export default function ProjectsPage() {
   return (
     <main className="page-shell projects-page">
-      <section className="page-hero projects-intro">
-        <p className="eyebrow">PROJECT TRACK EXPLORER</p>
-        <h1>Choose Your Track</h1>
-        <p>Select a professional track and follow the projects connected to it.</p>
-      </section>
+      <div className="projects-track-label">
+        <p className="eyebrow">PROJECT TRACKS</p>
+      </div>
 
       <ProjectFilters projects={mainProjects} />
     </main>
