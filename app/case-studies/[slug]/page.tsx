@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { caseStudies, getCaseStudyBySlug } from "@/data/caseStudies";
 
 type CaseStudyPageProps = {
@@ -108,6 +108,12 @@ export default async function CaseStudyDetailPage({
               </a>
             ))}
           </div>
+        ) : null}
+        {study.relatedProject ? (
+          <Link className="text-link detail-related-project" href={study.relatedProject.href}>
+            <span>Related project: {study.relatedProject.title}</span>
+            <ArrowRight size={16} />
+          </Link>
         ) : null}
       </section>
 

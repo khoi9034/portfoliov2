@@ -208,6 +208,23 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         </article>
       </section>
 
+      {project.relatedCaseStudies?.length ? (
+        <section className="related-link-panel" aria-label="Related case studies">
+          <div>
+            <p className="eyebrow">Related case studies</p>
+            <h2>Problem framing and analytical context</h2>
+          </div>
+          <div className="related-link-list">
+            {project.relatedCaseStudies.map((study) => (
+              <Link className="text-link" href={study.href} key={study.href}>
+                <span>{study.title}</span>
+                <ArrowRight size={16} />
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       <div className="case-study-layout" id="case-study">
         <CaseStudySection eyebrow="Case study" title="What it is">
           <p>{project.caseStudy.whatItIs}</p>

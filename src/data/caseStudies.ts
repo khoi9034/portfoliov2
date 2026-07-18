@@ -1,11 +1,21 @@
 import { researchBriefs } from "./research";
 
+export type CaseStudyCategory =
+  | "government-planning"
+  | "utilities-infrastructure"
+  | "real-estate-location"
+  | "business-operations";
+
+export type CaseStudyFilterValue = "all" | CaseStudyCategory;
+
 export type CaseStudy = {
   slug: string;
   title: string;
   summary: string;
   problem: string;
   category: string;
+  categorySlug: CaseStudyCategory;
+  secondaryCategories?: CaseStudyCategory[];
   context: string;
   methods: string[];
   deliverable: string;
@@ -20,6 +30,7 @@ export type CaseStudy = {
     external?: boolean;
   }[];
   href: string;
+  relatedProject?: { title: string; href: string };
   featured: boolean;
   published: boolean;
   detail: {
@@ -43,6 +54,17 @@ const researchCategoryBySlug: Record<string, string> = {
     "Remote Sensing / Urban Heat Analysis"
 };
 
+const researchCategorySlugBySlug: Record<string, CaseStudyCategory> = {
+  "anime-retail-site-selection-tokyo": "real-estate-location",
+  "ltc-facilities-aging-population-japan": "government-planning",
+  "thermal-mitigating-effects-urban-canopy": "government-planning"
+};
+
+const researchSecondaryCategoriesBySlug: Record<string, CaseStudyCategory[]> = {
+  "anime-retail-site-selection-tokyo": ["business-operations"],
+  "thermal-mitigating-effects-urban-canopy": ["utilities-infrastructure"]
+};
+
 const researchDeliverableBySlug: Record<string, string> = {
   "anime-retail-site-selection-tokyo":
     "Research paper, hotspot maps, overlay analysis, and reusable ArcPy workflow.",
@@ -61,6 +83,8 @@ const coreCaseStudies: CaseStudy[] = [
     problem:
       "County growth information is distributed across parcels, permits, flood constraints, schools, transportation, utilities, and planning datasets, making coordinated review difficult.",
     category: "Public Sector Strategy / Spatial Analytics",
+    categorySlug: "government-planning",
+    secondaryCategories: ["utilities-infrastructure"],
     context: "Independent portfolio case study for a county-scale planning intelligence prototype.",
     methods: [
       "GIS analysis",
@@ -80,6 +104,10 @@ const coreCaseStudies: CaseStudy[] = [
       alt: "Cabarrus FutureScape planning intelligence interface preview"
     },
     href: "/case-studies/cabarrus-futurescape",
+    relatedProject: {
+      title: "Cabarrus FutureScape",
+      href: "/projects/cabarrus-futurescape"
+    },
     featured: true,
     published: true,
     detail: {
@@ -131,6 +159,84 @@ const coreCaseStudies: CaseStudy[] = [
     }
   },
   {
+    slug: "automap",
+    title: "AutoMap: GIS Request Automation and Operational Review",
+    summary:
+      "How plain-language GIS requests can become reviewable map workflows through REST metadata, source validation, map recipes, customization, refinement, and analysis reports.",
+    problem:
+      "GIS requests often arrive as plain language, but teams still need a repeatable way to identify the right layers, validate sources, document assumptions, and produce reviewable outputs.",
+    category: "Business Operations / GIS Automation",
+    categorySlug: "business-operations",
+    secondaryCategories: ["government-planning"],
+    context: "Independent portfolio case study for a live GIS automation prototype.",
+    methods: [
+      "Plain-language request interpretation",
+      "ArcGIS REST metadata review",
+      "Approved source matching",
+      "Map recipe generation",
+      "Analysis report workflow"
+    ],
+    deliverable: "GIS request automation workflow and live AutoMap prototype.",
+    status: "Independent Portfolio Case Study",
+    image: {
+      src: "/projects/automap-live-preview.png",
+      alt: "AutoMap deployed interface preview"
+    },
+    href: "/case-studies/automap",
+    relatedProject: {
+      title: "AutoMap",
+      href: "/projects/automap"
+    },
+    featured: false,
+    published: true,
+    detail: {
+      executiveSummary:
+        "AutoMap frames repeated GIS map requests as operational workflows that can be interpreted, validated, refined, and documented before they become reusable outputs.",
+      contextAndConstraints: [
+        "The work is an active personal project and live prototype.",
+        "The prototype does not claim to publish official county maps or replace GIS review.",
+        "Outputs are intended to make requests more reviewable, not to remove analyst judgment."
+      ],
+      approach: [
+        "Convert user wording into structured map intent.",
+        "Match requested needs against known ArcGIS REST layer metadata.",
+        "Keep selected sources, assumptions, customization choices, warnings, and report history visible."
+      ],
+      dataAndTools: [
+        "Next.js",
+        "TypeScript",
+        "FastAPI",
+        "Python",
+        "ArcGIS REST",
+        "Layer registry",
+        "Analysis reports"
+      ],
+      keyFindings: [
+        "Plain-language requests become safer when they are converted into explicit source, layer, and recipe choices.",
+        "REST metadata validation helps avoid guessed layers and unsupported fields.",
+        "Report history and warnings make automation easier to review."
+      ],
+      recommendation: [
+        "Use AutoMap as a reviewable workflow pattern for repeated GIS requests.",
+        "Keep approved sources, metadata limitations, and analyst review visible before operational use."
+      ],
+      risksAndLimitations: [
+        "Layer metadata and available public sources may be incomplete or inconsistent.",
+        "Automation output still needs GIS review before being treated as authoritative.",
+        "The prototype should not be represented as an official production county system."
+      ],
+      potentialImpact: [
+        "More repeatable request intake and map-building workflows.",
+        "Clearer communication between requesters and GIS analysts.",
+        "Better documentation of source choices, limitations, and recommended follow-up."
+      ],
+      nextAnalysis: [
+        "Test the workflow against more sanitized public REST services.",
+        "Separate request types that are safe for automation from those requiring manual GIS review."
+      ]
+    }
+  },
+  {
     slug: "real-estate-screening",
     title: "Turning County Data into a Real Estate Screening Framework",
     summary:
@@ -138,6 +244,8 @@ const coreCaseStudies: CaseStudy[] = [
     problem:
       "A parcel may appear attractive based on price or location while still carrying zoning, flood, infrastructure, entitlement, market, or service-delivery risks.",
     category: "Real Estate Strategy / Location Intelligence",
+    categorySlug: "real-estate-location",
+    secondaryCategories: ["utilities-infrastructure"],
     context: "Portfolio framework for real estate and location intelligence screening.",
     methods: [
       "Parcel screening",
@@ -149,8 +257,12 @@ const coreCaseStudies: CaseStudy[] = [
     deliverable: "Screening checklist and location-intelligence analysis structure.",
     status: "Case Study in Development",
     href: "/case-studies/real-estate-screening",
+    relatedProject: {
+      title: "Cabarrus FutureScape",
+      href: "/projects/cabarrus-futurescape"
+    },
     featured: false,
-    published: false,
+    published: true,
     detail: {
       executiveSummary:
         "This overview frames a defensible parcel screening workflow for identifying constraints, follow-up questions, and early location risks before deeper due diligence.",
@@ -198,6 +310,7 @@ const coreCaseStudies: CaseStudy[] = [
     problem:
       "Planners need an early review signal for areas where existing school utilization context overlaps with observed residential permit activity.",
     category: "Public Sector Analytics / Growth Planning",
+    categorySlug: "government-planning",
     context: "Cabarrus FutureScape analysis concept.",
     methods: [
       "Attendance-area review",
@@ -209,8 +322,12 @@ const coreCaseStudies: CaseStudy[] = [
     deliverable: "Preliminary school capacity watch and planning review signal.",
     status: "Cabarrus FutureScape Analysis",
     href: "/case-studies/school-pressure",
+    relatedProject: {
+      title: "Cabarrus FutureScape",
+      href: "/projects/cabarrus-futurescape"
+    },
     featured: false,
-    published: false,
+    published: true,
     detail: {
       executiveSummary:
         "This overview explains how school utilization context and observed residential permit activity can support early planning review without claiming to forecast enrollment.",
@@ -260,6 +377,7 @@ const coreCaseStudies: CaseStudy[] = [
     problem:
       "Public GIS resources can be difficult to navigate when datasets, applications, maps, categories, metadata, and download options are inconsistently organized.",
     category: "Digital Government / Data Strategy",
+    categorySlug: "government-planning",
     context: "Professional experience through Cabarrus County GIS Analyst Internship.",
     methods: [
       "ArcGIS Hub",
@@ -275,8 +393,12 @@ const coreCaseStudies: CaseStudy[] = [
       alt: "Cabarrus County Open Data GIS Hub website preview"
     },
     href: "/case-studies/gis-hub",
+    relatedProject: {
+      title: "Cabarrus County Open Data / GIS Hub Redesign",
+      href: "/projects/cabarrus-gis-hub"
+    },
     featured: false,
-    published: false,
+    published: true,
     detail: {
       executiveSummary:
         "This overview describes public GIS data-discovery work completed through internship experience, focusing on navigation, metadata, public access, and clearer paths to county GIS resources.",
@@ -328,6 +450,8 @@ const researchCaseStudies: CaseStudy[] = researchBriefs.map((brief) => ({
   problem: brief.questions[0] ?? brief.summary,
   category:
     researchCategoryBySlug[brief.slug] ?? "Applied GIS Research / Spatial Analysis",
+  categorySlug: researchCategorySlugBySlug[brief.slug] ?? "government-planning",
+  secondaryCategories: researchSecondaryCategoriesBySlug[brief.slug],
   context: brief.context,
   methods: brief.methods,
   deliverable:
@@ -376,6 +500,17 @@ const researchCaseStudies: CaseStudy[] = researchBriefs.map((brief) => ({
 export const caseStudies: CaseStudy[] = [
   ...coreCaseStudies,
   ...researchCaseStudies
+];
+
+export const caseStudyFilterOptions: {
+  value: CaseStudyFilterValue;
+  label: string;
+}[] = [
+  { value: "all", label: "All Case Studies" },
+  { value: "government-planning", label: "Government & Planning" },
+  { value: "utilities-infrastructure", label: "Utilities & Infrastructure" },
+  { value: "real-estate-location", label: "Real Estate & Location Strategy" },
+  { value: "business-operations", label: "Business & Operations" }
 ];
 
 export function getCaseStudyBySlug(slug: string) {

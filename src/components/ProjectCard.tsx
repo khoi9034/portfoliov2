@@ -78,9 +78,9 @@ export function ProjectCard({ project, compact = false }: ProjectCardProps) {
         <p className="project-card-type">{project.type}</p>
         <h3>{project.title}</h3>
         <p className="project-card-summary">{cardSummary}</p>
-        <div className="tool-list" aria-label={`${project.title} tools`}>
-          {project.tools.slice(0, compact ? 5 : 6).map((tool) => (
-            <span key={tool}>{tool}</span>
+        <div className="tool-list" aria-label={`${project.title} focus tags`}>
+          {project.industryTags.slice(0, compact ? 3 : 4).map((tag) => (
+            <span key={tag}>{tag}</span>
           ))}
         </div>
         {showSecondaryDetail ? (

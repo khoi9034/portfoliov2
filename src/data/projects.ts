@@ -11,12 +11,19 @@ export type ProjectCategory =
   | "Applied GIS / Research";
 
 export type ProjectDepth = "flagship" | "platform" | "professional" | "research";
+export type ProjectIndustryCategory =
+  | "planning-government"
+  | "utilities-infrastructure"
+  | "business-tools";
+
+export type ProjectFilterValue = "all" | ProjectIndustryCategory;
 
 export type Project = {
   slug: string;
   title: string;
   subtitle: string;
   category: ProjectCategory;
+  categories: ProjectIndustryCategory[];
   type: string;
   status: string;
   role: string;
@@ -24,6 +31,7 @@ export type Project = {
   homepageSummary?: string;
   tools: string[];
   focus: string[];
+  industryTags: string[];
   visual: {
     variant: VisualVariant;
     image?: string;
@@ -31,8 +39,10 @@ export type Project = {
     caption?: string;
   };
   featured: boolean;
+  published?: boolean;
   depth: ProjectDepth;
   implementationNote?: string;
+  relatedCaseStudies?: { title: string; href: string }[];
   caseStudy: {
     whatItIs: string;
     problem: string;
@@ -59,6 +69,7 @@ export const projects: Project[] = [
     title: "Cabarrus FutureScape",
     subtitle: "County Digital Twin & Growth Intelligence Platform",
     category: "Flagship Systems",
+    categories: ["planning-government", "utilities-infrastructure"],
     type: "County Digital Twin & Growth Intelligence Platform",
     status:
       "Personal prototype / ongoing applied GIS platform. Not an official county system.",
@@ -93,6 +104,13 @@ export const projects: Project[] = [
       "Development pressure ranking",
       "Executive reporting"
     ],
+    industryTags: [
+      "Planning Intelligence",
+      "Parcel Analytics",
+      "Permitting",
+      "Infrastructure Capacity",
+      "Web GIS"
+    ],
     visual: {
       variant: "cabarrus-futurescape",
       image: "/projects/cfs-live-preview.png",
@@ -100,7 +118,22 @@ export const projects: Project[] = [
       caption: "Live CFS prototype interface"
     },
     featured: true,
+    published: true,
     depth: "flagship",
+    relatedCaseStudies: [
+      {
+        title: "Growth and Infrastructure Intelligence",
+        href: "/case-studies/cabarrus-futurescape"
+      },
+      {
+        title: "School Utilization and Development Pressure Review",
+        href: "/case-studies/school-pressure"
+      },
+      {
+        title: "Real Estate Screening Framework",
+        href: "/case-studies/real-estate-screening"
+      }
+    ],
     caseStudy: {
       whatItIs:
         "A live county-scale digital twin and planning intelligence prototype for Cabarrus County, focused on parcels, development activity, school capacity, infrastructure awareness, growth pressure, environmental constraints, and executive planning support.",
@@ -239,6 +272,7 @@ export const projects: Project[] = [
     title: "AutoMap",
     subtitle: "AI-assisted county map request and ArcGIS REST automation engine",
     category: "Automation Systems",
+    categories: ["planning-government", "business-tools"],
     type: "AI-assisted County Map Request / REST Layer Automation Engine",
     status: "Active personal project. Live deployed prototype.",
     role: "Full-stack workflow design, deterministic request intelligence, GIS automation architecture",
@@ -270,6 +304,13 @@ export const projects: Project[] = [
       "Analysis reports",
       "Report history"
     ],
+    industryTags: [
+      "Automation",
+      "ArcGIS REST",
+      "Web GIS",
+      "Business Operations",
+      "Data Validation"
+    ],
     visual: {
       variant: "automap",
       image: "/projects/automap-live-preview.png",
@@ -277,7 +318,14 @@ export const projects: Project[] = [
       caption: "AutoMap deployed interface"
     },
     featured: true,
+    published: true,
     depth: "platform",
+    relatedCaseStudies: [
+      {
+        title: "GIS Request Automation and Operational Review",
+        href: "/case-studies/automap"
+      }
+    ],
     caseStudy: {
       whatItIs:
         "A live GIS automation prototype that ingests ArcGIS REST service URLs and layer metadata, stores them in a registry, and turns plain-language map requests into reviewable map workflows.",
@@ -371,6 +419,7 @@ export const projects: Project[] = [
     title: "Cabarrus County Open Data / GIS Hub Redesign",
     subtitle: "Public GIS infrastructure, metadata, and user-centered data discovery",
     category: "Enterprise GIS / Public Infrastructure",
+    categories: ["planning-government"],
     type: "Internship / Public GIS Infrastructure Work",
     status: "Professional experience through Cabarrus County GIS Analyst Internship.",
     role: "Independent hub redesign, content organization, GIS item management",
@@ -396,6 +445,13 @@ export const projects: Project[] = [
       "Data Portal",
       "Contact workflows"
     ],
+    industryTags: [
+      "Enterprise GIS",
+      "Public Data",
+      "ArcGIS Hub",
+      "Metadata",
+      "Government IA"
+    ],
     visual: {
       variant: "cabarrus-hub",
       image: "/projects/cabarrus-open-data-preview.png",
@@ -403,7 +459,14 @@ export const projects: Project[] = [
       caption: "Cabarrus County Open Data website preview"
     },
     featured: true,
+    published: true,
     depth: "professional",
+    relatedCaseStudies: [
+      {
+        title: "Improving Public Access to County GIS Data",
+        href: "/case-studies/gis-hub"
+      }
+    ],
     caseStudy: {
       whatItIs:
         "A public GIS infrastructure and data discovery redesign completed through the Cabarrus County GIS Analyst Internship.",
@@ -455,6 +518,7 @@ export const projects: Project[] = [
     title: "Anime Retail Site Selection in Japan",
     subtitle: "Senior Thesis / Applied GIS Research Project",
     category: "Applied GIS / Research",
+    categories: ["business-tools"],
     type: "Senior Thesis / Applied GIS Research Project",
     status: "Academic research project.",
     role: "Spatial analyst, ArcPy workflow designer, suitability modeling",
@@ -477,13 +541,26 @@ export const projects: Project[] = [
       "Cultural POIs",
       "Competitor locations"
     ],
+    industryTags: [
+      "Location Intelligence",
+      "Site Selection",
+      "Market Analysis",
+      "ArcPy"
+    ],
     visual: {
       variant: "research",
       image: "/project-images/anime/AnimeStoreHotSpot.webp",
       alt: "Anime store hotspot map output"
     },
     featured: true,
+    published: false,
     depth: "research",
+    relatedCaseStudies: [
+      {
+        title: "Spatial Determinants of Anime Store Locations in Tokyo",
+        href: "/case-studies/anime-retail-site-selection-tokyo"
+      }
+    ],
     caseStudy: {
       whatItIs:
         "An applied GIS research project for evaluating candidate anime retail locations in Japan through repeatable suitability modeling.",
@@ -518,6 +595,7 @@ export const projects: Project[] = [
     title: "Elderly Access to Services",
     subtitle: "GIS Accessibility / Planning Analysis",
     category: "Applied GIS / Research",
+    categories: ["planning-government"],
     type: "GIS Accessibility / Planning Analysis",
     status: "Academic planning analysis.",
     role: "GIS analyst, accessibility mapping, ArcPy automation",
@@ -538,13 +616,26 @@ export const projects: Project[] = [
       "Ward-level planning",
       "Reproducible mapping"
     ],
+    industryTags: [
+      "Accessibility",
+      "Service Equity",
+      "Planning Analysis",
+      "ArcPy"
+    ],
     visual: {
       variant: "research",
       image: "/project-images/ltc/FacilitiesOverlayPopDens65.webp",
       alt: "Long-term care facility overlay on elderly population density"
     },
     featured: false,
+    published: false,
     depth: "research",
+    relatedCaseStudies: [
+      {
+        title: "Geographic Access to Long-Term Care Facilities for Japan's Aging Population",
+        href: "/case-studies/ltc-facilities-aging-population-japan"
+      }
+    ],
     caseStudy: {
       whatItIs:
         "A GIS accessibility and planning analysis focused on long-term care service equity for Tokyo's elderly population.",
@@ -579,6 +670,7 @@ export const projects: Project[] = [
     title: "NC Working Age LISA Analysis in R",
     subtitle: "Spatial Statistics / Demographic Clustering",
     category: "Applied GIS / Research",
+    categories: ["planning-government"],
     type: "Spatial Statistics / Demographic Clustering",
     status: "Academic spatial statistics project.",
     role: "Spatial statistics analyst, R workflow author, map interpretation",
@@ -601,12 +693,19 @@ export const projects: Project[] = [
       "County and regional patterns",
       "Demographic interpretation"
     ],
+    industryTags: [
+      "Spatial Statistics",
+      "Demographic Analysis",
+      "R",
+      "LISA"
+    ],
     visual: {
       variant: "research",
       image: "/project-images/working-age/LISA_Clusters.webp",
       alt: "North Carolina working-age LISA cluster map"
     },
     featured: false,
+    published: false,
     depth: "research",
     caseStudy: {
       whatItIs:
@@ -639,7 +738,9 @@ export const projects: Project[] = [
   }
 ];
 
-export const featuredProjects = projects.filter((project) => project.featured);
+export const featuredProjects = projects.filter(
+  (project) => project.featured && project.published !== false
+);
 
 export const flagshipProject = projects.find(
   (project) => project.slug === "cabarrus-futurescape"
@@ -650,6 +751,35 @@ export const projectCategories: ProjectCategory[] = [
   "Enterprise GIS / Public Infrastructure",
   "Automation Systems",
   "Applied GIS / Research"
+];
+
+export const projectFilterOptions: { value: ProjectFilterValue; label: string }[] = [
+  { value: "all", label: "All" },
+  { value: "planning-government", label: "Planning & Government" },
+  { value: "utilities-infrastructure", label: "Utilities & Infrastructure" },
+  { value: "business-tools", label: "Business & Independent Tools" }
+];
+
+export const projectTrackPanels: {
+  value: ProjectIndustryCategory;
+  title: string;
+  description: string;
+  action: string;
+}[] = [
+  {
+    value: "planning-government",
+    title: "Public Sector & Planning Intelligence",
+    description:
+      "Explore county GIS, planning systems, parcel intelligence, permits, public data, economic development, and growth-management projects.",
+    action: "Explore Planning Projects"
+  },
+  {
+    value: "utilities-infrastructure",
+    title: "Utilities & Network Infrastructure",
+    description:
+      "Explore utility, telecom, broadband, service-territory, asset-data, infrastructure-capacity, and network-intelligence projects.",
+    action: "Explore Infrastructure Projects"
+  }
 ];
 
 export const researchProjects = projects.filter(
