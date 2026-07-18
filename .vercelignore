@@ -1,0 +1,10 @@
+.next/
+.next-locked-*/
+node_modules/
+.vercel/
+out/
+build/
+*.tsbuildinfo
+*.log
+.env
+.env*.local
