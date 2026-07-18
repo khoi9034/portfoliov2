@@ -1,15 +1,20 @@
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
-import type { Project } from "@/data/projects";
+import type { ProfessionalTrack, Project } from "@/data/projects";
 import { getProjectLaunch, projectLinks } from "@/data/links";
 import { ProjectVisual } from "@/components/ProjectVisual";
 
 type ProjectCardProps = {
   project: Project;
+  activeTrack?: ProfessionalTrack;
   compact?: boolean;
 };
 
-export function ProjectCard({ project, compact = false }: ProjectCardProps) {
+export function ProjectCard({
+  project,
+  activeTrack,
+  compact = false
+}: ProjectCardProps) {
   const launch = getProjectLaunch(project.slug);
   const isCabarrusHub = project.slug === "cabarrus-gis-hub";
   const openDataHref = isCabarrusHub ? projectLinks.cabarrusOpenData : "";
@@ -47,19 +52,32 @@ export function ProjectCard({ project, compact = false }: ProjectCardProps) {
     </span>
   );
   const relatedCaseStudy = project.relatedCaseStudies?.[0];
+  const trackLabel =
+    activeTrack === "utilities"
+      ? "Utilities & Infrastructure"
+      : "Government Technology";
+  const secondaryTrack =
+    activeTrack && project.tracks.length > 1
+      ? activeTrack === "utilities"
+        ? "Government relevance"
+        : "Utilities relevance"
+      : null;
 
   return (
     <article className={`project-card ${compact ? "compact" : ""}`}>
       <div className="project-card-content">
         <div className="project-card-topline">
-          <span>{project.primaryIndustry ?? project.type}</span>
+          <span>{activeTrack ? trackLabel : project.primaryIndustry ?? project.type}</span>
+          {secondaryTrack ? <span>{secondaryTrack}</span> : null}
           <span>{project.capabilityCategory ?? project.category}</span>
         </div>
         <span className={`project-status-inline ${launch ? "is-live" : "is-professional"}`}>
           {statusLabel}
         </span>
         <h3>{project.title}</h3>
-        <p className="project-card-summary">{project.purpose ?? cardSummary}</p>
+        <p className="project-card-summary">
+          {getRouteAwareSummary(project, activeTrack) ?? project.purpose ?? cardSummary}
+        </p>
         <p className="project-card-role">{project.role}</p>
         <div className="tool-list" aria-label={`${project.title} focus tags`}>
           {project.industryTags.slice(0, compact ? 3 : 4).map((tag) => (
@@ -121,4 +139,15 @@ function getProjectCardSummary(project: Project) {
   }
 
   return project.summary;
+}
+
+function getRouteAwareSummary(
+  project: Project,
+  activeTrack: ProfessionalTrack | undefined
+) {
+  if (project.slug !== "cabarrus-futurescape" || activeTrack !== "utilities") {
+    return null;
+  }
+
+  return "Infrastructure-context capability for reviewing development pressure near utility service context, readiness signals, constraints, and planning workflows.";
 }

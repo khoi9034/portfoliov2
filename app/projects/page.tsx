@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { BriefcaseBusiness } from "lucide-react";
 import { ProjectFilters } from "@/components/ProjectFilters";
 import { getProjectBySlug, type Project } from "@/data/projects";
 
@@ -38,29 +36,10 @@ export default function ProjectsPage() {
       <section className="page-hero projects-intro">
         <p className="eyebrow">PROJECT TRACK EXPLORER</p>
         <h1>Choose Your Track</h1>
-        <p>
-          Follow the systems, applications, and analytical tools I have built
-          across government technology and infrastructure intelligence.
-        </p>
+        <p>Select a professional track and follow the projects connected to it.</p>
       </section>
 
       <ProjectFilters projects={mainProjects} />
-
-      <section className="section-shell projects-research-cta">
-        <div>
-          <p className="eyebrow">Analysis archive</p>
-          <h2>Consulting and applied research belong in Case Studies.</h2>
-          <p>
-            Applied GIS research, spatial analytics, strategy framing, and
-            evidence-based recommendations are organized separately from the
-            technical product index.
-          </p>
-        </div>
-        <Link className="button secondary" href="/case-studies">
-          <BriefcaseBusiness size={18} />
-          <span>View Consulting Case Studies</span>
-        </Link>
-      </section>
     </main>
   );
 }
