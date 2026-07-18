@@ -46,14 +46,43 @@ export function ProjectCard({ project, compact = false }: ProjectCardProps) {
       <span>{primaryAction.label}</span>
     </span>
   );
+  const relatedCaseStudy = project.relatedCaseStudies?.[0];
 
   return (
     <article className={`project-card ${compact ? "compact" : ""}`}>
-      <div className="project-card-preview">
-        <ProjectVisual project={project} />
-        <span className={`project-status-pill ${launch ? "is-live" : "is-professional"}`}>
+      <div className="project-card-content">
+        <div className="project-card-topline">
+          <span>{project.primaryIndustry ?? project.type}</span>
+          <span>{project.capabilityCategory ?? project.category}</span>
+        </div>
+        <span className={`project-status-inline ${launch ? "is-live" : "is-professional"}`}>
           {statusLabel}
         </span>
+        <h3>{project.title}</h3>
+        <p className="project-card-summary">{project.purpose ?? cardSummary}</p>
+        <p className="project-card-role">{project.role}</p>
+        <div className="tool-list" aria-label={`${project.title} focus tags`}>
+          {project.industryTags.slice(0, compact ? 3 : 4).map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
+        </div>
+        <div className="project-card-links">
+          {showSecondaryDetail ? (
+            <Link className="project-secondary-link" href={detailHref}>
+              <span>{detailLabel}</span>
+              <ArrowRight size={16} />
+            </Link>
+          ) : null}
+          {relatedCaseStudy ? (
+            <Link className="project-secondary-link" href={relatedCaseStudy.href}>
+              <span>Related case study</span>
+              <ArrowRight size={16} />
+            </Link>
+          ) : null}
+        </div>
+      </div>
+      <div className="project-card-preview">
+        <ProjectVisual project={project} />
         {primaryAction.external ? (
           <a
             className="project-card-overlay"
@@ -73,22 +102,6 @@ export function ProjectCard({ project, compact = false }: ProjectCardProps) {
             {overlayContent}
           </Link>
         )}
-      </div>
-      <div className="project-card-content">
-        <p className="project-card-type">{project.type}</p>
-        <h3>{project.title}</h3>
-        <p className="project-card-summary">{cardSummary}</p>
-        <div className="tool-list" aria-label={`${project.title} focus tags`}>
-          {project.industryTags.slice(0, compact ? 3 : 4).map((tag) => (
-            <span key={tag}>{tag}</span>
-          ))}
-        </div>
-        {showSecondaryDetail ? (
-          <Link className="project-secondary-link" href={detailHref}>
-            <span>{detailLabel}</span>
-            <ArrowRight size={16} />
-          </Link>
-        ) : null}
       </div>
     </article>
   );

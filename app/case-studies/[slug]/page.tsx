@@ -92,7 +92,7 @@ export default async function CaseStudyDetailPage({
         <h1>{study.title}</h1>
         <p>{study.summary}</p>
         <div className="status-banner">
-          {study.published ? study.status : `${study.status} / Overview`}
+          {study.status} / {study.decisionType}
         </div>
         {study.actions?.length ? (
           <div className="hero-actions">
@@ -131,12 +131,12 @@ export default async function CaseStudyDetailPage({
 
       <section className="consulting-summary-grid" aria-label="Case study summary">
         <article>
-          <span>Problem</span>
-          <p>{study.problem}</p>
+          <span>Decision question</span>
+          <p>{study.decisionQuestion}</p>
         </article>
         <article>
-          <span>Context</span>
-          <p>{study.context}</p>
+          <span>Evidence reviewed</span>
+          <p>{study.evidence.join(" / ")}</p>
         </article>
         <article>
           <span>Key deliverable</span>
@@ -145,31 +145,24 @@ export default async function CaseStudyDetailPage({
       </section>
 
       <div className="consulting-detail-grid">
-        <DetailBlock title="Executive Summary">
+        <DetailBlock title="Executive Decision">
           <p>{study.detail.executiveSummary}</p>
         </DetailBlock>
 
-        <DetailBlock title="The Problem">
+        <DetailBlock title="Problem and Context">
           <p>{study.problem}</p>
+          <DetailList items={study.detail.contextAndConstraints} />
         </DetailBlock>
 
-        <DetailBlock title="Context and Constraints">
-          <DetailList items={study.detail.contextAndConstraints} />
+        <DetailBlock title="Evidence Reviewed">
+          <DetailList items={[...study.evidence, ...study.detail.dataAndTools]} />
         </DetailBlock>
 
         <DetailBlock title="Analytical Approach">
           <DetailList items={study.detail.approach} />
         </DetailBlock>
 
-        <DetailBlock title="Data and Tools">
-          <div className="method-grid">
-            {study.detail.dataAndTools.map((item) => (
-              <span key={item}>{item}</span>
-            ))}
-          </div>
-        </DetailBlock>
-
-        <DetailBlock title="Key Findings">
+        <DetailBlock title="Findings">
           <DetailList items={study.detail.keyFindings} />
         </DetailBlock>
 
@@ -185,9 +178,18 @@ export default async function CaseStudyDetailPage({
           <DetailList items={study.detail.potentialImpact} />
         </DetailBlock>
 
-        <DetailBlock title="What I Would Analyze Next">
+        <DetailBlock title="Recommended Follow-Up">
           <DetailList items={study.detail.nextAnalysis} />
         </DetailBlock>
+
+        {study.relatedProject ? (
+          <DetailBlock title="Related Project or System">
+            <Link className="text-link" href={study.relatedProject.href}>
+              <span>{study.relatedProject.title}</span>
+              <ArrowRight size={16} />
+            </Link>
+          </DetailBlock>
+        ) : null}
       </div>
     </main>
   );

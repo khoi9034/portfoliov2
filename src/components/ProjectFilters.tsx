@@ -4,8 +4,10 @@ import { useMemo, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { ProjectCard } from "@/components/ProjectCard";
 import {
+  additionalTechnicalBuilds,
   projectFilterOptions,
   projectTrackPanels,
+  sharedFoundationCapabilities,
   type Project,
   type ProjectFilterValue
 } from "@/data/projects";
@@ -27,25 +29,28 @@ export function ProjectFilters({ projects }: ProjectFiltersProps) {
       ),
     [activeFilter, projects]
   );
-  const counts = useMemo(
+  const trackCounts = useMemo(
     () =>
       Object.fromEntries(
-        projectFilterOptions.map((option) => [
-          option.value,
+        projectTrackPanels.map((track) => [
+          track.value,
           projects.filter(
             (project) =>
-              project.published !== false && matchesFilter(project, option.value)
+              project.published !== false && project.categories.includes(track.value)
           ).length
         ])
-      ) as Record<ProjectFilterValue, number>,
+      ) as Record<(typeof projectTrackPanels)[number]["value"], number>,
     [projects]
   );
 
   function selectFilter(filter: ProjectFilterValue) {
     setActiveFilter(filter);
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
     window.requestAnimationFrame(() => {
       document.getElementById("project-collection")?.scrollIntoView({
-        behavior: "smooth",
+        behavior: prefersReducedMotion ? "auto" : "smooth",
         block: "start"
       });
     });
@@ -57,20 +62,58 @@ export function ProjectFilters({ projects }: ProjectFiltersProps) {
         {projectTrackPanels.map((track) => (
           <button
             aria-pressed={activeFilter === track.value}
-            className="track-panel"
+            className={`track-panel is-${track.value}`}
             key={track.value}
             onClick={() => selectFilter(track.value)}
             type="button"
           >
             <span className="track-panel-kicker">Industry track</span>
-            <h2>{track.title}</h2>
-            <p>{track.description}</p>
+            <div className="track-panel-visual" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </div>
+            <div>
+              <h2>{track.title}</h2>
+              <p>{track.description}</p>
+            </div>
+            <div className="track-panel-tags" aria-label={`${track.title} capabilities`}>
+              {track.labels.map((label) => (
+                <span key={label}>{label}</span>
+              ))}
+            </div>
+            <div className="track-panel-meta">
+              <span>
+                {trackCounts[track.value]} relevant{" "}
+                {trackCounts[track.value] === 1 ? "project" : "projects"}
+              </span>
+              <span>Featured: {track.featuredProject}</span>
+            </div>
             <strong>
               {track.action}
               <ArrowRight size={16} />
             </strong>
           </button>
         ))}
+      </section>
+
+      <section className="shared-foundation" aria-labelledby="shared-foundation-title">
+        <div>
+          <p className="eyebrow">Cross-sector foundation</p>
+          <h2 id="shared-foundation-title">
+            Shared GIS Systems & Automation Foundation
+          </h2>
+          <p>
+            Enterprise GIS, spatial databases, automation, data publishing, web
+            GIS, and system integration support work across both professional
+            tracks.
+          </p>
+        </div>
+        <div className="shared-foundation-tags">
+          {sharedFoundationCapabilities.map((capability) => (
+            <span key={capability}>{capability}</span>
+          ))}
+        </div>
       </section>
 
       <section
@@ -87,8 +130,7 @@ export function ProjectFilters({ projects }: ProjectFiltersProps) {
               onClick={() => setActiveFilter(option.value)}
               type="button"
             >
-              <span>{option.label}</span>
-              <small>{counts[option.value]}</small>
+              {option.label}
             </button>
           ))}
         </div>
@@ -107,6 +149,33 @@ export function ProjectFilters({ projects }: ProjectFiltersProps) {
           </p>
         ) : null}
       </section>
+
+      {additionalTechnicalBuilds.length ? (
+        <section className="section-shell additional-builds" aria-labelledby="additional-builds-title">
+          <div>
+            <p className="eyebrow">Secondary technical work</p>
+            <h2 id="additional-builds-title">Additional Technical Builds</h2>
+            <p>
+              Selected independent applications demonstrating full-stack
+              development, data engineering, and practical problem-solving.
+            </p>
+          </div>
+          <div className="additional-build-grid">
+            {additionalTechnicalBuilds.map((build) => (
+              <article className="additional-build-card" key={build.title}>
+                <span>{build.status}</span>
+                <h3>{build.title}</h3>
+                <p>{build.summary}</p>
+                <div className="tool-list">
+                  {build.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
     </>
   );
 }

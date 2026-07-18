@@ -4,18 +4,29 @@ export type CaseStudyCategory =
   | "government-planning"
   | "utilities-infrastructure"
   | "real-estate-location"
-  | "business-operations";
+  | "gis-modernization";
 
 export type CaseStudyFilterValue = "all" | CaseStudyCategory;
+export type CaseStudyDecisionType =
+  | "Growth and Capacity"
+  | "Network Expansion"
+  | "Data Modernization"
+  | "Operational Efficiency"
+  | "Site and Investment Screening"
+  | "Public Service Delivery";
 
 export type CaseStudy = {
   slug: string;
   title: string;
+  decisionQuestion: string;
   summary: string;
   problem: string;
   category: string;
   categorySlug: CaseStudyCategory;
   secondaryCategories?: CaseStudyCategory[];
+  decisionType: CaseStudyDecisionType;
+  evidence: string[];
+  cardRecommendation: string;
   context: string;
   methods: string[];
   deliverable: string;
@@ -61,8 +72,13 @@ const researchCategorySlugBySlug: Record<string, CaseStudyCategory> = {
 };
 
 const researchSecondaryCategoriesBySlug: Record<string, CaseStudyCategory[]> = {
-  "anime-retail-site-selection-tokyo": ["business-operations"],
   "thermal-mitigating-effects-urban-canopy": ["utilities-infrastructure"]
+};
+
+const researchDecisionTypeBySlug: Record<string, CaseStudyDecisionType> = {
+  "anime-retail-site-selection-tokyo": "Site and Investment Screening",
+  "ltc-facilities-aging-population-japan": "Public Service Delivery",
+  "thermal-mitigating-effects-urban-canopy": "Growth and Capacity"
 };
 
 const researchDeliverableBySlug: Record<string, string> = {
@@ -78,6 +94,8 @@ const coreCaseStudies: CaseStudy[] = [
   {
     slug: "cabarrus-futurescape",
     title: "Cabarrus FutureScape: Growth and Infrastructure Intelligence",
+    decisionQuestion:
+      "How can county-scale parcel, permit, infrastructure, school, and constraint data be organized for earlier growth review?",
     summary:
       "How parcel-level GIS and public data can be organized into a planning intelligence platform for reviewing growth, development pressure, infrastructure context, and service constraints.",
     problem:
@@ -85,6 +103,15 @@ const coreCaseStudies: CaseStudy[] = [
     category: "Public Sector Strategy / Spatial Analytics",
     categorySlug: "government-planning",
     secondaryCategories: ["utilities-infrastructure"],
+    decisionType: "Growth and Capacity",
+    evidence: [
+      "Parcel context",
+      "Permit activity",
+      "Flood constraints",
+      "School and utility context"
+    ],
+    cardRecommendation:
+      "Use a planning-intelligence workflow to organize observed activity, constraints, and recommended follow-up before decisions become harder to coordinate.",
     context: "Independent portfolio case study for a county-scale planning intelligence prototype.",
     methods: [
       "GIS analysis",
@@ -159,15 +186,109 @@ const coreCaseStudies: CaseStudy[] = [
     }
   },
   {
+    slug: "utility-capacity-development-review",
+    title: "Utility Capacity and Development Review",
+    decisionQuestion:
+      "Where does observed growth pressure need utility and infrastructure follow-up before development review advances?",
+    summary:
+      "A utility-focused planning intelligence overview using CFS concepts to frame how parcel activity, development pressure, service context, and infrastructure constraints can guide follow-up review.",
+    problem:
+      "Development pressure can outpace the visibility of utility service, capacity, and infrastructure context when parcel, permit, and service-area signals are reviewed separately.",
+    category: "Utilities & Infrastructure",
+    categorySlug: "utilities-infrastructure",
+    secondaryCategories: ["government-planning"],
+    decisionType: "Growth and Capacity",
+    evidence: [
+      "Parcel and permit context",
+      "Utility service context",
+      "Infrastructure readiness signals",
+      "Planning constraints"
+    ],
+    cardRecommendation:
+      "Treat utility capacity as an infrastructure-context review signal and identify where follow-up with authoritative utility data would be required.",
+    context:
+      "Case study in development based on Cabarrus FutureScape infrastructure-context concepts.",
+    methods: [
+      "Parcel review",
+      "Permit activity review",
+      "Service-area context",
+      "Infrastructure readiness framing",
+      "Data limitation review"
+    ],
+    deliverable: "Prototype-backed utility capacity and growth-context review framework.",
+    status: "Case Study in Development",
+    href: "/case-studies/utility-capacity-development-review",
+    relatedProject: {
+      title: "Cabarrus FutureScape",
+      href: "/projects/cabarrus-futurescape"
+    },
+    featured: false,
+    published: true,
+    detail: {
+      executiveSummary:
+        "This in-development overview explains how CFS-style parcel intelligence can support utility capacity follow-up without claiming official utility findings or verified capacity conclusions.",
+      contextAndConstraints: [
+        "This is not commissioned utility work.",
+        "No official capacity finding, service commitment, or utility approval is claimed.",
+        "Authoritative utility datasets and engineering review would be required before operational decisions."
+      ],
+      approach: [
+        "Use parcel and permit activity to identify where growth pressure is visible.",
+        "Layer infrastructure and service context as planning review signals.",
+        "Separate observed activity from capacity assumptions and recommended follow-up."
+      ],
+      dataAndTools: [
+        "Cabarrus FutureScape concept",
+        "Parcel context",
+        "Permit activity",
+        "Infrastructure readiness framing",
+        "PostGIS-ready data organization"
+      ],
+      keyFindings: [
+        "Utility context is most useful when shown alongside parcel activity, development pressure, and constraints.",
+        "The current portfolio supports infrastructure-context framing, not verified utility capacity conclusions."
+      ],
+      recommendation: [
+        "Use the workflow as an early review framework for identifying where authoritative utility follow-up is needed.",
+        "Document source coverage, update cadence, and assumptions before using any capacity-related signal operationally."
+      ],
+      risksAndLimitations: [
+        "Verified utility capacity data is not included.",
+        "Service areas and utility assets can be incomplete or restricted.",
+        "Infrastructure signals should not be treated as engineering determinations."
+      ],
+      potentialImpact: [
+        "Clearer first-pass identification of development areas needing utility follow-up.",
+        "Better separation between planning intelligence, data caveats, and operational utility review."
+      ],
+      nextAnalysis: [
+        "Identify public, non-sensitive utility context that can be safely shown.",
+        "Define which signals require authoritative utility confirmation.",
+        "Prepare a broadband or utility expansion case study only after real evidence is available."
+      ]
+    }
+  },
+  {
     slug: "automap",
     title: "AutoMap: GIS Request Automation and Operational Review",
+    decisionQuestion:
+      "How can repeated plain-language GIS requests become safer, more reviewable operational workflows?",
     summary:
       "How plain-language GIS requests can become reviewable map workflows through REST metadata, source validation, map recipes, customization, refinement, and analysis reports.",
     problem:
       "GIS requests often arrive as plain language, but teams still need a repeatable way to identify the right layers, validate sources, document assumptions, and produce reviewable outputs.",
-    category: "Business Operations / GIS Automation",
-    categorySlug: "business-operations",
+    category: "GIS Modernization & Data Strategy",
+    categorySlug: "gis-modernization",
     secondaryCategories: ["government-planning"],
+    decisionType: "Operational Efficiency",
+    evidence: [
+      "Plain-language requests",
+      "ArcGIS REST metadata",
+      "Layer registry",
+      "Analysis reports"
+    ],
+    cardRecommendation:
+      "Use source validation, recipe generation, refinement, and report history to make GIS request automation reviewable.",
     context: "Independent portfolio case study for a live GIS automation prototype.",
     methods: [
       "Plain-language request interpretation",
@@ -239,6 +360,8 @@ const coreCaseStudies: CaseStudy[] = [
   {
     slug: "real-estate-screening",
     title: "Turning County Data into a Real Estate Screening Framework",
+    decisionQuestion:
+      "Which parcel risks should be screened before a site is treated as attractive for investment or development?",
     summary:
       "A structured screening framework that combines spatial constraints, development activity, parcel characteristics, infrastructure context, and follow-up due diligence.",
     problem:
@@ -246,6 +369,15 @@ const coreCaseStudies: CaseStudy[] = [
     category: "Real Estate Strategy / Location Intelligence",
     categorySlug: "real-estate-location",
     secondaryCategories: ["utilities-infrastructure"],
+    decisionType: "Site and Investment Screening",
+    evidence: [
+      "Parcel characteristics",
+      "Zoning and flood constraints",
+      "Infrastructure proximity",
+      "Development activity"
+    ],
+    cardRecommendation:
+      "Use a structured location-intelligence screen to surface risks and due-diligence questions before deeper review.",
     context: "Portfolio framework for real estate and location intelligence screening.",
     methods: [
       "Parcel screening",
@@ -305,12 +437,23 @@ const coreCaseStudies: CaseStudy[] = [
   {
     slug: "school-pressure",
     title: "School Utilization and Development Pressure Review",
+    decisionQuestion:
+      "Where should planners review attendance-area development pressure when utilization context overlaps with observed permit activity?",
     summary:
       "Combining attendance-area utilization context with observed permit activity as a preliminary planning review signal.",
     problem:
       "Planners need an early review signal for areas where existing school utilization context overlaps with observed residential permit activity.",
     category: "Public Sector Analytics / Growth Planning",
     categorySlug: "government-planning",
+    decisionType: "Public Service Delivery",
+    evidence: [
+      "Utilization context",
+      "Observed permit activity",
+      "Attendance-area context",
+      "Data coverage caveats"
+    ],
+    cardRecommendation:
+      "Use the signal as preliminary planning review context and identify where official school-capacity follow-up is needed.",
     context: "Cabarrus FutureScape analysis concept.",
     methods: [
       "Attendance-area review",
@@ -372,12 +515,24 @@ const coreCaseStudies: CaseStudy[] = [
   {
     slug: "gis-hub",
     title: "Improving Public Access to County GIS Data",
+    decisionQuestion:
+      "How should public GIS content be organized so residents, staff, planners, and data users can find the right resources faster?",
     summary:
       "Reorganizing public GIS content into clearer categories and improving discoverability of county datasets, maps, applications, planning resources, and property information.",
     problem:
       "Public GIS resources can be difficult to navigate when datasets, applications, maps, categories, metadata, and download options are inconsistently organized.",
-    category: "Digital Government / Data Strategy",
-    categorySlug: "government-planning",
+    category: "GIS Modernization & Data Strategy",
+    categorySlug: "gis-modernization",
+    secondaryCategories: ["government-planning"],
+    decisionType: "Data Modernization",
+    evidence: [
+      "ArcGIS Hub structure",
+      "Hosted items",
+      "Metadata",
+      "Public data navigation"
+    ],
+    cardRecommendation:
+      "Organize public GIS resources around user intent, metadata quality, and clearer data-discovery paths.",
     context: "Professional experience through Cabarrus County GIS Analyst Internship.",
     methods: [
       "ArcGIS Hub",
@@ -446,12 +601,19 @@ const coreCaseStudies: CaseStudy[] = [
 const researchCaseStudies: CaseStudy[] = researchBriefs.map((brief) => ({
   slug: brief.slug,
   title: brief.title,
+  decisionQuestion: brief.questions[0] ?? brief.summary,
   summary: brief.summary,
   problem: brief.questions[0] ?? brief.summary,
   category:
     researchCategoryBySlug[brief.slug] ?? "Applied GIS Research / Spatial Analysis",
   categorySlug: researchCategorySlugBySlug[brief.slug] ?? "government-planning",
   secondaryCategories: researchSecondaryCategoriesBySlug[brief.slug],
+  decisionType:
+    researchDecisionTypeBySlug[brief.slug] ?? "Public Service Delivery",
+  evidence: brief.outputs.slice(0, 4),
+  cardRecommendation:
+    brief.findings[0] ??
+    "Use the spatial evidence as a starting point for follow-up analysis.",
   context: brief.context,
   methods: brief.methods,
   deliverable:
@@ -509,8 +671,8 @@ export const caseStudyFilterOptions: {
   { value: "all", label: "All Case Studies" },
   { value: "government-planning", label: "Government & Planning" },
   { value: "utilities-infrastructure", label: "Utilities & Infrastructure" },
-  { value: "real-estate-location", label: "Real Estate & Location Strategy" },
-  { value: "business-operations", label: "Business & Operations" }
+  { value: "real-estate-location", label: "Real Estate & Location" },
+  { value: "gis-modernization", label: "GIS Modernization" }
 ];
 
 export function getCaseStudyBySlug(slug: string) {

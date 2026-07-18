@@ -12,22 +12,33 @@ export type ProjectCategory =
 
 export type ProjectDepth = "flagship" | "platform" | "professional" | "research";
 export type ProjectIndustryCategory =
-  | "planning-government"
+  | "public-systems"
   | "utilities-infrastructure"
-  | "business-tools";
+  | "gis-systems-automation";
 
 export type ProjectFilterValue = "all" | ProjectIndustryCategory;
+
+export type AdditionalTechnicalBuild = {
+  title: string;
+  summary: string;
+  status: string;
+  tags: string[];
+};
 
 export type Project = {
   slug: string;
   title: string;
+  shortTitle?: string;
   subtitle: string;
   category: ProjectCategory;
   categories: ProjectIndustryCategory[];
+  primaryIndustry?: string;
+  capabilityCategory?: string;
   type: string;
   status: string;
   role: string;
   summary: string;
+  purpose?: string;
   homepageSummary?: string;
   tools: string[];
   focus: string[];
@@ -67,15 +78,24 @@ export const projects: Project[] = [
   {
     slug: "cabarrus-futurescape",
     title: "Cabarrus FutureScape",
+    shortTitle: "Cabarrus FutureScape",
     subtitle: "County Digital Twin & Growth Intelligence Platform",
     category: "Flagship Systems",
-    categories: ["planning-government", "utilities-infrastructure"],
+    categories: [
+      "public-systems",
+      "utilities-infrastructure",
+      "gis-systems-automation"
+    ],
+    primaryIndustry: "Public Systems & Planning Intelligence",
+    capabilityCategory: "Planning intelligence / infrastructure context",
     type: "County Digital Twin & Growth Intelligence Platform",
     status:
       "Personal prototype / ongoing applied GIS platform. Not an official county system.",
     role: "Product strategy, spatial data architecture, dashboard concept, Web GIS prototype",
     summary:
       "A county-scale GIS intelligence prototype that connects parcel context, development activity, school capacity, planning constraints, infrastructure readiness, environmental signals, and executive reporting into one decision-support interface.",
+    purpose:
+      "Independent planning-intelligence prototype for parcel review, permit activity, growth context, planning constraints, school utilization context, and utility/service capacity awareness.",
     homepageSummary:
       "The flagship live prototype: a command-center interface for parcel intelligence, development hotspots, constraints, infrastructure readiness, school-capacity signals, and executive planning reports.",
     tools: [
@@ -108,8 +128,7 @@ export const projects: Project[] = [
       "Planning Intelligence",
       "Parcel Analytics",
       "Permitting",
-      "Infrastructure Capacity",
-      "Web GIS"
+      "Infrastructure Capacity"
     ],
     visual: {
       variant: "cabarrus-futurescape",
@@ -269,15 +288,20 @@ export const projects: Project[] = [
   },
   {
     slug: "automap",
-    title: "AutoMap",
+    title: "AutoMap: County GIS Request Engine",
+    shortTitle: "AutoMap",
     subtitle: "AI-assisted county map request and ArcGIS REST automation engine",
     category: "Automation Systems",
-    categories: ["planning-government", "business-tools"],
+    categories: ["public-systems", "gis-systems-automation"],
+    primaryIndustry: "Public Systems & Planning Intelligence",
+    capabilityCategory: "GIS systems & automation",
     type: "AI-assisted County Map Request / REST Layer Automation Engine",
     status: "Active personal project. Live deployed prototype.",
     role: "Full-stack workflow design, deterministic request intelligence, GIS automation architecture",
     summary:
       "AutoMap turns plain-language GIS requests into reviewable map workflows by connecting user intent, ArcGIS REST layer metadata, source validation, map recipes, customization options, and analysis report generation.",
+    purpose:
+      "County GIS request workflow for turning plain-language map needs into repeatable layer selection, map-generation, refinement, and review steps.",
     homepageSummary:
       "A live GIS automation engine for county map requests, approved REST layer selection, customizable map recipes, refinement, and analysis report generation.",
     implementationNote:
@@ -308,7 +332,6 @@ export const projects: Project[] = [
       "Automation",
       "ArcGIS REST",
       "Web GIS",
-      "Business Operations",
       "Data Validation"
     ],
     visual: {
@@ -417,14 +440,19 @@ export const projects: Project[] = [
   {
     slug: "cabarrus-gis-hub",
     title: "Cabarrus County Open Data / GIS Hub Redesign",
+    shortTitle: "Cabarrus GIS Hub",
     subtitle: "Public GIS infrastructure, metadata, and user-centered data discovery",
     category: "Enterprise GIS / Public Infrastructure",
-    categories: ["planning-government"],
+    categories: ["public-systems", "gis-systems-automation"],
+    primaryIndustry: "Public Systems & Planning Intelligence",
+    capabilityCategory: "GIS modernization / public data",
     type: "Internship / Public GIS Infrastructure Work",
     status: "Professional experience through Cabarrus County GIS Analyst Internship.",
     role: "Independent hub redesign, content organization, GIS item management",
     summary:
       "Redesigned and reorganized a public GIS data hub from department-oriented navigation into user-intent navigation for public users, staff, planners, and external data consumers.",
+    purpose:
+      "Professional contribution to public GIS data organization, metadata, hosted item structure, and public-sector information architecture.",
     homepageSummary:
       "Professional enterprise GIS work focused on ArcGIS Hub, hosted layers, public data access, metadata, sharing settings, and user-centered navigation.",
     tools: [
@@ -518,7 +546,7 @@ export const projects: Project[] = [
     title: "Anime Retail Site Selection in Japan",
     subtitle: "Senior Thesis / Applied GIS Research Project",
     category: "Applied GIS / Research",
-    categories: ["business-tools"],
+    categories: ["gis-systems-automation"],
     type: "Senior Thesis / Applied GIS Research Project",
     status: "Academic research project.",
     role: "Spatial analyst, ArcPy workflow designer, suitability modeling",
@@ -595,7 +623,7 @@ export const projects: Project[] = [
     title: "Elderly Access to Services",
     subtitle: "GIS Accessibility / Planning Analysis",
     category: "Applied GIS / Research",
-    categories: ["planning-government"],
+    categories: ["public-systems"],
     type: "GIS Accessibility / Planning Analysis",
     status: "Academic planning analysis.",
     role: "GIS analyst, accessibility mapping, ArcPy automation",
@@ -670,7 +698,7 @@ export const projects: Project[] = [
     title: "NC Working Age LISA Analysis in R",
     subtitle: "Spatial Statistics / Demographic Clustering",
     category: "Applied GIS / Research",
-    categories: ["planning-government"],
+    categories: ["public-systems"],
     type: "Spatial Statistics / Demographic Clustering",
     status: "Academic spatial statistics project.",
     role: "Spatial statistics analyst, R workflow author, map interpretation",
@@ -754,31 +782,69 @@ export const projectCategories: ProjectCategory[] = [
 ];
 
 export const projectFilterOptions: { value: ProjectFilterValue; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: "planning-government", label: "Planning & Government" },
+  { value: "all", label: "All Projects" },
+  { value: "public-systems", label: "Public Systems" },
   { value: "utilities-infrastructure", label: "Utilities & Infrastructure" },
-  { value: "business-tools", label: "Business & Independent Tools" }
+  { value: "gis-systems-automation", label: "GIS Systems & Automation" }
 ];
 
 export const projectTrackPanels: {
   value: ProjectIndustryCategory;
   title: string;
   description: string;
+  labels: string[];
+  featuredProject: string;
   action: string;
 }[] = [
   {
-    value: "planning-government",
-    title: "Public Sector & Planning Intelligence",
+    value: "public-systems",
+    title: "Public Systems & Planning Intelligence",
     description:
-      "Explore county GIS, planning systems, parcel intelligence, permits, public data, economic development, and growth-management projects.",
-    action: "Explore Planning Projects"
+      "County GIS, planning, parcels, permitting, public data, growth management, economic development, and government decision-support systems.",
+    labels: ["County GIS", "Planning Intelligence", "Public Data"],
+    featuredProject: "Cabarrus FutureScape",
+    action: "Explore Public Systems"
   },
   {
     value: "utilities-infrastructure",
     title: "Utilities & Network Infrastructure",
     description:
-      "Explore utility, telecom, broadband, service-territory, asset-data, infrastructure-capacity, and network-intelligence projects.",
-    action: "Explore Infrastructure Projects"
+      "Telecom, broadband, water and sewer systems, electric infrastructure, service territories, utility assets, capacity, and network expansion.",
+    labels: [
+      "Utility Networks",
+      "Service Territories",
+      "Infrastructure Capacity"
+    ],
+    featuredProject: "Infrastructure intelligence module",
+    action: "Explore Infrastructure Systems"
+  }
+];
+
+export const sharedFoundationCapabilities = [
+  "ArcGIS Enterprise",
+  "ArcGIS Pro",
+  "PostGIS",
+  "Python",
+  "ArcPy",
+  "Web GIS",
+  "REST Services",
+  "Data Integration"
+];
+
+export const additionalTechnicalBuilds: AdditionalTechnicalBuild[] = [
+  {
+    title: "Nimbus Teppanyaki",
+    summary:
+      "Independent small-business build focused on customer booking workflow, database integration, deployment, service-area communication, and customer experience.",
+    status: "Independent technical build",
+    tags: ["Full-stack", "Database", "Deployment", "Customer Workflow"]
+  },
+  {
+    title: "StockPicker369",
+    summary:
+      "Independent data and analytics build kept separate from the primary GIS portfolio so the main story stays focused on public systems, infrastructure, and automation.",
+    status: "Independent technical build",
+    tags: ["Data Engineering", "Analytics", "Risk Analysis"]
   }
 ];
 

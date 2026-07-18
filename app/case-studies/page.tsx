@@ -24,12 +24,12 @@ export default function CaseStudiesPage() {
   return (
     <main className="page-shell case-studies-page">
       <section className="page-hero case-studies-hero">
-        <p className="eyebrow">Consulting portfolio</p>
+        <p className="eyebrow">DECISION INTELLIGENCE</p>
         <h1>Consulting Case Studies</h1>
         <p>
-          Analyses showing how spatial data, operational context, economic
-          reasoning, and technology can support planning, infrastructure, and
-          business decisions.
+          Analyses showing how spatial evidence, operational context, and
+          economic reasoning can support government, infrastructure, and
+          location decisions.
         </p>
       </section>
 

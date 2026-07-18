@@ -32,17 +32,6 @@ export function CaseStudyFilters({ studies }: CaseStudyFiltersProps) {
     () => publishedStudies.filter((study) => matchesFilter(study, activeFilter)),
     [activeFilter, publishedStudies]
   );
-  const counts = useMemo(
-    () =>
-      Object.fromEntries(
-        caseStudyFilterOptions.map((option) => [
-          option.value,
-          publishedStudies.filter((study) => matchesFilter(study, option.value))
-            .length
-        ])
-      ) as Record<CaseStudyFilterValue, number>,
-    [publishedStudies]
-  );
 
   return (
     <section className="case-study-filter-section" aria-label="Filtered case studies">
@@ -50,51 +39,34 @@ export function CaseStudyFilters({ studies }: CaseStudyFiltersProps) {
         {caseStudyFilterOptions.map((option) => (
           <button
             aria-pressed={activeFilter === option.value}
-            className="filter-button"
-            key={option.value}
-            onClick={() => setActiveFilter(option.value)}
-            type="button"
-          >
-            <span>{option.label}</span>
-            <small>{counts[option.value]}</small>
-          </button>
-        ))}
-      </div>
+              className="filter-button"
+              key={option.value}
+              onClick={() => setActiveFilter(option.value)}
+              type="button"
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
 
       <div className="case-study-index">
         {visibleStudies.map((study) => (
           <Link className="case-study-card" href={study.href} key={study.slug}>
-            <div className="case-study-visual" aria-hidden={!study.image}>
-              {study.image ? (
-                <Image
-                  alt={study.image.alt}
-                  fill
-                  sizes="(max-width: 860px) 100vw, 420px"
-                  src={study.image.src}
-                />
-              ) : (
-                <FileText size={32} />
-              )}
-            </div>
             <div className="case-study-card-body">
               <div className="case-study-card-topline">
                 <span>{study.category}</span>
-                <span>{study.status}</span>
+                <span>{study.decisionType}</span>
               </div>
               <h2>{study.title}</h2>
-              <p>{study.problem}</p>
-              <dl className="case-study-facts">
+              <p className="case-study-question">{study.decisionQuestion}</p>
+              <dl className="case-study-facts case-study-decision-facts">
                 <div>
-                  <dt>Context</dt>
-                  <dd>{study.context}</dd>
+                  <dt>Evidence reviewed</dt>
+                  <dd>{study.evidence.slice(0, 4).join(" / ")}</dd>
                 </div>
                 <div>
-                  <dt>Methods</dt>
-                  <dd>{study.methods.slice(0, 4).join(" / ")}</dd>
-                </div>
-                <div>
-                  <dt>Deliverable</dt>
-                  <dd>{study.deliverable}</dd>
+                  <dt>Recommendation / deliverable</dt>
+                  <dd>{study.cardRecommendation}</dd>
                 </div>
               </dl>
               {study.relatedProject ? (
@@ -106,6 +78,18 @@ export function CaseStudyFilters({ studies }: CaseStudyFiltersProps) {
                 <span>Read case study</span>
                 <ArrowRight size={16} />
               </span>
+            </div>
+            <div className="case-study-visual" aria-hidden={!study.image}>
+              {study.image ? (
+                <Image
+                  alt={study.image.alt}
+                  fill
+                  sizes="(max-width: 860px) 100vw, 220px"
+                  src={study.image.src}
+                />
+              ) : (
+                <FileText size={32} />
+              )}
             </div>
           </Link>
         ))}
