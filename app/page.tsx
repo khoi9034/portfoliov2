@@ -2,144 +2,133 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
+  BriefcaseBusiness,
   FileText,
-  Layers3
+  Layers3,
+  Network
 } from "lucide-react";
-import { LiveProductFrame } from "@/components/LiveProductFrame";
-import { projectLinks } from "@/data/links";
-import { getProjectBySlug } from "@/data/projects";
 
 export const metadata: Metadata = {
-  title: "Cabarrus FutureScape | Khoi Nguyen GIS Portfolio",
+  title: "Khoi Nguyen | Enterprise GIS & Spatial Intelligence",
   description:
-    "Khoi Nguyen is a GIS analyst focused on Enterprise GIS, Web GIS, planning intelligence, digital twin prototypes, ArcPy automation, and spatial decision-support systems.",
+    "Portfolio of Khoi Nguyen featuring enterprise GIS, planning intelligence, government technology, utility infrastructure, spatial analytics, projects, and consulting case studies.",
   openGraph: {
-    title: "Cabarrus FutureScape | Khoi Nguyen GIS Portfolio",
+    title: "Khoi Nguyen | Enterprise GIS & Spatial Intelligence",
     description:
-      "Launch Cabarrus FutureScape, Khoi Nguyen's live county-scale digital twin and planning intelligence prototype.",
+      "Enterprise GIS, planning intelligence, government technology, utility infrastructure, spatial analytics, projects, and consulting case studies by Khoi Nguyen.",
     images: ["/og-gis-portfolio.svg"]
   },
   twitter: {
-    title: "Cabarrus FutureScape | Khoi Nguyen GIS Portfolio",
+    title: "Khoi Nguyen | Enterprise GIS & Spatial Intelligence",
     description:
-      "Live county digital twin, parcel intelligence, constraints, growth pressure, and planning intelligence prototype.",
+      "Enterprise GIS, planning intelligence, utility infrastructure, spatial analytics, projects, and consulting case studies.",
     images: ["/og-gis-portfolio.svg"]
   }
 };
 
-const cfs = getProjectBySlug("cabarrus-futurescape");
-
-const cfsActions = [
-  "Parcel context",
-  "Growth pressure",
-  "Constraints",
-  "Executive planning summaries"
-];
-
-const additionalWork = [
+const gatewayOptions = [
   {
-    title: "AutoMap",
-    description: "Launch or review the live GIS automation engine.",
-    href: "/projects/automap"
+    index: "01",
+    title: "Explore Projects",
+    description:
+      "Systems, applications, and GIS workflows built for government technology, planning intelligence, utilities, and infrastructure.",
+    href: "/projects",
+    tone: "projects",
+    Icon: Layers3
   },
   {
-    title: "Projects",
-    description: "See deployed systems and professional GIS infrastructure work.",
-    href: "/projects"
+    index: "02",
+    title: "Explore Case Studies",
+    description:
+      "Consulting-style analyses examining planning, infrastructure, real estate, and data-modernization decisions.",
+    href: "/case-studies",
+    tone: "cases",
+    Icon: Network
   },
   {
-    title: "Contact",
-    description: "Reach out about GIS, planning intelligence, or automation roles.",
-    href: "/contact"
+    index: "03",
+    title: "View Experience",
+    description:
+      "Professional experience, enterprise GIS capabilities, applied work, and education.",
+    href: "/experience",
+    tone: "experience",
+    Icon: BriefcaseBusiness
+  },
+  {
+    index: "04",
+    title: "Open Resume",
+    description:
+      "Review or download a concise summary of experience, technical capabilities, education, and selected work.",
+    href: "/resume",
+    tone: "resume",
+    Icon: FileText
   }
 ];
 
 export default function Home() {
-  if (!cfs) {
-    return null;
-  }
-
   return (
-    <main className="page-shell home-page cfs-home">
-      <section className="homepage-intro" aria-label="Professional introduction">
-        <p className="eyebrow">Khoi Nguyen</p>
-        <strong>GIS Analyst / Enterprise GIS / Planning Intelligence</strong>
-        <p>
-          Hi, I&apos;m Khoi Nguyen, a GIS analyst focused on Enterprise GIS,
-          Web GIS, ArcPy automation, and planning intelligence systems. I build
-          spatial workflows and digital twin prototypes that turn county-scale
-          data into decision-ready tools for planning, growth, and public-sector
-          decision support.
-        </p>
-      </section>
-
-      <section className="home-hero cfs-hero">
+    <main className="page-shell home-page gateway-home">
+      <section className="home-hero gateway-hero" aria-labelledby="home-title">
         <div className="hero-copy">
-          <p className="eyebrow">Flagship digital twin prototype</p>
-          <h1>Cabarrus FutureScape</h1>
-          <p className="project-subtitle">
-            County Digital Twin & Planning Intelligence Platform
-          </p>
-          <div className="status-banner">{cfs.status}</div>
+          <p className="eyebrow">Enterprise GIS / Spatial Intelligence</p>
+          <h1 id="home-title">Khoi Nguyen</h1>
           <p className="hero-subtitle">
-            Cabarrus FutureScape connects parcel context, development
-            activity, school capacity, planning constraints, infrastructure
-            readiness, environmental signals, and executive reporting into a
-            county-scale decision-support interface.
+            I build GIS systems, planning-intelligence tools, and spatial
+            decision-support applications for government, infrastructure, and
+            operational workflows.
           </p>
-        </div>
-        <div className="cfs-preview-stack">
-          <LiveProductFrame
-            src="/projects/cfs-live-preview.png"
-            alt="Live Cabarrus FutureScape deployed prototype interface"
-            caption="Live CFS prototype interface"
-            href={projectLinks.cfs}
-            label="Live Prototype"
-            ctaLabel="View CFS"
-          />
-          <div className="cfs-preview-actions" aria-label="Cabarrus FutureScape supporting links">
-            <Link className="button secondary" href="/projects/cabarrus-futurescape">
-              <FileText size={18} />
-              <span>Read CFS Case Study</span>
-            </Link>
-            <Link className="button ghost" href="/projects">
-              <Layers3 size={18} />
-              <span>View All Projects</span>
-            </Link>
-          </div>
         </div>
       </section>
 
-      <section className="cfs-intelligence-section compact-strip-section" aria-labelledby="cfs-intel-title">
-        <div className="section-header">
-          <p className="eyebrow">Planning intelligence surface</p>
-          <h2 id="cfs-intel-title">What FutureScape does.</h2>
+      <section className="portfolio-gateway" aria-labelledby="gateway-title">
+        <div className="gateway-heading">
+          <p className="eyebrow">Portfolio Gateway</p>
+          <h2 id="gateway-title">Choose where to start.</h2>
           <p>
-            A concise signal layer for the flagship prototype. Deeper details
-            live in the case study.
+            Fast paths for recruiters reviewing technical builds, consulting
+            analysis, professional experience, and resume details.
           </p>
         </div>
-        <div className="cfs-action-strip" aria-label="Cabarrus FutureScape capabilities">
-          {cfsActions.map((action) => (
-            <span key={action}>{action}</span>
-          ))}
-        </div>
-      </section>
 
-      <section className="additional-work" aria-labelledby="additional-work-title">
-        <div>
-          <p className="eyebrow">Additional work</p>
-          <h2 id="additional-work-title">A few supporting paths.</h2>
-        </div>
-        <div className="additional-work-links">
-          {additionalWork.map((item) => (
-            <Link href={item.href} key={item.title}>
-              <strong>{item.title}</strong>
-              <span>{item.description}</span>
-              <ArrowRight size={16} />
+        <nav className="gateway-console" aria-label="Portfolio destinations">
+          <div className="gateway-center-node" aria-hidden="true">
+            <span>KN</span>
+            <small>GIS</small>
+          </div>
+          {gatewayOptions.map(({ Icon, ...item }) => (
+            <Link
+              aria-label={`${item.title}: ${item.description}`}
+              className={`gateway-option gateway-${item.tone}`}
+              href={item.href}
+              key={item.title}
+            >
+              <span className="gateway-index">{item.index}</span>
+              <span className="gateway-icon" aria-hidden="true">
+                <Icon size={22} />
+              </span>
+              <span className="gateway-copy">
+                <strong>{item.title}</strong>
+                <small>{item.description}</small>
+              </span>
+              <span className="gateway-direction" aria-hidden="true">
+                <ArrowRight size={18} />
+              </span>
+              <span className="gateway-motif" aria-hidden="true">
+                <i />
+                <i />
+                <i />
+              </span>
             </Link>
           ))}
-        </div>
+        </nav>
+      </section>
+
+      <section className="home-contact-transition" aria-label="Contact Khoi">
+        <p>Have a role or project where spatial intelligence could help?</p>
+        <Link href="/contact">
+          Contact Khoi
+          <ArrowRight size={16} />
+        </Link>
       </section>
     </main>
   );
