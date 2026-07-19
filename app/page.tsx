@@ -91,10 +91,6 @@ export default function Home() {
         </div>
 
         <nav className="gateway-console" aria-label="Portfolio destinations">
-          <div className="gateway-center-node" aria-hidden="true">
-            <span>KN</span>
-            <small>GIS</small>
-          </div>
           {gatewayOptions.map(({ Icon, ...item }) => (
             <Link
               aria-label={`${item.title}: ${item.description}`}

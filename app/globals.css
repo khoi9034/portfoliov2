@@ -1807,6 +1807,11 @@ p {
 .gateway-home {
   display: grid;
   gap: 26px;
+  overflow-x: clip;
+}
+
+.gateway-home * {
+  min-width: 0;
 }
 
 .gateway-hero {
@@ -1828,11 +1833,12 @@ p {
   max-width: 800px;
   margin-bottom: 8px;
   font-size: 17px;
+  overflow-wrap: break-word;
 }
 
 .portfolio-gateway {
   display: grid;
-  gap: 14px;
+  gap: 18px;
 }
 
 .gateway-heading {
@@ -1849,6 +1855,7 @@ p {
 .gateway-heading h2 {
   font-size: clamp(26px, 3.4vw, 36px);
   line-height: 1.08;
+  overflow-wrap: break-word;
 }
 
 .gateway-heading p {
@@ -1862,10 +1869,10 @@ p {
   position: relative;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 16px;
   border: 1px solid rgba(143, 214, 224, 0.16);
   border-radius: 8px;
-  padding: 16px;
+  padding: clamp(18px, 2.4vw, 28px);
   background:
     linear-gradient(rgba(143, 214, 224, 0.045) 1px, transparent 1px),
     linear-gradient(90deg, rgba(143, 214, 224, 0.045) 1px, transparent 1px),
@@ -1877,49 +1884,17 @@ p {
 .gateway-console::before,
 .gateway-console::after {
   position: absolute;
-  inset: 50% 18px auto;
+  inset: 50% clamp(18px, 2.4vw, 28px) auto;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(143, 214, 224, 0.28), transparent);
+  background: linear-gradient(90deg, transparent, rgba(143, 214, 224, 0.18), transparent);
   content: "";
 }
 
 .gateway-console::after {
-  inset: 18px auto 18px 50%;
+  inset: clamp(18px, 2.4vw, 28px) auto clamp(18px, 2.4vw, 28px) 50%;
   width: 1px;
   height: auto;
-  background: linear-gradient(180deg, transparent, rgba(143, 214, 224, 0.28), transparent);
-}
-
-.gateway-center-node {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 3;
-  display: grid;
-  width: 76px;
-  height: 76px;
-  border: 1px solid rgba(143, 214, 224, 0.3);
-  border-radius: 999px;
-  color: var(--text);
-  background: rgba(5, 17, 21, 0.94);
-  box-shadow: 0 0 0 8px rgba(5, 17, 21, 0.74);
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  place-items: center;
-}
-
-.gateway-center-node span {
-  font-size: 20px;
-  font-weight: 900;
-  line-height: 1;
-}
-
-.gateway-center-node small {
-  margin-top: -18px;
-  color: var(--muted);
-  font-size: 10px;
-  font-weight: 850;
-  letter-spacing: 0.08em;
+  background: linear-gradient(180deg, transparent, rgba(143, 214, 224, 0.18), transparent);
 }
 
 .gateway-option {
@@ -1929,15 +1904,15 @@ p {
   position: relative;
   display: grid;
   grid-template-columns: auto auto minmax(0, 1fr) auto;
-  gap: 12px;
+  gap: 14px;
   align-items: start;
-  min-height: 158px;
+  min-height: 190px;
   border: 1px solid var(--gateway-border);
   border-radius: 8px;
-  padding: 18px;
+  padding: clamp(22px, 2.5vw, 30px);
   color: var(--text);
   background:
-    radial-gradient(circle at 100% 0%, var(--gateway-soft), transparent 36%),
+    radial-gradient(circle at 100% 0%, var(--gateway-soft), transparent 40%),
     rgba(9, 24, 30, 0.82);
   text-decoration: none;
   overflow: hidden;
@@ -1982,15 +1957,15 @@ p {
 
 .gateway-index {
   color: var(--gateway-accent);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 900;
   letter-spacing: 0.08em;
 }
 
 .gateway-icon {
   display: grid;
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   border: 1px solid var(--gateway-border);
   border-radius: 8px;
   color: var(--gateway-accent);
@@ -2000,25 +1975,26 @@ p {
 
 .gateway-copy {
   display: grid;
-  gap: 8px;
+  gap: 10px;
   min-width: 0;
 }
 
 .gateway-copy strong {
-  font-size: clamp(21px, 2.6vw, 28px);
+  font-size: clamp(24px, 2.6vw, 31px);
   line-height: 1.08;
 }
 
 .gateway-copy small {
   color: var(--soft);
-  font-size: 13.5px;
-  line-height: 1.52;
+  font-size: 14.5px;
+  line-height: 1.58;
+  overflow-wrap: break-word;
 }
 
 .gateway-direction {
   display: grid;
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   border: 1px solid var(--gateway-border);
   border-radius: 999px;
   color: var(--gateway-accent);
@@ -2036,9 +2012,9 @@ p {
 
 .gateway-motif {
   position: absolute;
-  right: 18px;
-  bottom: 16px;
-  left: 18px;
+  right: clamp(22px, 2.5vw, 30px);
+  bottom: 18px;
+  left: clamp(22px, 2.5vw, 30px);
   display: grid;
   grid-template-columns: 0.42fr 0.24fr 0.34fr;
   gap: 7px;
@@ -4568,17 +4544,6 @@ p {
     display: none;
   }
 
-  .gateway-center-node {
-    position: relative;
-    top: auto;
-    left: auto;
-    width: 66px;
-    height: 66px;
-    margin: 0 auto 2px;
-    box-shadow: none;
-    transform: none;
-  }
-
   .route-rail {
     left: 11px;
   }
@@ -4763,38 +4728,72 @@ p {
   }
 
   .gateway-hero {
-    padding: 22px;
+    padding: 20px 14px;
   }
 
   .gateway-hero h1 {
-    font-size: 44px;
+    max-width: 100%;
+    font-size: 36px;
+    overflow-wrap: anywhere;
+  }
+
+  .gateway-hero .hero-subtitle {
+    font-size: 15px;
+  }
+
+  .gateway-heading h2 {
+    max-width: 100%;
+    font-size: 26px;
+  }
+
+  .gateway-heading p {
+    max-width: 100%;
+    font-size: 14px;
+  }
+
+  .gateway-console {
+    padding: 10px;
   }
 
   .gateway-option {
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    min-height: 156px;
-    padding: 16px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    min-height: 182px;
+    padding: 18px 16px;
   }
 
   .gateway-index {
     grid-column: 1;
+    grid-row: 1;
   }
 
   .gateway-icon {
-    grid-column: 1;
-    grid-row: 2;
-    width: 36px;
-    height: 36px;
+    grid-column: 2;
+    grid-row: 1;
+    width: 40px;
+    height: 40px;
   }
 
   .gateway-copy {
-    grid-column: 2;
-    grid-row: 1 / span 2;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    padding-right: 0;
+  }
+
+  .gateway-copy strong {
+    font-size: 24px;
+  }
+
+  .gateway-copy small {
+    font-size: 14px;
   }
 
   .gateway-direction {
-    grid-column: 3;
-    grid-row: 1 / span 2;
+    position: absolute;
+    right: 16px;
+    bottom: 18px;
+    top: auto;
+    width: 32px;
+    height: 32px;
   }
 
   .research-page .page-hero h1 {
