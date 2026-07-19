@@ -18,7 +18,6 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <Link className="brand" href="/" aria-label="Khoi Nguyen home">
-        <span>KN</span>
         <div>
           <strong>Khoi Nguyen</strong>
           <small>Enterprise GIS / Planning Intelligence</small>
