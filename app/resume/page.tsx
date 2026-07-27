@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Download, GitBranch, Mail } from "lucide-react";
+import { GitBranch } from "lucide-react";
 import { contact, education, experience } from "@/data/profile";
 import { projects } from "@/data/projects";
 
@@ -43,14 +43,6 @@ export default function ResumePage() {
             planning analysis.
           </p>
           <div className="hero-actions">
-            <a className="button primary" download href={contact.resumePath}>
-              <Download size={18} />
-              <span>Download PDF</span>
-            </a>
-            <a className="button secondary" href={`mailto:${contact.email}`}>
-              <Mail size={18} />
-              <span>Email</span>
-            </a>
             <a className="button ghost" href={contact.github}>
               <GitBranch size={18} />
               <span>GitHub</span>
@@ -59,7 +51,6 @@ export default function ResumePage() {
         </div>
         <aside className="resume-contact-card" aria-label="Contact details">
           <span>{contact.location}</span>
-          <a href={`mailto:${contact.email}`}>{contact.email}</a>
           <a href={contact.github}>github.com/khoi9034</a>
         </aside>
       </section>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { GitBranch, Mail, MapPinned } from "lucide-react";
+import { GitBranch, MapPinned } from "lucide-react";
 import { contact } from "@/data/profile";
 
 export const metadata: Metadata = {
@@ -36,13 +36,6 @@ export default function ContactPage() {
         </div>
 
         <aside className="contact-card" aria-label="Contact options">
-          <a className="contact-method" href={`mailto:${contact.email}`}>
-            <Mail size={20} />
-            <div>
-              <strong>Email</strong>
-              <span>{contact.email}</span>
-            </div>
-          </a>
           <a className="contact-method" href={contact.github}>
             <GitBranch size={20} />
             <div>
