@@ -1,7 +1,9 @@
 export const contact = {
   name: "Khoi Nguyen",
   location: "Concord, NC",
-  github: "https://github.com/khoi9034"
+  email: "khoianhnguyen48@gmail.com",
+  github: "https://github.com/khoi9034",
+  resumePath: "/resume/KhoiNguyenResume.pdf"
 };
 
 export const education = {

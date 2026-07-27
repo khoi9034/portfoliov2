@@ -4,6 +4,7 @@ import {
   FileText,
   GitBranch,
   Layers3,
+  Mail,
   Send,
   Sparkles,
   UserRound
@@ -39,6 +40,10 @@ export function SiteFooter() {
           <Send size={16} />
           <span>Contact</span>
         </Link>
+        <a href={`mailto:${contact.email}`}>
+          <Mail size={16} />
+          <span>Email</span>
+        </a>
         <a href={contact.github} rel="noopener noreferrer" target="_blank">
           <GitBranch size={16} />
           <span>GitHub</span>
