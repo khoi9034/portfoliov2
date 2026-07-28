@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { GitBranch, Mail, MapPinned } from "lucide-react";
+import { FileText, GitBranch, Mail } from "lucide-react";
 import { contact } from "@/data/profile";
 
 export const metadata: Metadata = {
@@ -27,7 +27,7 @@ export default function ContactPage() {
       <section className="contact-page-grid">
         <div className="page-hero compact-hero">
           <p className="eyebrow">Contact</p>
-          <h1>GIS analyst work with enterprise systems and planning intelligence focus.</h1>
+          <h1>Connect on GIS and spatial intelligence work.</h1>
           <p>
             Based in {contact.location}. The best fit is work that connects GIS
             operations, public data infrastructure, automation, Web GIS,
@@ -43,18 +43,23 @@ export default function ContactPage() {
               <span>{contact.email}</span>
             </div>
           </a>
-          <a className="contact-method" href={contact.github}>
+          <a
+            className="contact-method"
+            href={contact.github}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             <GitBranch size={20} />
             <div>
               <strong>GitHub</strong>
               <span>github.com/khoi9034</span>
             </div>
           </a>
-          <Link className="contact-method" href="/projects/cabarrus-futurescape">
-            <MapPinned size={20} />
+          <Link className="contact-method" href="/resume">
+            <FileText size={20} />
             <div>
-              <strong>Start with the flagship case study</strong>
-              <span>Cabarrus FutureScape</span>
+              <strong>Resume</strong>
+              <span>Review experience, education, and selected work</span>
             </div>
           </Link>
         </aside>

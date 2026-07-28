@@ -107,6 +107,28 @@ export default function ExperiencePage() {
 
       <section className="section-shell experience-section">
         <SectionHeader
+          eyebrow="Selected Applied Experience"
+          title="Systems, analysis, and decision-support work"
+          description="A compact view of the applied work behind the portfolio, separated from the product gallery and resume document."
+        />
+        <div className="experience-applied-grid">
+          {selectedAppliedExperience.map((item) => (
+            <Link className="experience-applied-card" href={item.href} key={item.title}>
+              <Sparkles size={20} />
+              <span>{item.label}</span>
+              <h2>{item.title}</h2>
+              <p>{item.text}</p>
+              <strong>
+                View context
+                <ArrowRight size={15} />
+              </strong>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-shell experience-section">
+        <SectionHeader
           eyebrow="Technical Capabilities"
           title="Capability map"
           description="The portfolio combines enterprise GIS operations, automation, web GIS, spatial modeling, data QA, and planning communication."
@@ -143,28 +165,6 @@ export default function ExperiencePage() {
             <p>{education.languages.join(" / ")}</p>
           </div>
         </article>
-      </section>
-
-      <section className="section-shell experience-section">
-        <SectionHeader
-          eyebrow="Selected Applied Experience"
-          title="Systems, analysis, and decision-support work"
-          description="A compact view of the applied work behind the portfolio, separated from the product gallery and resume document."
-        />
-        <div className="experience-applied-grid">
-          {selectedAppliedExperience.map((item) => (
-            <Link className="experience-applied-card" href={item.href} key={item.title}>
-              <Sparkles size={20} />
-              <span>{item.label}</span>
-              <h2>{item.title}</h2>
-              <p>{item.text}</p>
-              <strong>
-                View context
-                <ArrowRight size={15} />
-              </strong>
-            </Link>
-          ))}
-        </div>
       </section>
     </main>
   );

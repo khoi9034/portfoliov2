@@ -52,10 +52,6 @@ export function ProjectCard({
     </span>
   );
   const relatedCaseStudy = project.relatedCaseStudies?.[0];
-  const trackLabel =
-    activeTrack === "utilities"
-      ? "Utilities & Infrastructure"
-      : "Government Technology";
   const secondaryTrack =
     activeTrack && project.tracks.length > 1
       ? activeTrack === "utilities"
@@ -67,9 +63,8 @@ export function ProjectCard({
     <article className={`project-card ${compact ? "compact" : ""}`}>
       <div className="project-card-content">
         <div className="project-card-topline">
-          <span>{activeTrack ? trackLabel : project.primaryIndustry ?? project.type}</span>
-          {secondaryTrack ? <span>{secondaryTrack}</span> : null}
           <span>{project.capabilityCategory ?? project.category}</span>
+          {secondaryTrack ? <span>{secondaryTrack}</span> : null}
         </div>
         <span className={`project-status-inline ${launch ? "is-live" : "is-professional"}`}>
           {statusLabel}

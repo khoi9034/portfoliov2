@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { ProjectFilters } from "@/components/ProjectFilters";
-import { getProjectBySlug, type Project } from "@/data/projects";
+import {
+  getProjectBySlug,
+  type ProfessionalTrack,
+  type Project
+} from "@/data/projects";
 
 export const metadata: Metadata = {
   title: "Projects | Khoi Nguyen",
@@ -30,14 +34,27 @@ const mainProjects = mainProjectSlugs
   .map((slug) => getProjectBySlug(slug))
   .filter((project): project is Project => Boolean(project));
 
-export default function ProjectsPage() {
+type ProjectsPageProps = {
+  searchParams: Promise<{ track?: string }>;
+};
+
+export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
+  const track = (await searchParams).track;
+  const initialTrack: ProfessionalTrack =
+    track === "utilities" ? "utilities" : "government";
+
   return (
     <main className="page-shell projects-page">
-      <div className="projects-track-label">
-        <p className="eyebrow">PROJECT TRACKS</p>
-      </div>
+      <section className="projects-intro-compact" aria-labelledby="projects-title">
+        <p className="eyebrow">Project Portfolio</p>
+        <h1 id="projects-title">Selected Projects</h1>
+        <p>
+          GIS systems and analytical tools for public planning,
+          infrastructure, and operational decision-making.
+        </p>
+      </section>
 
-      <ProjectFilters projects={mainProjects} />
+      <ProjectFilters initialTrack={initialTrack} projects={mainProjects} />
     </main>
   );
 }

@@ -51,7 +51,12 @@ export default function ResumePage() {
               <Mail size={18} />
               <span>Email</span>
             </a>
-            <a className="button ghost" href={contact.github}>
+            <a
+              className="button ghost"
+              href={contact.github}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <GitBranch size={18} />
               <span>GitHub</span>
             </a>
@@ -60,52 +65,62 @@ export default function ResumePage() {
         <aside className="resume-contact-card" aria-label="Contact details">
           <span>{contact.location}</span>
           <a href={`mailto:${contact.email}`}>{contact.email}</a>
-          <a href={contact.github}>github.com/khoi9034</a>
+          <a
+            href={contact.github}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            github.com/khoi9034
+          </a>
         </aside>
       </section>
 
       <section className="resume-layout">
-        <article className="resume-panel-block">
-          <h2>Education</h2>
-          <p>{education.school}</p>
-          <span>{education.degree}</span>
-          <span>{education.graduation}</span>
-          <span>{education.gpa}</span>
-        </article>
+        <div className="resume-column">
+          <article className="resume-panel-block">
+            <h2>Experience</h2>
+            <p>
+              {experience.title} - {experience.organization}
+            </p>
+            <span>{experience.dates}</span>
+            <ul className="detail-list">
+              {experience.bullets.map((bullet) => (
+                <li key={bullet}>{bullet}</li>
+              ))}
+            </ul>
+          </article>
+        </div>
 
-        <article className="resume-panel-block">
-          <h2>Experience</h2>
-          <p>
-            {experience.title} - {experience.organization}
-          </p>
-          <span>{experience.dates}</span>
-          <ul className="detail-list">
-            {experience.bullets.map((bullet) => (
-              <li key={bullet}>{bullet}</li>
+        <div className="resume-column">
+          <article className="resume-panel-block">
+            <h2>Education</h2>
+            <p>{education.school}</p>
+            <span>{education.degree}</span>
+            <span>{education.graduation}</span>
+            <span>{education.gpa}</span>
+          </article>
+
+          <article className="resume-panel-block">
+            <h2>Selected projects</h2>
+            <div className="resume-project-list">
+              {resumeProjects.map((project) =>
+                project ? (
+                  <Link href={`/projects/${project.slug}`} key={project.slug}>
+                    <strong>{project.title}</strong>
+                    <span>{project.type}</span>
+                  </Link>
+                ) : null
+              )}
+            </div>
+          </article>
+
+          <article className="resume-panel-block">
+            <h2>Languages</h2>
+            {education.languages.map((language) => (
+              <span key={language}>{language}</span>
             ))}
-          </ul>
-        </article>
-
-        <article className="resume-panel-block">
-          <h2>Selected projects</h2>
-          <div className="resume-project-list">
-            {resumeProjects.map((project) =>
-              project ? (
-                <Link href={`/projects/${project.slug}`} key={project.slug}>
-                  <strong>{project.title}</strong>
-                  <span>{project.type}</span>
-                </Link>
-              ) : null
-            )}
-          </div>
-        </article>
-
-        <article className="resume-panel-block">
-          <h2>Languages</h2>
-          {education.languages.map((language) => (
-            <span key={language}>{language}</span>
-          ))}
-        </article>
+          </article>
+        </div>
       </section>
     </main>
   );

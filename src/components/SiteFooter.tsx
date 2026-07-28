@@ -6,10 +6,8 @@ import {
   Layers3,
   Mail,
   Send,
-  Sparkles,
   UserRound
 } from "lucide-react";
-import { projectLinks } from "@/data/links";
 import { contact } from "@/data/profile";
 
 export function SiteFooter() {
@@ -47,10 +45,6 @@ export function SiteFooter() {
         <a href={contact.github} rel="noopener noreferrer" target="_blank">
           <GitBranch size={16} />
           <span>GitHub</span>
-        </a>
-        <a href={projectLinks.cfs} rel="noopener noreferrer" target="_blank">
-          <Sparkles size={16} />
-          <span>Cabarrus FutureScape</span>
         </a>
       </div>
     </footer>

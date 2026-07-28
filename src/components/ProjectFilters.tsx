@@ -11,6 +11,7 @@ import {
 } from "@/data/projects";
 
 type ProjectFiltersProps = {
+  initialTrack: ProfessionalTrack;
   projects: Project[];
 };
 
@@ -19,27 +20,12 @@ const trackLabels: Record<ProfessionalTrack, string> = {
   utilities: "Utilities & Network Infrastructure"
 };
 
-function isTrack(value: string | null): value is ProfessionalTrack {
-  return value === "government" || value === "utilities";
-}
-
-function getInitialTrack(): ProfessionalTrack {
-  if (typeof window === "undefined") {
-    return "government";
-  }
-
-  const queryTrack = new URLSearchParams(window.location.search).get("track");
-  if (isTrack(queryTrack)) {
-    return queryTrack;
-  }
-
-  return "government";
-}
-
-export function ProjectFilters({ projects }: ProjectFiltersProps) {
-  const [selectedTrack, setSelectedTrack] = useState<ProfessionalTrack>(
-    () => getInitialTrack()
-  );
+export function ProjectFilters({
+  initialTrack,
+  projects
+}: ProjectFiltersProps) {
+  const [selectedTrack, setSelectedTrack] =
+    useState<ProfessionalTrack>(initialTrack);
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const checkpointRefs = useRef(new Map<string, HTMLElement>());
   const routeRef = useRef<HTMLElement | null>(null);

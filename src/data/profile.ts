@@ -20,7 +20,7 @@ export const experience = {
   dates: "March 2026 - Present",
   label: "Professional experience through Cabarrus County GIS Analyst Internship.",
   bullets: [
-    "Independently designed and rebuilt Cabarrus County's public Open Data / GIS Hub, improving navigation, discoverability, and access to county GIS resources.",
+    "Contributed to the design and rebuild of Cabarrus County's public Open Data / GIS Hub, improving navigation, discoverability, and access to county GIS resources.",
     "Managed public-facing GIS items through ArcGIS Hub, ArcGIS Online, and ArcGIS Enterprise/Portal, including hosted layers, web maps, metadata, sharing settings, and access links.",
     "Used ArcPy and GIS data management workflows to review and standardize county-scale datasets, including parcels, addresses, boundaries, building outlines, zoning, and planning layers.",
     "Improved discoverability and usability of county GIS resources for public users, county staff, planners, and external data consumers through clearer structure and navigation."

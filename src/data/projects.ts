@@ -516,7 +516,7 @@ export const projects: Project[] = [
       problem:
         "Public GIS data needs to be findable, understandable, and organized around user needs rather than internal department structures.",
       approach: [
-        "Independently designed and rebuilt Cabarrus County's public Open Data / GIS Hub.",
+        "Contributed to the design and rebuild of Cabarrus County's public Open Data / GIS Hub.",
         "Improved navigation, discoverability, and access to GIS resources.",
         "Managed public-facing GIS items through ArcGIS Hub, ArcGIS Online, and ArcGIS Enterprise/Portal.",
         "Worked with hosted layers, web maps, metadata, sharing settings, and access links."
