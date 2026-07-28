@@ -45,7 +45,7 @@ export async function generateMetadata({
     "cabarrus-futurescape":
       "Cabarrus FutureScape is a county-scale planning intelligence and digital twin prototype focused on parcels, constraints, development activity, infrastructure signals, and executive planning support.",
     automap:
-      "AutoMap is a GIS automation engine for turning plain-language map requests into verified ArcGIS REST workflows, map recipes, and analysis reports.",
+      "AutoMap is a county GIS request engine with a reliable portfolio demo and an optional live map-composer workbench for backend-connected workflows.",
     "cabarrus-gis-hub":
       "Cabarrus County GIS Hub case study: professional internship work in ArcGIS Hub, ArcGIS Online, Enterprise/Portal, hosted layers, metadata, sharing settings, and public GIS workflows."
   };
@@ -175,10 +175,12 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             <p className="eyebrow">GIS automation engine</p>
             <h2 id="automap-primer-title">What AutoMap Does</h2>
             <p>
-              AutoMap turns plain-language GIS requests into reviewable map
-              workflows by connecting user intent, ArcGIS REST layer metadata,
-              source validation, map recipes, customization options, and
-              analysis report generation.
+              AutoMap is a county GIS request engine that converts
+              plain-English mapping requests into draft GIS previews, workflow
+              interpretation, QA notes, and export-ready map concepts. The
+              portfolio demo is static/cached for reliable review, while the
+              live workbench demonstrates backend-connected workflows when
+              services are available.
             </p>
           </div>
 

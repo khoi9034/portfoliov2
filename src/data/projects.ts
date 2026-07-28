@@ -310,7 +310,7 @@ export const projects: Project[] = [
     status: "Active personal project. Live deployed prototype.",
     role: "Full-stack workflow design, deterministic request intelligence, GIS automation architecture",
     summary:
-      "AutoMap turns plain-language GIS requests into reviewable map workflows by connecting user intent, ArcGIS REST layer metadata, source validation, map recipes, customization options, and analysis report generation.",
+      "AutoMap is a county GIS request engine that converts plain-English mapping requests into draft GIS previews, workflow interpretation, QA notes, and export-ready map concepts. The portfolio demo is static/cached for reliable review, while the live workbench demonstrates backend-connected workflows when services are available.",
     purpose:
       "County GIS request workflow for turning plain-language map needs into repeatable layer selection, map-generation, refinement, and review steps.",
     homepageSummary:
@@ -363,7 +363,7 @@ export const projects: Project[] = [
     routeOrder: 2,
     caseStudy: {
       whatItIs:
-        "A live GIS automation prototype that ingests ArcGIS REST service URLs and layer metadata, stores them in a registry, and turns plain-language map requests into reviewable map workflows.",
+        "AutoMap is a county GIS request engine that converts plain-English mapping requests into draft GIS previews, workflow interpretation, QA notes, and export-ready map concepts. The portfolio demo is static/cached for reliable review, while the live workbench demonstrates backend-connected workflows when services are available.",
       problem:
         "County GIS requests often arrive as plain language, but building the correct map requires knowing which REST layers, fields, filters, geometries, and limitations apply.",
       approach: [

@@ -22,7 +22,12 @@ export function ProjectHero({ project }: ProjectHeroProps) {
           ? "Read Hub Details"
           : "Read Project Details";
   const externalPrimary = launch
-    ? { href: launch.href, label: launch.label, status: launch.status }
+    ? {
+        href: launch.href,
+        label: launch.label,
+        status: launch.status,
+        secondary: launch.secondary
+      }
     : openDataHref
       ? {
           href: openDataHref,
@@ -57,6 +62,17 @@ export function ProjectHero({ project }: ProjectHeroProps) {
               <ExternalLink size={18} />
               <span>{externalPrimary.label}</span>
             </a>
+            {externalPrimary.secondary ? (
+              <a
+                className="button secondary"
+                href={externalPrimary.secondary.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLink size={17} />
+                <span>{externalPrimary.secondary.label}</span>
+              </a>
+            ) : null}
             <span>{externalPrimary.status}</span>
           </div>
         ) : null}

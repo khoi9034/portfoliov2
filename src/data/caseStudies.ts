@@ -1,4 +1,5 @@
 import { researchBriefs } from "./research";
+import { projectLinks } from "./links";
 
 export type CaseStudyCategory =
   | "government-planning"
@@ -285,7 +286,7 @@ const coreCaseStudies: CaseStudy[] = [
     decisionQuestion:
       "How can repeated plain-language GIS requests become safer, more reviewable operational workflows?",
     summary:
-      "How plain-language GIS requests can become reviewable map workflows through REST metadata, source validation, map recipes, customization, refinement, and analysis reports.",
+      "AutoMap is a county GIS request engine that converts plain-English mapping requests into draft GIS previews, workflow interpretation, QA notes, and export-ready map concepts. The portfolio demo is static/cached for reliable review, while the live workbench demonstrates backend-connected workflows when services are available.",
     problem:
       "GIS requests often arrive as plain language, but teams still need a repeatable way to identify the right layers, validate sources, document assumptions, and produce reviewable outputs.",
     category: "GIS Modernization & Data Strategy",
@@ -320,6 +321,18 @@ const coreCaseStudies: CaseStudy[] = [
       title: "AutoMap",
       href: "/projects/automap"
     },
+    actions: [
+      {
+        label: "Reliable Demo",
+        href: projectLinks.automap,
+        external: true
+      },
+      {
+        label: "Live Map Composer",
+        href: projectLinks.automapComposer,
+        external: true
+      }
+    ],
     routeOrder: 4,
     featured: false,
     published: true,

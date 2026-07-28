@@ -21,16 +21,16 @@ export function ProjectCard({
   const detailHref = `/projects/${project.slug}`;
   const cardSummary = getProjectCardSummary(project);
   const statusLabel = launch
-    ? "Live personal prototype"
+    ? project.slug === "automap"
+      ? "Portfolio demo + live workbench"
+      : "Live personal prototype"
     : isCabarrusHub
       ? "Professional internship work"
       : project.status;
   const primaryAction = {
     href: launch?.href ?? (openDataHref || detailHref),
     label: launch
-      ? project.slug === "cabarrus-futurescape"
-        ? "View CFS"
-        : "View AutoMap"
+      ? launch.label
       : openDataHref
         ? "View Open Data Site"
         : "Read Hub Details",
@@ -85,6 +85,17 @@ export function ProjectCard({
           ))}
         </div>
         <div className="project-card-links">
+          {launch?.secondary ? (
+            <a
+              className="project-secondary-link"
+              href={launch.secondary.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>{launch.secondary.label}</span>
+              <ExternalLink size={16} />
+            </a>
+          ) : null}
           {showSecondaryDetail ? (
             <Link className="project-secondary-link" href={detailHref}>
               <span>{detailLabel}</span>

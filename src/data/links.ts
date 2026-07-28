@@ -1,6 +1,7 @@
 export const projectLinks = {
   cfs: "https://cabarrus-future-scape.vercel.app/",
-  automap: "https://auto-map-cyan.vercel.app/",
+  automap: "https://auto-map-cyan.vercel.app/demo",
+  automapComposer: "https://auto-map-cyan.vercel.app/map-composer",
   cabarrusOpenData: "https://gis-cabarrus.opendata.arcgis.com/"
 };
 
@@ -10,6 +11,10 @@ export const projectLaunches: Record<
     href: string;
     label: string;
     status: string;
+    secondary?: {
+      href: string;
+      label: string;
+    };
   }
 > = {
   "cabarrus-futurescape": {
@@ -19,8 +24,12 @@ export const projectLaunches: Record<
   },
   automap: {
     href: projectLinks.automap,
-    label: "View AutoMap",
-    status: "Live personal prototype. Active personal project."
+    label: "Reliable Demo",
+    status: "Portfolio demo for reliable review. Active personal project.",
+    secondary: {
+      href: projectLinks.automapComposer,
+      label: "Live Map Composer"
+    }
   }
 };
 

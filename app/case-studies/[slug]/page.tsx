@@ -96,9 +96,9 @@ export default async function CaseStudyDetailPage({
         </div>
         {study.actions?.length ? (
           <div className="hero-actions">
-            {study.actions.map((action) => (
+            {study.actions.map((action, index) => (
               <a
-                className="button secondary"
+                className={`button ${index === 0 ? "primary" : "secondary"}`}
                 href={action.href}
                 key={action.href}
                 rel={action.external ? "noopener noreferrer" : undefined}
