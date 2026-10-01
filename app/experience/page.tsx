@@ -38,7 +38,7 @@ const professionalBullets = [
 
 const selectedAppliedExperience = [
   {
-    title: "Cabarrus FutureScape",
+    title: "Cabarrus Insights",
     label: "Independent planning intelligence prototype",
     text:
       "County-scale GIS intelligence system for parcel review, growth pressure, constraints, infrastructure context, and executive planning summaries.",

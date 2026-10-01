@@ -19,7 +19,7 @@ export const projectLaunches: Record<
 > = {
   "cabarrus-futurescape": {
     href: projectLinks.cfs,
-    label: "View CFS",
+    label: "Open Cabarrus Insights",
     status: "Live personal prototype. Not an official county system."
   },
   automap: {

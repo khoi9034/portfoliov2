@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, FileText, Layers3, ListChecks } from "lucide-react";
@@ -7,9 +8,6 @@ import {
   ArchitectureFlow,
   AutoMapInterfaceVisual,
   AutoMapWorkflowVisual,
-  CFSDataPipeline,
-  CFSIntelligencePanels,
-  CFSWhatItDoesGrid,
   HubBeforeAfterVisual,
   HubNavigationVisual,
   InterfaceConceptGrid,
@@ -43,7 +41,7 @@ export async function generateMetadata({
 
   const descriptions: Record<string, string> = {
     "cabarrus-futurescape":
-      "Cabarrus FutureScape is a county-scale planning intelligence and digital twin prototype focused on parcels, constraints, development activity, infrastructure signals, and executive planning support.",
+      "Cabarrus Insights is a county-scale planning intelligence prototype focused on parcels, observed development activity, constraints, infrastructure context, governed data, and decision support.",
     automap:
       "AutoMap is a county GIS request engine with a reliable portfolio demo and an optional live map-composer workbench for backend-connected workflows.",
     "cabarrus-gis-hub":
@@ -93,13 +91,112 @@ const cfsValueCards = [
   },
   {
     title: "What data does it connect?",
-    text: "Parcels, permits, zoning, school-capacity context, flood/environmental constraints, infrastructure signals, and remote-sensing indicators."
+    text: "Parcels, permits, addresses, zoning, flood review, school context, infrastructure proxies, and assessed-value context."
+  }
+];
+
+const cabarrusInsightsWalkthrough = [
+  {
+    eyebrow: "Countywide exploration",
+    title: "Start with location, activity, and infrastructure context",
+    description:
+      "The Analyst workspace brings live GIS layers, parcel search, map controls, and an intelligence panel into one review surface. Users can move from a countywide pattern to a specific area without switching between disconnected maps.",
+    views: [
+      {
+        src: "/projects/cabarrus-insights/countywide-development-hotspots.png",
+        alt: "Cabarrus Insights countywide map showing clustered development hotspots and the intelligence workspace",
+        title: "Development activity map",
+        text: "Clustered permit activity highlights where observed development records are concentrated. Layer controls let reviewers change the permit segment, time range, and display mode before selecting a map feature.",
+        value:
+          "Useful for locating areas that deserve closer review; the clusters summarize observed records and are not forecasts."
+      },
+      {
+        src: "/projects/cabarrus-insights/countywide-infrastructure-context.png",
+        alt: "Cabarrus Insights countywide map showing sewer proximity and infrastructure context",
+        title: "Infrastructure readiness context",
+        text: "The same map can emphasize sewer proximity, subbasin context, and other infrastructure-related overlays while clearly identifying unavailable official layers.",
+        value:
+          "Useful for asking better infrastructure follow-up questions without presenting proxy data as verified capacity."
+      }
+    ]
+  },
+  {
+    eyebrow: "Management insights",
+    title: "Translate GIS evidence into review-ready summaries",
+    description:
+      "Management views organize countywide indicators into focused planning and economic narratives. Each view keeps the analysis period, source context, and limitations visible so summary metrics remain connected to their evidence.",
+    views: [
+      {
+        src: "/projects/cabarrus-insights/planning-insights.png",
+        alt: "Cabarrus Insights planning dashboard with development hotspots, flood review, and school assignment context",
+        title: "Planning Insights",
+        text: "This view combines hotspot geography with flood-review counts and school assignment context. Selecting a hotspot opens its current observed evidence for follow-up in the Analyst workspace.",
+        value:
+          "Useful for first-pass growth review across development activity, constraints, and public-service context."
+      },
+      {
+        src: "/projects/cabarrus-insights/economic-insights.png",
+        alt: "Cabarrus Insights economic dashboard with development-linked activity trends and parcel review indicators",
+        title: "Economic Insights",
+        text: "A period-based activity trend sits above parcel and assessed-value indicators, including the share of parcels flagged for deeper economic review.",
+        value:
+          "Useful for identifying where parcel-level economic context may warrant investigation, not for making valuation or investment conclusions."
+      }
+    ]
+  },
+  {
+    eyebrow: "Signals and model transparency",
+    title: "Show the evidence behind attention signals",
+    description:
+      "The system separates operational indicators from historical model research. This keeps observed activity, preliminary capacity watches, relative ranking bands, and held-out evaluation evidence from being confused with official forecasts.",
+    views: [
+      {
+        src: "/projects/cabarrus-insights/indicator-center.png",
+        alt: "Cabarrus Insights indicator center showing permit activity and school utilization growth-pressure review signals",
+        title: "Indicator Center",
+        text: "The readiness strip surfaces observed permit activity and school-utilization-plus-permit context with coverage labels and plain-language explanations. Supporting panels break activity down by year, type, segment, and jurisdiction.",
+        value:
+          "Useful for prioritizing follow-up while preserving the caveat that school signals are preliminary planning context, not enrollment forecasts."
+      },
+      {
+        src: "/projects/cabarrus-insights/development-signals.png",
+        alt: "Cabarrus Insights development signals view showing relative historical bands, held-out results, and documented model inputs",
+        title: "Development Signals",
+        text: "The Model Lab documents relative historical signal bands, held-out aggregate results, and the parcel, planning, transportation, utility-proxy, and value inputs used in research variants.",
+        value:
+          "Useful for evaluating whether a ranking approach adds review value while making clear that bands are relative ranks, not parcel probabilities."
+      }
+    ]
+  },
+  {
+    eyebrow: "Governed master data",
+    title: "Make the source data inspectable and reusable",
+    description:
+      "Cabarrus Insights includes a governed data workflow rather than treating the map as the only product. Analysts can understand available datasets, choose approved fields, filter records, preview results, and export a documented extract.",
+    views: [
+      {
+        src: "/projects/cabarrus-insights/master-data-catalog.png",
+        alt: "Cabarrus Insights master data catalog listing governed parcels, permits, addresses, zoning, flood, and school datasets",
+        title: "Dataset catalog",
+        text: "The catalog presents curated parcel, permit, address, zoning, flood, and school datasets with geometry type, record count, source, update date, and readiness status.",
+        value:
+          "Useful for data discovery and governance because users can see what exists and where it came from before starting analysis."
+      },
+      {
+        src: "/projects/cabarrus-insights/permit-data-preview.png",
+        alt: "Cabarrus Insights permit dataset preview with field selection, filters, tabular records, and CSV or XLSX exports",
+        title: "Filter, preview, and export",
+        text: "The permit workflow lets users choose allowed fields, add filters, inspect matching records, control row previews, and export CSV or XLSX files.",
+        value:
+          "Useful for producing repeatable, reviewable extracts without manually rebuilding the same dataset for each request."
+      }
+    ]
   }
 ];
 
 const cfsRankingExplanation = [
-  "The first model uses permit history, zoning-change signals, flood constraints, utility/infrastructure context, and other parcel-level factors to rank areas by relative development likelihood.",
-  "The purpose is decision support and prioritization, not final approval or deterministic prediction."
+  "Documented research variants compare parcel history, observed permits, zoning, transportation, utility-proxy, and tax/value context to test relative development signals.",
+  "The bands are relative historical ranks and the held-out results are aggregate research metrics. They are not parcel probabilities, final approvals, or deterministic predictions."
 ];
 
 const automapValueCards = [
@@ -137,9 +234,9 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         <section className="cfs-detail-primer" aria-labelledby="cfs-primer-title">
           <div className="cfs-primer-copy">
             <p className="eyebrow">Live prototype orientation</p>
-            <h2 id="cfs-primer-title">What CFS Does</h2>
+            <h2 id="cfs-primer-title">What Cabarrus Insights Does</h2>
             <p>
-              CFS is designed to help users review parcel context, identify
+              Cabarrus Insights helps users review parcel context, identify
               development hotspots, surface planning constraints, track
               infrastructure and school-capacity signals, and organize growth
               intelligence before development pressure becomes harder to
@@ -150,7 +247,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             </p>
           </div>
 
-          <div className="cfs-value-grid" aria-label="Cabarrus FutureScape product value">
+          <div className="cfs-value-grid" aria-label="Cabarrus Insights product value">
             {cfsValueCards.map((card) => (
               <article key={card.title}>
                 <h3>{card.title}</h3>
@@ -159,13 +256,60 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             ))}
           </div>
 
-          <CFSWhatItDoesGrid />
+        </section>
+      ) : null}
 
-          <CFSIntelligencePanels />
+      {project.slug === "cabarrus-futurescape" ? (
+        <section className="insights-product-tour" aria-labelledby="insights-tour-title">
+          <header className="section-header centered-section-header">
+            <p className="eyebrow">Real application walkthrough</p>
+            <h2 id="insights-tour-title">Inside Cabarrus Insights</h2>
+            <p>
+              These live prototype views show how the platform moves from
+              countywide exploration to management insights, transparent
+              analytical signals, and governed data extracts.
+            </p>
+          </header>
 
-          {project.architecture ? (
-            <CFSDataPipeline items={project.architecture} />
-          ) : null}
+          <div className="insights-tour-list">
+            {cabarrusInsightsWalkthrough.map((section) => (
+              <article className="insights-tour-section" key={section.title}>
+                <div className="insights-tour-heading">
+                  <p className="eyebrow">{section.eyebrow}</p>
+                  <h3>{section.title}</h3>
+                  <p>{section.description}</p>
+                </div>
+                <div className="insights-view-grid">
+                  {section.views.map((view) => (
+                    <figure className="insights-view" key={view.title}>
+                      <a
+                        aria-label={`Open full-size ${view.title} screenshot`}
+                        className="insights-view-image"
+                        href={view.src}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        <Image
+                          alt={view.alt}
+                          fill
+                          sizes="(max-width: 860px) 100vw, 560px"
+                          src={view.src}
+                        />
+                      </a>
+                      <figcaption>
+                        <span>Live prototype interface</span>
+                        <h4>{view.title}</h4>
+                        <p>{view.text}</p>
+                        <p className="insights-view-value">
+                          <strong>Why it is useful:</strong> {view.value}
+                        </p>
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
         </section>
       ) : null}
 

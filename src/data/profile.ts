@@ -67,7 +67,7 @@ export const pathway = {
   currentFocus: [
     "Enterprise GIS and county data systems",
     "Public GIS infrastructure and metadata stewardship",
-    "Cabarrus FutureScape digital twin prototype",
+    "Cabarrus Insights planning intelligence prototype",
     "AutoMap county GIS request automation",
     "ArcPy QA/QC and reproducible spatial workflows"
   ],

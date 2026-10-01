@@ -100,7 +100,7 @@ const researchDeliverableBySlug: Record<string, string> = {
 const coreCaseStudies: CaseStudy[] = [
   {
     slug: "cabarrus-futurescape",
-    title: "Cabarrus FutureScape: Growth and Infrastructure Intelligence",
+    title: "Cabarrus Insights: Growth and Infrastructure Intelligence",
     decisionQuestion:
       "How can county-scale parcel, permit, infrastructure, school, and constraint data be organized for earlier growth review?",
     summary:
@@ -135,12 +135,12 @@ const coreCaseStudies: CaseStudy[] = [
     deliverable: "Planning intelligence platform concept and live prototype.",
     status: "Independent Portfolio Case Study",
     image: {
-      src: "/projects/cfs-live-preview.png",
-      alt: "Cabarrus FutureScape planning intelligence interface preview"
+      src: "/projects/cabarrus-insights/planning-insights.png",
+      alt: "Cabarrus Insights planning intelligence interface preview"
     },
     href: "/case-studies/cabarrus-futurescape",
     relatedProject: {
-      title: "Cabarrus FutureScape",
+      title: "Cabarrus Insights",
       href: "/projects/cabarrus-futurescape"
     },
     routeOrder: 1,
@@ -149,7 +149,7 @@ const coreCaseStudies: CaseStudy[] = [
     published: true,
     detail: {
       executiveSummary:
-        "Cabarrus FutureScape frames county-scale GIS data as a decision-support system for reviewing parcel context, observed development activity, infrastructure signals, and planning constraints before decisions become harder to coordinate.",
+        "Cabarrus Insights frames county-scale GIS data as a decision-support system for reviewing parcel context, observed development activity, infrastructure signals, and planning constraints before decisions become harder to coordinate.",
       contextAndConstraints: [
         "The work is an independent portfolio prototype, not an official county system.",
         "The analysis depends on available public and portfolio-safe datasets.",
@@ -201,7 +201,7 @@ const coreCaseStudies: CaseStudy[] = [
     decisionQuestion:
       "Where does observed growth pressure need utility and infrastructure follow-up before development review advances?",
     summary:
-      "A utility-focused planning intelligence overview using CFS concepts to frame how parcel activity, development pressure, service context, and infrastructure constraints can guide follow-up review.",
+      "A utility-focused planning intelligence overview using Cabarrus Insights concepts to frame how parcel activity, development pressure, service context, and infrastructure constraints can guide follow-up review.",
     problem:
       "Development pressure can outpace the visibility of utility service, capacity, and infrastructure context when parcel, permit, and service-area signals are reviewed separately.",
     category: "Utilities & Infrastructure",
@@ -218,7 +218,7 @@ const coreCaseStudies: CaseStudy[] = [
     cardRecommendation:
       "Treat utility capacity as an infrastructure-context review signal and identify where follow-up with authoritative utility data would be required.",
     context:
-      "Case study in development based on Cabarrus FutureScape infrastructure-context concepts.",
+      "Case study in development based on Cabarrus Insights infrastructure-context concepts.",
     methods: [
       "Parcel review",
       "Permit activity review",
@@ -230,7 +230,7 @@ const coreCaseStudies: CaseStudy[] = [
     status: "Case Study in Development",
     href: "/case-studies/utility-capacity-development-review",
     relatedProject: {
-      title: "Cabarrus FutureScape",
+      title: "Cabarrus Insights",
       href: "/projects/cabarrus-futurescape"
     },
     routeOrder: 2,
@@ -238,7 +238,7 @@ const coreCaseStudies: CaseStudy[] = [
     published: true,
     detail: {
       executiveSummary:
-        "This in-development overview explains how CFS-style parcel intelligence can support utility capacity follow-up without claiming official utility findings or verified capacity conclusions.",
+        "This in-development overview explains how Cabarrus Insights parcel intelligence can support utility capacity follow-up without claiming official utility findings or verified capacity conclusions.",
       contextAndConstraints: [
         "This is not commissioned utility work.",
         "No official capacity finding, service commitment, or utility approval is claimed.",
@@ -250,7 +250,7 @@ const coreCaseStudies: CaseStudy[] = [
         "Separate observed activity from capacity assumptions and recommended follow-up."
       ],
       dataAndTools: [
-        "Cabarrus FutureScape concept",
+        "Cabarrus Insights concept",
         "Parcel context",
         "Permit activity",
         "Infrastructure readiness framing",
@@ -417,7 +417,7 @@ const coreCaseStudies: CaseStudy[] = [
     status: "Case Study in Development",
     href: "/case-studies/real-estate-screening",
     relatedProject: {
-      title: "Cabarrus FutureScape",
+      title: "Cabarrus Insights",
       href: "/projects/cabarrus-futurescape"
     },
     routeOrder: 6,
@@ -483,7 +483,7 @@ const coreCaseStudies: CaseStudy[] = [
     ],
     cardRecommendation:
       "Use the signal as preliminary planning review context and identify where official school-capacity follow-up is needed.",
-    context: "Cabarrus FutureScape analysis concept.",
+    context: "Cabarrus Insights analysis concept.",
     methods: [
       "Attendance-area review",
       "Utilization context",
@@ -492,10 +492,10 @@ const coreCaseStudies: CaseStudy[] = [
       "GIS overlay analysis"
     ],
     deliverable: "Preliminary school capacity watch and planning review signal.",
-    status: "Cabarrus FutureScape Analysis",
+    status: "Cabarrus Insights Analysis",
     href: "/case-studies/school-pressure",
     relatedProject: {
-      title: "Cabarrus FutureScape",
+      title: "Cabarrus Insights",
       href: "/projects/cabarrus-futurescape"
     },
     routeOrder: 2,

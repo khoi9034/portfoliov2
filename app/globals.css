@@ -3092,6 +3092,109 @@ p {
   line-height: 1.58;
 }
 
+.insights-product-tour {
+  margin-top: 58px;
+}
+
+.insights-tour-list {
+  display: grid;
+  gap: 34px;
+}
+
+.insights-tour-section {
+  border-top: 1px solid var(--line-strong);
+  padding-top: 24px;
+}
+
+.insights-tour-heading {
+  max-width: 860px;
+  margin: 0 auto 18px;
+  text-align: center;
+}
+
+.insights-tour-heading .eyebrow {
+  margin-bottom: 8px;
+}
+
+.insights-tour-heading h3 {
+  margin-bottom: 10px;
+  font-size: clamp(25px, 3vw, 32px);
+}
+
+.insights-tour-heading > p:last-child {
+  margin-bottom: 0;
+  color: var(--soft);
+  line-height: 1.65;
+}
+
+.insights-view-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.insights-view {
+  min-width: 0;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(8, 21, 27, 0.82);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.16);
+  overflow: hidden;
+}
+
+.insights-view-image {
+  position: relative;
+  display: block;
+  aspect-ratio: 2490 / 1470;
+  border-bottom: 1px solid var(--line);
+  background: #061014;
+}
+
+.insights-view-image img {
+  object-fit: cover;
+}
+
+.insights-view-image:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: -4px;
+}
+
+.insights-view figcaption {
+  padding: 18px;
+}
+
+.insights-view figcaption > span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--cyan);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.insights-view h4 {
+  margin: 0 0 9px;
+  color: var(--text);
+  font-size: 21px;
+}
+
+.insights-view p {
+  color: var(--muted);
+  line-height: 1.58;
+}
+
+.insights-view-value {
+  margin: 14px 0 0;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+
+.insights-view-value strong {
+  color: var(--soft);
+}
+
 .cfs-primer-cards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -3451,6 +3554,14 @@ p {
   flex-direction: column;
   align-items: center;
   width: min(100%, 920px);
+  min-width: 0;
+}
+
+.project-hero-copy > *,
+.live-prototype-callout,
+.status-banner,
+.project-subtitle {
+  max-width: 100%;
 }
 
 .project-hero-copy .back-link {
@@ -3466,6 +3577,11 @@ p {
 .project-hero .project-image,
 .project-hero .project-mockup {
   width: min(100%, 980px);
+}
+
+.project-hero .project-image.cabarrus-futurescape {
+  aspect-ratio: 2406 / 1444;
+  min-height: 0;
 }
 
 .project-hero .flagship-dashboard {
@@ -4620,6 +4736,7 @@ p {
   .consulting-summary-grid,
   .consulting-detail-grid,
   .resume-layout,
+  .insights-view-grid,
   .pathway-grid {
     grid-template-columns: 1fr;
   }
@@ -4918,6 +5035,16 @@ p {
   .projects-intro-compact h1,
   .case-analysis-card h3 {
     max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .project-hero-copy,
+  .project-hero-copy > p,
+  .project-subtitle,
+  .live-prototype-callout,
+  .status-banner {
+    width: 100%;
+    min-width: 0;
     overflow-wrap: anywhere;
   }
 

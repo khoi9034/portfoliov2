@@ -82,9 +82,9 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "cabarrus-futurescape",
-    title: "Cabarrus FutureScape",
-    shortTitle: "Cabarrus FutureScape",
-    subtitle: "County Digital Twin & Growth Intelligence Platform",
+    title: "Cabarrus Insights",
+    shortTitle: "Cabarrus Insights",
+    subtitle: "County Planning Intelligence & GIS Decision-Support Platform",
     category: "Flagship Systems",
     categories: [
       "public-systems",
@@ -95,21 +95,21 @@ export const projects: Project[] = [
     tracks: ["government", "utilities"],
     primaryIndustry: "Public Systems & Planning Intelligence",
     capabilityCategory: "Planning intelligence / infrastructure context",
-    type: "County Digital Twin & Growth Intelligence Platform",
+    type: "County Planning Intelligence Platform",
     status:
       "Personal prototype / ongoing applied GIS platform. Not an official county system.",
-    role: "Product strategy, spatial data architecture, dashboard concept, Web GIS prototype",
+    role: "Product strategy, spatial data architecture, full-stack implementation, Web GIS prototype",
     summary:
-      "A county-scale GIS intelligence prototype that connects parcel context, development activity, school capacity, planning constraints, infrastructure readiness, environmental signals, and executive reporting into one decision-support interface.",
+      "A county-scale GIS intelligence prototype connecting parcel context, observed development activity, planning and economic insights, infrastructure context, transparent analytical signals, and governed data workflows.",
     purpose:
       "Independent planning-intelligence prototype for parcel review, permit activity, growth context, planning constraints, school utilization context, and utility/service capacity awareness.",
     homepageSummary:
-      "The flagship live prototype: a command-center interface for parcel intelligence, development hotspots, constraints, infrastructure readiness, school-capacity signals, and executive planning reports.",
+      "A live planning intelligence prototype for parcel review, development activity, constraints, infrastructure context, transparent analytical signals, and governed data workflows.",
     tools: [
       "Next.js",
       "TypeScript",
       "ArcGIS Maps SDK",
-      "SceneView",
+      "MapView",
       "PostGIS",
       "ArcGIS REST services",
       "Google Earth Engine",
@@ -127,9 +127,10 @@ export const projects: Project[] = [
       "Growth pressure",
       "Infrastructure readiness",
       "Constraint intelligence",
-      "Environmental signals",
+      "Economic review",
+      "Governed master data",
       "Development pressure ranking",
-      "Executive reporting"
+      "Snapshot reporting"
     ],
     industryTags: [
       "Planning Intelligence",
@@ -139,9 +140,9 @@ export const projects: Project[] = [
     ],
     visual: {
       variant: "cabarrus-futurescape",
-      image: "/projects/cfs-live-preview.png",
-      alt: "Live Cabarrus FutureScape deployed prototype interface",
-      caption: "Live CFS prototype interface"
+      image: "/projects/cabarrus-insights/countywide-development-hotspots.png",
+      alt: "Live Cabarrus Insights countywide planning intelligence interface",
+      caption: "Live Cabarrus Insights prototype"
     },
     featured: true,
     published: true,
@@ -164,36 +165,36 @@ export const projects: Project[] = [
     junction: true,
     caseStudy: {
       whatItIs:
-        "A live county-scale digital twin and planning intelligence prototype for Cabarrus County, focused on parcels, development activity, school capacity, infrastructure awareness, growth pressure, environmental constraints, and executive planning support.",
+        "A live county-scale planning intelligence prototype for Cabarrus County, focused on parcels, observed development activity, school context, infrastructure awareness, constraints, economic review, and governed data workflows.",
       problem:
-        "County planning data is spread across parcels, zoning, permits, school-capacity context, flood layers, utility and infrastructure signals, environmental rasters, and public REST services. Planning teams need clearer ways to understand what is happening, where development pressure is forming, and what constraints affect each parcel.",
+        "County planning data is spread across parcels, zoning, permits, school context, flood layers, infrastructure sources, and public REST services. Planning teams need a clearer way to move from countywide patterns to parcel evidence, understand where observed activity is concentrated, and preserve the limitations behind each signal.",
       approach: [
-        "Designed a product-oriented information architecture around parcels, permits, zoning, future land-use context, ETJ, municipal boundaries, flood exposure, schools, infrastructure context, environmental constraints, and development activity.",
-        "Separated raw, derived, metadata, and QA outputs so future PostGIS ingestion and dashboard analytics can be handled cleanly.",
-        "Framed the interface as a live planning intelligence platform rather than a one-off map viewer.",
-        "Added first-pass relative development likelihood ranking language as decision support and prioritization, not deterministic prediction or final approval."
+        "Designed a product-oriented information architecture around Management, Analyst, and Master Data workspaces.",
+        "Connected countywide map exploration with planning, economic, school, flood, permit, and infrastructure-context review.",
+        "Made source coverage, unavailable official data, proxy limitations, and analytical caveats visible in the interface.",
+        "Presented first-pass development signals as relative ranking evidence for prioritization, not deterministic parcel predictions or final approvals."
       ],
       system: [
-        "Web GIS dashboard concept for county-scale parcel, permit, constraint, school-capacity, and infrastructure review.",
-        "Parcel intelligence summaries tied to development activity, infrastructure readiness, zoning, future land-use context, environmental constraints, and growth signals.",
-        "Early development pressure ranking concept based on permit history, zoning-change signals, flood constraints, utility/infrastructure context, and other parcel-level factors.",
-        "Environmental workflow concepts using Landsat surface temperature, NDVI, Dynamic World land cover, terrain, hydrology, rainfall, and flooding data."
+        "2D Web GIS workspace for countywide parcel, permit, constraint, school, and infrastructure-context review.",
+        "Management views for planning and economic summaries tied to a selected analysis period.",
+        "Indicator Center and Model Lab views that separate observed activity, preliminary attention signals, relative bands, and held-out aggregate evidence.",
+        "Governed Master Data workflow for dataset discovery, field selection, filtering, preview, and CSV or XLSX export."
       ],
       outputs: [
         "Live interactive Web GIS planning intelligence prototype",
-        "Parcel intelligence summary pattern",
-        "Permit and development hotspot review workflow",
-        "Constraint, school-capacity, and readiness layer model",
-        "Executive-level insight and report concepts",
-        "First-pass relative development likelihood ranking model",
-        "PostGIS-ready raw, derived, metadata, and QA output organization"
+        "Countywide development activity and infrastructure-context workspace",
+        "Planning, economic, and indicator dashboards",
+        "School-utilization and observed-permit review signals",
+        "Transparent development-signal research view",
+        "Governed parcel, permit, address, zoning, flood, and school catalog",
+        "Filterable data previews with CSV and XLSX export"
       ],
       whyItMatters:
-        "Cabarrus FutureScape shows the ability to move beyond static maps into deployed planning intelligence systems that combine data engineering, Web GIS, analysis, and decision support.",
+        "Cabarrus Insights shows the ability to move beyond static maps into a deployed planning intelligence system that combines governed data, Web GIS, transparent analysis, and decision support.",
       nextSteps: [
-        "Connect stable data sources.",
-        "Add parcel-level constraint scores.",
-        "Build executive PDF report generation.",
+        "Continue documenting source coverage, update cadence, and field-level QA rules.",
+        "Add official infrastructure-capacity layers only when verified data is available.",
+        "Expand snapshot and report exports while keeping evidence and caveats visible.",
         "Improve the early development pressure ranking only after source data, assumptions, and QA rules are documented.",
         "Treat ranking outputs as planning prioritization signals, not final approvals or deterministic predictions."
       ]
@@ -202,15 +203,15 @@ export const projects: Project[] = [
       "Data Sources",
       "Ingestion / QA",
       "PostGIS / Registry",
-      "Web GIS Dashboard",
-      "Parcel Intelligence",
-      "Executive Insight Reports"
+      "2D Web GIS",
+      "Management / Analyst Views",
+      "Governed Exports"
     ],
     coreModules: [
       {
-        title: "Parcel Intelligence",
+        title: "Countywide Map & Parcel Search",
         description:
-          "Parcel selection, ownership/context summaries, land-use context, zoning intersections, and development-readiness signals."
+          "2D map exploration, global parcel search, live layers, selected-feature context, and snapshot actions."
       },
       {
         title: "Permit Hotspots",
@@ -218,9 +219,9 @@ export const projects: Project[] = [
           "Permit and activity signals organized to show where review pressure is emerging."
       },
       {
-        title: "Development Hotspots",
+        title: "Planning Insights",
         description:
-          "Planning intelligence panels for seeing where recent activity, zoning context, and readiness signals overlap."
+          "Development hotspots, flood review, school assignment context, and follow-up links organized for management review."
       },
       {
         title: "School Capacity Context",
@@ -228,24 +229,24 @@ export const projects: Project[] = [
           "Preliminary school-capacity and service context used as a planning signal, not a final capacity determination."
       },
       {
-        title: "Constraint Intelligence",
+        title: "Indicator Center",
         description:
-          "Flood exposure, zoning, ETJ, environmental, school, boundary, and other planning constraints surfaced together."
+          "Observed permit activity and preliminary school-utilization context with coverage labels and explainable signals."
       },
       {
         title: "Infrastructure Awareness",
         description:
-          "A readiness concept for seeing parcels in relation to utility, road, service, and operational context."
+          "Sewer proximity, subbasin, transportation, and service context presented with explicit proxy and data-availability caveats."
       },
       {
-        title: "Environmental Signals",
+        title: "Economic Insights",
         description:
-          "Remote-sensing and environmental indicators including heat, vegetation, land cover, terrain, hydrology, rainfall, and flooding."
+          "Selected-period development activity and parcel-value context used to identify where deeper economic review may be useful."
       },
       {
-        title: "Executive Reporting",
+        title: "Governed Master Data",
         description:
-          "Report concepts that translate spatial overlays into concise planning intelligence for decision review."
+          "Curated dataset catalog, allowed-field selection, filters, record previews, and documented CSV or XLSX exports."
       },
       {
         title: "Development Pressure Ranking",
@@ -255,44 +256,19 @@ export const projects: Project[] = [
     ],
     methods: [
       "ArcGIS REST services",
+      "ArcGIS Maps SDK 2D MapView",
       "Parcel overlays",
       "Permit history",
       "Development activity signals",
       "Zoning / ETJ / municipal boundaries",
-      "Future land-use context",
       "Flood exposure",
-      "School zones",
-      "School capacity context",
-      "Utility / infrastructure readiness",
-      "Google Earth Engine",
-      "Landsat surface temperature",
-      "NDVI",
-      "Dynamic World land cover",
-      "Terrain / hydrology",
-      "Rainfall / flooding data",
-      "PostGIS-ready data organization",
+      "School assignment and utilization context",
+      "Sewer proximity and infrastructure proxy context",
+      "Economic and assessed-value review",
+      "PostGIS-backed governed datasets",
+      "Field selection and filtered exports",
       "First-pass relative development likelihood ranking",
-      "QA folders: raw, derived, metadata, qa notes"
-    ],
-    interfaceConcepts: [
-      {
-        title: "Parcel Intelligence Console",
-        description:
-          "Selected parcel context, constraints, readiness indicators, and report actions in one review surface.",
-        label: "Prototype interface concept"
-      },
-      {
-        title: "Growth Pressure Review",
-        description:
-          "Layered dashboard concept for seeing development activity, land-use context, and pressure signals together.",
-        label: "Prototype interface concept"
-      },
-      {
-        title: "Environmental Signal Stack",
-        description:
-          "Remote sensing and hydrology outputs organized for future ingestion and planning analytics.",
-        label: "Prototype interface concept"
-      }
+      "Coverage notes and analytical caveats"
     ]
   },
   {
@@ -316,7 +292,7 @@ export const projects: Project[] = [
     homepageSummary:
       "A live GIS automation engine for county map requests, approved REST layer selection, customizable map recipes, refinement, and analysis report generation.",
     implementationNote:
-      "AutoMap is separate from Cabarrus FutureScape. The deployed prototype is designed for reviewable workflows and does not perform real county publishing actions.",
+      "AutoMap is separate from Cabarrus Insights. The deployed prototype is designed for reviewable workflows and does not perform real county publishing actions.",
     tools: [
       "Next.js",
       "TypeScript",
@@ -826,7 +802,7 @@ export const projectTrackPanels: {
     description:
       "County GIS, planning intelligence, public data, permitting, automation, growth management, and digital government systems.",
     labels: ["County GIS", "Planning Systems", "Public Data", "GIS Automation"],
-    featuredProject: "Cabarrus FutureScape",
+    featuredProject: "Cabarrus Insights",
     action: "Explore Government Technology"
   },
   {

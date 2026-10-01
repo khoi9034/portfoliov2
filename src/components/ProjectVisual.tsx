@@ -8,11 +8,12 @@ type ProjectVisualProps = {
 export function ProjectVisual({ project }: ProjectVisualProps) {
   if (project.visual.image) {
     return (
-      <div className="project-image">
+      <div className={`project-image ${project.visual.variant}`}>
         <Image
           src={project.visual.image}
           alt={project.visual.alt}
           fill
+          priority={project.slug === "cabarrus-futurescape"}
           sizes="(max-width: 768px) 100vw, 520px"
         />
         {project.visual.caption ? (

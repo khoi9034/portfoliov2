@@ -15,7 +15,7 @@ export function ProjectHero({ project }: ProjectHeroProps) {
   const hasExternalPrimary = Boolean(launch || openDataHref);
   const detailActionLabel =
     project.slug === "cabarrus-futurescape"
-      ? "Read CFS Details"
+      ? "Read Insights Details"
       : project.slug === "automap"
         ? "Read AutoMap Details"
         : isCabarrusHub

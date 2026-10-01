@@ -100,7 +100,7 @@ const cfsPanelData = [
   }
 ];
 
-export function FutureScapeShowcase() {
+export function CabarrusInsightsShowcase() {
   const signals = [
     { label: "Parcel intelligence", value: "PIN / zoning / constraints", icon: MapPinned },
     { label: "Growth pressure", value: "Activity and readiness signals", icon: Activity },
@@ -111,11 +111,11 @@ export function FutureScapeShowcase() {
   ];
 
   return (
-    <div className="flagship-dashboard" aria-label="Cabarrus FutureScape command-center visual">
+    <div className="flagship-dashboard" aria-label="Cabarrus Insights command-center visual">
       <div className="dashboard-topline">
         <div>
           <span className="status-dot" />
-          <span>Cabarrus FutureScape</span>
+          <span>Cabarrus Insights</span>
         </div>
         <span>Prototype interface concept</span>
       </div>
@@ -168,7 +168,7 @@ export function FutureScapeShowcase() {
 
 export function CFSWhatItDoesGrid() {
   return (
-    <div className="cfs-what-grid" aria-label="What Cabarrus FutureScape does">
+    <div className="cfs-what-grid" aria-label="What Cabarrus Insights does">
       {cfsWhatItDoes.map((item) => {
         const Icon = item.icon;
 
@@ -186,7 +186,7 @@ export function CFSWhatItDoesGrid() {
 
 export function CFSIntelligencePanels() {
   return (
-    <div className="cfs-panel-system" aria-label="Cabarrus FutureScape dashboard modules">
+    <div className="cfs-panel-system" aria-label="Cabarrus Insights dashboard modules">
       <div className="cfs-panel-map">
         <div className="map-grid" />
         <div className="cfs-zone zone-one" />
@@ -221,7 +221,7 @@ export function CFSIntelligencePanels() {
 
 export function CFSDataPipeline({ items }: ArchitectureFlowProps) {
   return (
-    <div className="cfs-data-pipeline" aria-label="Cabarrus FutureScape data pipeline">
+    <div className="cfs-data-pipeline" aria-label="Cabarrus Insights data pipeline">
       {items.map((item, index) => (
         <article key={item}>
           <span>{String(index + 1).padStart(2, "0")}</span>

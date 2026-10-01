@@ -190,7 +190,7 @@ export function ProjectFilters({
             <p className="eyebrow">Expanding Infrastructure Track</p>
             <h2>Prototype-backed infrastructure intelligence is developing.</h2>
             <p>
-              Applying the CFS planning-intelligence foundation to utility
+              Applying the Cabarrus Insights planning-intelligence foundation to utility
               service context, infrastructure readiness, and development
               review. No utility partnership or verified capacity finding is
               claimed.
